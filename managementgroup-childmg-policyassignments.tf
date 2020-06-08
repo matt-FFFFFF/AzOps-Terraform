@@ -33,7 +33,7 @@ PARAMETERS
 
 resource "azurerm_role_assignment" "deploy-log-analytics-childmg" {
   scope                = azurerm_policy_assignment.deploy-log-analytics-childmg.scope
-  role_definition_name = "Contributor"
+  role_definition_name = "Owner"
   principal_id         = azurerm_policy_assignment.deploy-log-analytics-childmg.identity[0].principal_id
 }
 
