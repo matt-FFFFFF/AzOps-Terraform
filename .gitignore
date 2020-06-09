@@ -6,8 +6,8 @@
 *.tfstate.*
 
 # .tfvars files
-*.tfvars
-*.tfvars.json
+##*.tfvars
+##*.tfvars.json
 
 # HCL files (for backend configs)
 *.hcl
