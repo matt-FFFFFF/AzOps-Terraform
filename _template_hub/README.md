@@ -1,0 +1,1 @@
+# Template connectivity hub
