@@ -88,7 +88,7 @@ for COMMAND in $COMMANDS; do
   fi
 done
 
-POLICYDEFINITIONS=$(find ../azopsreference -iname *policyDefinitions*)
+POLICYDEFINITIONS=$(find $REFDIR -iname *policyDefinitions*)
 
 for POLICYDEFINITION in $POLICYDEFINITIONS; do
   POLICYDEFINITIONBASE=$(basename $POLICYDEFINITION)
