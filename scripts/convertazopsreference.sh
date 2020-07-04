@@ -44,7 +44,7 @@ resource "azurerm_policy_definition" "${1}" {
   display_name          = "$POLICYDISPLAYNAME"
   description           = "$POLICYDESCRIPTION"
 
-  management_group_name = azurerm_management_group.<changeme>.name
+  management_group_name = azurerm_management_group.es.name
   policy_rule           = var.policydefinition_$1_policyrule
   $POLICYPARAMETERS
 }
