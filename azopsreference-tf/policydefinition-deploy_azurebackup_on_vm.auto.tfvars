@@ -1,4 +1,4 @@
-policyDefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
+policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
 {
   "if": {
     "allof": [

@@ -1,4 +1,4 @@
-policyDefinition_deploy_diagnostics_vm_policyrule = <<POLICYRULE
+policydefinition_deploy_diagnostics_vm_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -85,7 +85,7 @@ policyDefinition_deploy_diagnostics_vm_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_diagnostics_vm_parameters = <<PARAMETERS
+policydefinition_deploy_diagnostics_vm_parameters = <<PARAMETERS
 {
   "loganalytics": {
     "type": "String",

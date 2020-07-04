@@ -1,4 +1,4 @@
-policyDefinition_deploy_diagnostics_analysisservice_policyrule = <<POLICYRULE
+policydefinition_deploy_diagnostics_analysisservice_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -99,7 +99,7 @@ policyDefinition_deploy_diagnostics_analysisservice_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_diagnostics_analysisservice_parameters = <<PARAMETERS
+policydefinition_deploy_diagnostics_analysisservice_parameters = <<PARAMETERS
 {
   "loganalytics": {
     "type": "String",

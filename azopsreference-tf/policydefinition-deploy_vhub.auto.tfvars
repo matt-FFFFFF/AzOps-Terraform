@@ -1,4 +1,4 @@
-policyDefinition_deploy_vhub_policyrule = <<POLICYRULE
+policydefinition_deploy_vhub_policyrule = <<POLICYRULE
 {
   "if": {
     "allof": [
@@ -258,7 +258,7 @@ policyDefinition_deploy_vhub_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_vhub_parameters = <<PARAMETERS
+policydefinition_deploy_vhub_parameters = <<PARAMETERS
 {
   "vwanname": {
     "type": "String",

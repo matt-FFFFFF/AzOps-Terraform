@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deploy_diagnostics_rediscache" {
   display_name          = "Deploy-Diagnostics-RedisCache"
   description           = "Apply diagnostic settings for Redis Cache - Log Analytics"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deploy_diagnostics_rediscache_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deploy_diagnostics_rediscache_policyrule
   policy_parameters     = var.policyDefinition-deploy_diagnostics_rediscache-parameters
 }
 
-
-variable "policyDefinition_deploy_diagnostics_rediscache_policyrule" {
+variable "policydefinition_deploy_diagnostics_rediscache_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deploy_diagnostics_rediscache_parameters" {
+variable "policydefinition_deploy_diagnostics_rediscache_parameters" {
     type    = string
     default = ""
 }

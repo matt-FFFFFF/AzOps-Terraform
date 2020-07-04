@@ -1,4 +1,4 @@
-policyDefinition_deploy_diagnostics_eventhub_policyrule = <<POLICYRULE
+policydefinition_deploy_diagnostics_eventhub_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -103,7 +103,7 @@ policyDefinition_deploy_diagnostics_eventhub_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_diagnostics_eventhub_parameters = <<PARAMETERS
+policydefinition_deploy_diagnostics_eventhub_parameters = <<PARAMETERS
 {
   "loganalytics": {
     "type": "String",

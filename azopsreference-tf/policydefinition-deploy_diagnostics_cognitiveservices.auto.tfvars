@@ -1,4 +1,4 @@
-policyDefinition_deploy_diagnostics_cognitiveservices_policyrule = <<POLICYRULE
+policydefinition_deploy_diagnostics_cognitiveservices_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -99,7 +99,7 @@ policyDefinition_deploy_diagnostics_cognitiveservices_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_diagnostics_cognitiveservices_parameters = <<PARAMETERS
+policydefinition_deploy_diagnostics_cognitiveservices_parameters = <<PARAMETERS
 {
   "loganalytics": {
     "type": "String",

@@ -1,4 +1,4 @@
-policyDefinition_deploy_diagnostics_aks_policyrule = <<POLICYRULE
+policydefinition_deploy_diagnostics_aks_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -111,7 +111,7 @@ policyDefinition_deploy_diagnostics_aks_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_diagnostics_aks_parameters = <<PARAMETERS
+policydefinition_deploy_diagnostics_aks_parameters = <<PARAMETERS
 {
   "loganalytics": {
     "type": "String",

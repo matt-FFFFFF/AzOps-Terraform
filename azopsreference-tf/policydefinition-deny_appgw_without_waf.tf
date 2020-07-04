@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deny_appgw_without_waf" {
   display_name          = "Deny-AppGW-Without-WAF"
   description           = "null"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deny_appgw_without_waf_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deny_appgw_without_waf_policyrule
   
 }
 
-
-variable "policyDefinition_deny_appgw_without_waf_policyrule" {
+variable "policydefinition_deny_appgw_without_waf_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deny_appgw_without_waf_parameters" {
+variable "policydefinition_deny_appgw_without_waf_parameters" {
     type    = string
     default = ""
 }

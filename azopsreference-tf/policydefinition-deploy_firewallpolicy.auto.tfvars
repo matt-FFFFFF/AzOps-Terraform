@@ -1,4 +1,4 @@
-policyDefinition_deploy_firewallpolicy_policyrule = <<POLICYRULE
+policydefinition_deploy_firewallpolicy_policyrule = <<POLICYRULE
 {
   "if": {
     "allof": [
@@ -109,7 +109,7 @@ policyDefinition_deploy_firewallpolicy_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_firewallpolicy_parameters = <<PARAMETERS
+policydefinition_deploy_firewallpolicy_parameters = <<PARAMETERS
 {
   "fwpolicy": {
     "type": "Object",

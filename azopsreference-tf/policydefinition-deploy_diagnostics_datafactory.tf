@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deploy_diagnostics_datafactory" {
   display_name          = "Deploy-Diagnostics-DataFactory"
   description           = "Apply diagnostic settings for Data Factory - Log Analytics"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deploy_diagnostics_datafactory_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deploy_diagnostics_datafactory_policyrule
   policy_parameters     = var.policyDefinition-deploy_diagnostics_datafactory-parameters
 }
 
-
-variable "policyDefinition_deploy_diagnostics_datafactory_policyrule" {
+variable "policydefinition_deploy_diagnostics_datafactory_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deploy_diagnostics_datafactory_parameters" {
+variable "policydefinition_deploy_diagnostics_datafactory_parameters" {
     type    = string
     default = ""
 }

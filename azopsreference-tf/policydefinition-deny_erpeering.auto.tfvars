@@ -1,4 +1,4 @@
-policyDefinition_deny_erpeering_policyrule = <<POLICYRULE
+policydefinition_deny_erpeering_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",

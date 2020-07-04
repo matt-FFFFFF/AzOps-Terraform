@@ -1,4 +1,4 @@
-policyDefinition_deploy_diagnostics_networksecuritygroups_policyrule = <<POLICYRULE
+policydefinition_deploy_diagnostics_networksecuritygroups_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -85,7 +85,7 @@ policyDefinition_deploy_diagnostics_networksecuritygroups_policyrule = <<POLICYR
 }
 POLICYRULE
 
-policyDefinition_deploy_diagnostics_networksecuritygroups_parameters = <<PARAMETERS
+policydefinition_deploy_diagnostics_networksecuritygroups_parameters = <<PARAMETERS
 {
   "loganalytics": {
     "type": "String",

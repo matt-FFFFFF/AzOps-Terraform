@@ -1,4 +1,4 @@
-policyDefinition_deny_publicip_policyrule = <<POLICYRULE
+policydefinition_deny_publicip_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",

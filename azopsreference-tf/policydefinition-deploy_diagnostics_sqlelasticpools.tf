@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deploy_diagnostics_sqlelasticpools" {
   display_name          = "Deploy-Diagnostics-SQLElasticPools"
   description           = "Apply diagnostic settings for SQL Elastic Pools - Log Analytics"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deploy_diagnostics_sqlelasticpools_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deploy_diagnostics_sqlelasticpools_policyrule
   policy_parameters     = var.policyDefinition-deploy_diagnostics_sqlelasticpools-parameters
 }
 
-
-variable "policyDefinition_deploy_diagnostics_sqlelasticpools_policyrule" {
+variable "policydefinition_deploy_diagnostics_sqlelasticpools_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deploy_diagnostics_sqlelasticpools_parameters" {
+variable "policydefinition_deploy_diagnostics_sqlelasticpools_parameters" {
     type    = string
     default = ""
 }

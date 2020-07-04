@@ -1,4 +1,4 @@
-policyDefinition_deny_subnet_without_nsg_policyrule = <<POLICYRULE
+policydefinition_deny_subnet_without_nsg_policyrule = <<POLICYRULE
 {
   "if": {
     "allof": [

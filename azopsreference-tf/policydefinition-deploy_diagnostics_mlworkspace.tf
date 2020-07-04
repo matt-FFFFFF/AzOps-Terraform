@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deploy_diagnostics_mlworkspace" {
   display_name          = "Deploy-Diagnostics-MlWorkspace"
   description           = "Apply diagnostic settings for Ml Workspace - Log Analytics"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deploy_diagnostics_mlworkspace_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deploy_diagnostics_mlworkspace_policyrule
   policy_parameters     = var.policyDefinition-deploy_diagnostics_mlworkspace-parameters
 }
 
-
-variable "policyDefinition_deploy_diagnostics_mlworkspace_policyrule" {
+variable "policydefinition_deploy_diagnostics_mlworkspace_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deploy_diagnostics_mlworkspace_parameters" {
+variable "policydefinition_deploy_diagnostics_mlworkspace_parameters" {
     type    = string
     default = ""
 }

@@ -1,4 +1,4 @@
-policyDefinition_deny_publicendpoint_keyvault_policyrule = <<POLICYRULE
+policydefinition_deny_publicendpoint_keyvault_policyrule = <<POLICYRULE
 {
   "if": {
     "allof": [

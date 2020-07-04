@@ -1,4 +1,4 @@
-policyDefinition_deploy_sql_tde_policyrule = <<POLICYRULE
+policydefinition_deploy_sql_tde_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",

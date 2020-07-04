@@ -49,7 +49,6 @@ resource "azurerm_policy_definition" "${1}" {
   $POLICYPARAMETERS
 }
 
-
 variable "policydefinition_$1_policyrule" {
     type = string
 }

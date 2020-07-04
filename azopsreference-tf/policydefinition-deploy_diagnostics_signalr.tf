@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deploy_diagnostics_signalr" {
   display_name          = "Deploy-Diagnostics-SignalR"
   description           = "Apply diagnostic settings for SignalR - Log Analytics"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deploy_diagnostics_signalr_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deploy_diagnostics_signalr_policyrule
   policy_parameters     = var.policyDefinition-deploy_diagnostics_signalr-parameters
 }
 
-
-variable "policyDefinition_deploy_diagnostics_signalr_policyrule" {
+variable "policydefinition_deploy_diagnostics_signalr_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deploy_diagnostics_signalr_parameters" {
+variable "policydefinition_deploy_diagnostics_signalr_parameters" {
     type    = string
     default = ""
 }

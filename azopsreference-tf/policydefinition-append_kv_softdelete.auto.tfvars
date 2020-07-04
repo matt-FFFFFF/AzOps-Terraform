@@ -1,4 +1,4 @@
-policyDefinition_append_kv_softdelete_policyrule = <<POLICYRULE
+policydefinition_append_kv_softdelete_policyrule = <<POLICYRULE
 {
   "if": {
     "anyof": [

@@ -1,4 +1,4 @@
-policyDefinition_deploy_ddosprotection_policyrule = <<POLICYRULE
+policydefinition_deploy_ddosprotection_policyrule = <<POLICYRULE
 {
   "if": {
     "allof": [
@@ -107,7 +107,7 @@ policyDefinition_deploy_ddosprotection_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_ddosprotection_parameters = <<PARAMETERS
+policydefinition_deploy_ddosprotection_parameters = <<PARAMETERS
 {
   "ddosname": {
     "type": "String",

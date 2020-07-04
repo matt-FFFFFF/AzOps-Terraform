@@ -1,4 +1,4 @@
-policyDefinition_deploy_diagnostics_sqldbs_policyrule = <<POLICYRULE
+policydefinition_deploy_diagnostics_sqldbs_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -131,7 +131,7 @@ policyDefinition_deploy_diagnostics_sqldbs_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_diagnostics_sqldbs_parameters = <<PARAMETERS
+policydefinition_deploy_diagnostics_sqldbs_parameters = <<PARAMETERS
 {
   "loganalytics": {
     "type": "String",

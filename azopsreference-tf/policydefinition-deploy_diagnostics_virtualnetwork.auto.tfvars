@@ -1,4 +1,4 @@
-policyDefinition_deploy_diagnostics_virtualnetwork_policyrule = <<POLICYRULE
+policydefinition_deploy_diagnostics_virtualnetwork_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -94,7 +94,7 @@ policyDefinition_deploy_diagnostics_virtualnetwork_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_diagnostics_virtualnetwork_parameters = <<PARAMETERS
+policydefinition_deploy_diagnostics_virtualnetwork_parameters = <<PARAMETERS
 {
   "loganalytics": {
     "type": "String",

@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deploy_firewallpolicy" {
   display_name          = "Deploy-FirewallPolicy"
   description           = "Deploys Azure Firewall Policy/Manager"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deploy_firewallpolicy_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deploy_firewallpolicy_policyrule
   policy_parameters     = var.policyDefinition-deploy_firewallpolicy-parameters
 }
 
-
-variable "policyDefinition_deploy_firewallpolicy_policyrule" {
+variable "policydefinition_deploy_firewallpolicy_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deploy_firewallpolicy_parameters" {
+variable "policydefinition_deploy_firewallpolicy_parameters" {
     type    = string
     default = ""
 }

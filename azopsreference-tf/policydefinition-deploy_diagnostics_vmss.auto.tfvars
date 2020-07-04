@@ -1,4 +1,4 @@
-policyDefinition_deploy_diagnostics_vmss_policyrule = <<POLICYRULE
+policydefinition_deploy_diagnostics_vmss_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -85,7 +85,7 @@ policyDefinition_deploy_diagnostics_vmss_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_diagnostics_vmss_parameters = <<PARAMETERS
+policydefinition_deploy_diagnostics_vmss_parameters = <<PARAMETERS
 {
   "loganalytics": {
     "type": "String",

@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deny_subnet_without_nsg" {
   display_name          = "Deny-Subnets-Without-NSG"
   description           = "null"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deny_subnet_without_nsg_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deny_subnet_without_nsg_policyrule
   
 }
 
-
-variable "policyDefinition_deny_subnet_without_nsg_policyrule" {
+variable "policydefinition_deny_subnet_without_nsg_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deny_subnet_without_nsg_parameters" {
+variable "policydefinition_deny_subnet_without_nsg_parameters" {
     type    = string
     default = ""
 }

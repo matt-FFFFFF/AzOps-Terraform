@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deploy_diagnostics_logicappswf" {
   display_name          = "Deploy-Diagnostics-LogicAppsWF"
   description           = "Apply diagnostic settings for Logic Apps workflows - Log Analytics"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deploy_diagnostics_logicappswf_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deploy_diagnostics_logicappswf_policyrule
   policy_parameters     = var.policyDefinition-deploy_diagnostics_logicappswf-parameters
 }
 
-
-variable "policyDefinition_deploy_diagnostics_logicappswf_policyrule" {
+variable "policydefinition_deploy_diagnostics_logicappswf_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deploy_diagnostics_logicappswf_parameters" {
+variable "policydefinition_deploy_diagnostics_logicappswf_parameters" {
     type    = string
     default = ""
 }

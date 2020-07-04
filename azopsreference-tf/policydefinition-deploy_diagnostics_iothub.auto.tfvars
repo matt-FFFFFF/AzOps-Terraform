@@ -1,4 +1,4 @@
-policyDefinition_deploy_diagnostics_iothub_policyrule = <<POLICYRULE
+policydefinition_deploy_diagnostics_iothub_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -143,7 +143,7 @@ policyDefinition_deploy_diagnostics_iothub_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_diagnostics_iothub_parameters = <<PARAMETERS
+policydefinition_deploy_diagnostics_iothub_parameters = <<PARAMETERS
 {
   "loganalytics": {
     "type": "String",

@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deploy_diagnostics_loadbalancer" {
   display_name          = "Deploy-Diagnostics-LoadBalancer"
   description           = "Apply diagnostic settings for Load Balancers - Log Analytics"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deploy_diagnostics_loadbalancer_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deploy_diagnostics_loadbalancer_policyrule
   policy_parameters     = var.policyDefinition-deploy_diagnostics_loadbalancer-parameters
 }
 
-
-variable "policyDefinition_deploy_diagnostics_loadbalancer_policyrule" {
+variable "policydefinition_deploy_diagnostics_loadbalancer_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deploy_diagnostics_loadbalancer_parameters" {
+variable "policydefinition_deploy_diagnostics_loadbalancer_parameters" {
     type    = string
     default = ""
 }

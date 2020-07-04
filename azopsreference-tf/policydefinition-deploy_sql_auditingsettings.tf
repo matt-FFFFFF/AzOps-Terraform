@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deploy_sql_auditingsettings" {
   display_name          = "Deploy-Sql-AuditingSettings"
   description           = "Configures SQL Server"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deploy_sql_auditingsettings_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deploy_sql_auditingsettings_policyrule
   
 }
 
-
-variable "policyDefinition_deploy_sql_auditingsettings_policyrule" {
+variable "policydefinition_deploy_sql_auditingsettings_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deploy_sql_auditingsettings_parameters" {
+variable "policydefinition_deploy_sql_auditingsettings_parameters" {
     type    = string
     default = ""
 }

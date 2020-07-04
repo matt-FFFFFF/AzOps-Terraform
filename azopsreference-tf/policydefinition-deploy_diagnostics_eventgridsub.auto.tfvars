@@ -1,4 +1,4 @@
-policyDefinition_deploy_diagnostics_eventgridsub_policyrule = <<POLICYRULE
+policydefinition_deploy_diagnostics_eventgridsub_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -86,7 +86,7 @@ policyDefinition_deploy_diagnostics_eventgridsub_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_diagnostics_eventgridsub_parameters = <<PARAMETERS
+policydefinition_deploy_diagnostics_eventgridsub_parameters = <<PARAMETERS
 {
   "loganalytics": {
     "type": "String",

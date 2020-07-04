@@ -1,4 +1,4 @@
-policyDefinition_deny_appgw_without_waf_policyrule = <<POLICYRULE
+policydefinition_deny_appgw_without_waf_policyrule = <<POLICYRULE
 {
   "if": {
     "allof": [

@@ -1,4 +1,4 @@
-policyDefinition_deploy_log_analytics_policyrule = <<POLICYRULE
+policydefinition_deploy_log_analytics_policyrule = <<POLICYRULE
 {
   "if": {
     "allof": [
@@ -144,7 +144,7 @@ policyDefinition_deploy_log_analytics_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_log_analytics_parameters = <<PARAMETERS
+policydefinition_deploy_log_analytics_parameters = <<PARAMETERS
 {
   "workspacename": {
     "type": "String",

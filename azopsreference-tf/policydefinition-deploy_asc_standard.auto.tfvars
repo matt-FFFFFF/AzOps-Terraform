@@ -1,4 +1,4 @@
-policyDefinition_deploy_asc_standard_policyrule = <<POLICYRULE
+policydefinition_deploy_asc_standard_policyrule = <<POLICYRULE
 {
   "if": {
     "allof": [
@@ -238,7 +238,7 @@ policyDefinition_deploy_asc_standard_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_asc_standard_parameters = <<PARAMETERS
+policydefinition_deploy_asc_standard_parameters = <<PARAMETERS
 {
   "emailsecuritycontact": {
     "type": "String",

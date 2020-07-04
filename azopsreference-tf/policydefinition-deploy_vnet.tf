@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deploy_vnet" {
   display_name          = "Deploy-vNet"
   description           = "Deploy-vNet"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deploy_vnet_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deploy_vnet_policyrule
   policy_parameters     = var.policyDefinition-deploy_vnet-parameters
 }
 
-
-variable "policyDefinition_deploy_vnet_policyrule" {
+variable "policydefinition_deploy_vnet_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deploy_vnet_parameters" {
+variable "policydefinition_deploy_vnet_parameters" {
     type    = string
     default = ""
 }

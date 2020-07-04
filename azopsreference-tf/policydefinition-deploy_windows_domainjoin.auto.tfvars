@@ -1,4 +1,4 @@
-policyDefinition_deploy_windows_domainjoin_policyrule = <<POLICYRULE
+policydefinition_deploy_windows_domainjoin_policyrule = <<POLICYRULE
 {
   "if": {
     "allof": [
@@ -196,7 +196,7 @@ policyDefinition_deploy_windows_domainjoin_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_windows_domainjoin_parameters = <<PARAMETERS
+policydefinition_deploy_windows_domainjoin_parameters = <<PARAMETERS
 {
   "domainusername": {
     "type": "String",

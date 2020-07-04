@@ -1,4 +1,4 @@
-policyDefinition_deploy_la_config_policyrule = <<POLICYRULE
+policydefinition_deploy_la_config_policyrule = <<POLICYRULE
 {
   "if": {
     "allof": [
@@ -368,7 +368,7 @@ policyDefinition_deploy_la_config_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_la_config_parameters = <<PARAMETERS
+policydefinition_deploy_la_config_parameters = <<PARAMETERS
 {
   "workspacename": {
     "type": "String",

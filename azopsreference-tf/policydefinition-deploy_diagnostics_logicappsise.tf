@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deploy_diagnostics_logicappsise" {
   display_name          = "Deploy-Diagnostics-LogicAppsISE"
   description           = "Apply diagnostic settings for Logic Apps Integration Accounts - Log Analytics"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deploy_diagnostics_logicappsise_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deploy_diagnostics_logicappsise_policyrule
   policy_parameters     = var.policyDefinition-deploy_diagnostics_logicappsise-parameters
 }
 
-
-variable "policyDefinition_deploy_diagnostics_logicappsise_policyrule" {
+variable "policydefinition_deploy_diagnostics_logicappsise_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deploy_diagnostics_logicappsise_parameters" {
+variable "policydefinition_deploy_diagnostics_logicappsise_parameters" {
     type    = string
     default = ""
 }

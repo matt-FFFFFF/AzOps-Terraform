@@ -1,4 +1,4 @@
-policyDefinition_deploy_sql_securityalertpolicies_policyrule = <<POLICYRULE
+policydefinition_deploy_sql_securityalertpolicies_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",

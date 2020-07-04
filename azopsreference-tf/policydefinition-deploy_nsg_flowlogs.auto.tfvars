@@ -1,4 +1,4 @@
-policyDefinition_deploy_nsg_flowlogs_policyrule = <<POLICYRULE
+policydefinition_deploy_nsg_flowlogs_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -89,7 +89,7 @@ policyDefinition_deploy_nsg_flowlogs_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_nsg_flowlogs_parameters = <<PARAMETERS
+policydefinition_deploy_nsg_flowlogs_parameters = <<PARAMETERS
 {
   "retention": {
     "type": "Integer",

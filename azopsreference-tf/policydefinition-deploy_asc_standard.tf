@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deploy_asc_standard" {
   display_name          = "Deploy-ASC-Standard"
   description           = "Ensures that subscriptions have Security Centre Standard enabled."
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deploy_asc_standard_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deploy_asc_standard_policyrule
   policy_parameters     = var.policyDefinition-deploy_asc_standard-parameters
 }
 
-
-variable "policyDefinition_deploy_asc_standard_policyrule" {
+variable "policydefinition_deploy_asc_standard_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deploy_asc_standard_parameters" {
+variable "policydefinition_deploy_asc_standard_parameters" {
     type    = string
     default = ""
 }

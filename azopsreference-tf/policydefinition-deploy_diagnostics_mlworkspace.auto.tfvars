@@ -1,4 +1,4 @@
-policyDefinition_deploy_diagnostics_mlworkspace_policyrule = <<POLICYRULE
+policydefinition_deploy_diagnostics_mlworkspace_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -137,7 +137,7 @@ policyDefinition_deploy_diagnostics_mlworkspace_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_diagnostics_mlworkspace_parameters = <<PARAMETERS
+policydefinition_deploy_diagnostics_mlworkspace_parameters = <<PARAMETERS
 {
   "loganalytics": {
     "type": "String",

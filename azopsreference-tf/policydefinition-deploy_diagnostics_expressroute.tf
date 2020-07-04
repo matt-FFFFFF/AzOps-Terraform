@@ -5,17 +5,16 @@ resource "azurerm_policy_definition" "deploy_diagnostics_expressroute" {
   display_name          = "Deploy-Diagnostics-ExpressRoute"
   description           = "Apply diagnostic settings for Express Routes Circuits - Log Analytics"
 
-  management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_deploy_diagnostics_expressroute_policyrule
+  management_group_name = azurerm_management_group.es.name
+  policy_rule           = var.policydefinition_deploy_diagnostics_expressroute_policyrule
   policy_parameters     = var.policyDefinition-deploy_diagnostics_expressroute-parameters
 }
 
-
-variable "policyDefinition_deploy_diagnostics_expressroute_policyrule" {
+variable "policydefinition_deploy_diagnostics_expressroute_policyrule" {
     type = string
 }
 
-variable "policyDefinition_deploy_diagnostics_expressroute_parameters" {
+variable "policydefinition_deploy_diagnostics_expressroute_parameters" {
     type    = string
     default = ""
 }

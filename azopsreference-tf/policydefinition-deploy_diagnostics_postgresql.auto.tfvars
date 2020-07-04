@@ -1,4 +1,4 @@
-policyDefinition_deploy_diagnostics_postgresql_policyrule = <<POLICYRULE
+policydefinition_deploy_diagnostics_postgresql_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -95,7 +95,7 @@ policyDefinition_deploy_diagnostics_postgresql_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_diagnostics_postgresql_parameters = <<PARAMETERS
+policydefinition_deploy_diagnostics_postgresql_parameters = <<PARAMETERS
 {
   "loganalytics": {
     "type": "String",

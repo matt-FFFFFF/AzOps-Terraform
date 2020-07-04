@@ -1,4 +1,4 @@
-policyDefinition_deploy_asc_ce_policyrule = <<POLICYRULE
+policydefinition_deploy_asc_ce_policyrule = <<POLICYRULE
 {
   "if": {
     "field": "type",
@@ -211,7 +211,7 @@ policyDefinition_deploy_asc_ce_policyrule = <<POLICYRULE
 }
 POLICYRULE
 
-policyDefinition_deploy_asc_ce_parameters = <<PARAMETERS
+policydefinition_deploy_asc_ce_parameters = <<PARAMETERS
 {
   "resourcegrouplocation": {
     "type": "String",
