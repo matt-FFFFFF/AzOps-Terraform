@@ -1,0 +1,21 @@
+resource "azurerm_policy_definition" "deploy_diagnostics_hdinsight" {
+  name                  = "Deploy-Diagnostics-HDInsight"
+  policy_type           = "Custom"
+  mode                  = "All"
+  display_name          = "Deploy-Diagnostics-HDInsight"
+  description           = "Apply diagnostic settings for HDInsight - Log Analytics"
+
+  management_group_name = azurerm_management_group.<changeme>.name
+  policy_rule           = var.policyDefinition_deploy_diagnostics_hdinsight_policyrule
+  policy_parameters     = var.policyDefinition-deploy_diagnostics_hdinsight-parameters
+}
+
+
+variable "policyDefinition_deploy_diagnostics_hdinsight_policyrule" {
+    type = string
+}
+
+variable "policyDefinition_deploy_diagnostics_hdinsight_parameters" {
+    type    = string
+    default = ""
+}

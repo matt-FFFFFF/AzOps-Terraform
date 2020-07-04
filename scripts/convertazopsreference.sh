@@ -12,8 +12,11 @@ exit_abnormal() {
 
 generate_tf_name() {
   local TFNAME=""
-  TFNAME=$(echo $1 | sed 's/Microsoft.Authorization_policyDefinitions-//')
-  TFNAME=$(echo $TFNAME | sed 's/.parameters.json//')
+  TFNAME=$(echo $1 \
+          | sed 's/Microsoft.Authorization_policyDefinitions-//' \
+          | sed 's/.parameters.json//' \
+          | sed 's/-/_/g' \
+          | tr '[:upper:]' '[:lower:]')
   if [ "$TFNAME" == "" ]; then
     echo "Could not generate out file name from $1" 1>&2
     exit_abnormal
@@ -22,28 +25,53 @@ generate_tf_name() {
 }
 
 create_tf_file() {
+  local POLICYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.name')
+  local POLICYDISPLAYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.displayname')
+  local POLICYDESCRIPTION=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.description')
+  local POLICYMODE=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.mode')
+  local POLICYPARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.properties.parameters')
+  if [ ! "$POLICYPARAMETERS" == "{}" ] && [ ! "$POLICYPARAMETERS" == "null" ]; then
+    POLICYPARAMETERS="policy_parameters     = var.policyDefinition-$1-parameters"
+  else
+    POLICYPARAMETERS=""
+  fi
+
   cat << EOF >$OUTDIR/policydefinition-${1}.tf
-variable "policyDefinition-$1-policyrule" {
+resource "azurerm_policy_definition" "${1}" {
+  name                  = "$POLICYNAME"
+  policy_type           = "Custom"
+  mode                  = "$POLICYMODE"
+  display_name          = "$POLICYDISPLAYNAME"
+  description           = "$POLICYDESCRIPTION"
+
+  management_group_name = azurerm_management_group.<changeme>.name
+  policy_rule           = var.policyDefinition_$1_policyrule
+  $POLICYPARAMETERS
+}
+
+
+variable "policyDefinition_$1_policyrule" {
     type = string
 }
 
-variable "policyDefinition-$1-parameters" {
-    type = string
+variable "policyDefinition_$1_parameters" {
+    type    = string
+    default = ""
 }
 EOF
 }
 
 create_tfvars_file() {
   cat << EOF >$OUTDIR/policydefinition-${1}.auto.tfvars
-policyDefinition-${1}-policyrule = <<POLICYRULE
-$(jq 'def recurse_key_rename: walk( if type == "object" then with_entries( .key |= ascii_downcase ) else . end); recurse_key_rename | .parameters.input.value.properties.policyrule' $2)
+policyDefinition_${1}_policyrule = <<POLICYRULE
+$(echo $POLICYJSON | jq '.parameters.input.value.properties.policyrule')
 POLICYRULE
 
 EOF
-  local PARAMETERS=$(jq 'def recurse_key_rename: walk( if type == "object" then with_entries( .key |= ascii_downcase ) else . end); recurse_key_rename | .parameters.input.value.properties.parameters' $2)
+  local PARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.properties.parameters')
   if [ ! "$PARAMETERS" == "{}" ] && [ ! "$PARAMETERS" == "null" ]; then
     cat << EOF >>$OUTDIR/policydefinition-${1}.auto.tfvars
-policyDefinition-${1}-parameters = <<PARAMETERS
+policyDefinition_${1}_parameters = <<PARAMETERS
 $PARAMETERS
 PARAMETERS
 
@@ -80,7 +108,7 @@ else
 fi
 
 # Ensure we have the necessary tools
-COMMANDS="jq"
+COMMANDS="jq tr"
 for COMMAND in $COMMANDS; do
   if [ ! $(command -v $COMMAND) ]; then
     echo "Could not find '$COMMAND' command. Is it installed?"
@@ -93,7 +121,8 @@ POLICYDEFINITIONS=$(find $REFDIR -iname *policyDefinitions*)
 for POLICYDEFINITION in $POLICYDEFINITIONS; do
   POLICYDEFINITIONBASE=$(basename $POLICYDEFINITION)
   echo "Converting: $POLICYDEFINITIONBASE"
+  POLICYJSON=$(jq 'def recurse_key_rename: walk( if type == "object" then with_entries( .key |= ascii_downcase ) else . end); recurse_key_rename | .' $POLICYDEFINITION)
   TFNAME=$(generate_tf_name $POLICYDEFINITIONBASE)
   create_tf_file $TFNAME
-  create_tfvars_file $TFNAME $POLICYDEFINITION
+  create_tfvars_file $TFNAME
 done
