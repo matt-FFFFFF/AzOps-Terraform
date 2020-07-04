@@ -30,3 +30,22 @@ policysetdefinition_deploy_sql_security_policydefinitions = <<POLICYDEFINITIONS
 ]
 POLICYDEFINITIONS
 
+policysetdefinition_deploy_sql_security_parameters = <<PARAMETERS
+{
+  "vulnerabilityassessmentsemail": {
+    "type": "String",
+    "metadata": {
+      "description": "The email address to send alerts",
+      "displayname": "The email address to send alerts"
+    }
+  },
+  "vulnerabilityassessmentsstorageid": {
+    "type": "String",
+    "metadata": {
+      "description": "The storage account to store assessments",
+      "displayname": "The storage account to store assessments"
+    }
+  }
+}
+PARAMETERS
+
