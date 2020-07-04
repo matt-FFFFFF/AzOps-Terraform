@@ -5,7 +5,7 @@ resource "azurerm_management_group" "es" {
 
 resource "azurerm_role_assignment" "mawhi" {
   scope                = azurerm_management_group.es.id
-  principal_id         = "46f823b6-57f4-4743-9f7f-7e5046e6c7ef"
+  principal_id         = var.my_object_id
   role_definition_name = "Owner"
 }
 
@@ -35,7 +35,7 @@ resource "azurerm_management_group" "management" {
   name         = "ES-mawhi-management"
 
   parent_management_group_id = azurerm_management_group.platform.id
-  subscription_ids           = ["814a2d9d-752d-4ecb-bb2a-fc0321152d4b"]
+  subscription_ids           = [var.my_subscription_id]
 }
 
 resource "azurerm_management_group" "connectivity" {

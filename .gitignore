@@ -5,6 +5,8 @@
 *.tfstate
 *.tfstate.*
 
+*.private.tfvars
+*.private.auto.tfvars
 # .tfvars files
 ##*.tfvars
 ##*.tfvars.json
