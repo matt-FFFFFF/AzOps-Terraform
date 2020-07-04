@@ -45,16 +45,16 @@ resource "azurerm_policy_definition" "${1}" {
   description           = "$POLICYDESCRIPTION"
 
   management_group_name = azurerm_management_group.<changeme>.name
-  policy_rule           = var.policyDefinition_$1_policyrule
+  policy_rule           = var.policydefinition_$1_policyrule
   $POLICYPARAMETERS
 }
 
 
-variable "policyDefinition_$1_policyrule" {
+variable "policydefinition_$1_policyrule" {
     type = string
 }
 
-variable "policyDefinition_$1_parameters" {
+variable "policydefinition_$1_parameters" {
     type    = string
     default = ""
 }
@@ -63,7 +63,7 @@ EOF
 
 create_tfvars_file() {
   cat << EOF >$OUTDIR/policydefinition-${1}.auto.tfvars
-policyDefinition_${1}_policyrule = <<POLICYRULE
+policydefinition_${1}_policyrule = <<POLICYRULE
 $(echo $POLICYJSON | jq '.parameters.input.value.properties.policyrule')
 POLICYRULE
 
@@ -71,7 +71,7 @@ EOF
   local PARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.properties.parameters')
   if [ ! "$PARAMETERS" == "{}" ] && [ ! "$PARAMETERS" == "null" ]; then
     cat << EOF >>$OUTDIR/policydefinition-${1}.auto.tfvars
-policyDefinition_${1}_parameters = <<PARAMETERS
+policydefinition_${1}_parameters = <<PARAMETERS
 $PARAMETERS
 PARAMETERS
 
