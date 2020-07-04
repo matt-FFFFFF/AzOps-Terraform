@@ -13,7 +13,7 @@ exit_abnormal() {
 generate_tf_name() {
   local TFNAME=""
   TFNAME=$(echo $1 \
-          | sed 's/Microsoft.Authorization_policyDefinitions-//' \
+          | sed "s/Microsoft.Authorization_$2-//" \
           | sed 's/.parameters.json//' \
           | sed 's/-/_/g' \
           | tr '[:upper:]' '[:lower:]')
@@ -24,7 +24,7 @@ generate_tf_name() {
   echo $TFNAME
 }
 
-create_tf_file() {
+create_tf_def_file() {
   local POLICYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.name')
   local POLICYDISPLAYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.displayname')
   local POLICYDESCRIPTION=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.description')
@@ -60,7 +60,7 @@ variable "policydefinition_$1_parameters" {
 EOF
 }
 
-create_tfvars_file() {
+create_tfvars_def_file() {
   cat << EOF >$OUTDIR/policydefinition-${1}.auto.tfvars
 policydefinition_${1}_policyrule = <<POLICYRULE
 $(echo $POLICYJSON | jq '.parameters.input.value.properties.policyrule')
@@ -71,6 +71,46 @@ EOF
   if [ ! "$PARAMETERS" == "{}" ] && [ ! "$PARAMETERS" == "null" ]; then
     cat << EOF >>$OUTDIR/policydefinition-${1}.auto.tfvars
 policydefinition_${1}_parameters = <<PARAMETERS
+$PARAMETERS
+PARAMETERS
+
+EOF
+  fi
+}
+
+create_tf_setdef_file() {
+  local POLICYSETNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.name')
+  local POLICYSETDISPLAYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.displayname')
+  local POLICYSETDESCRIPTION=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.description')
+  local POLICYSETPARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.properties.parameters')
+  if [ ! "$POLICYSETPARAMETERS" == "{}" ] && [ ! "$POLICYSETPARAMETERS" == "null" ]; then
+    POLICYSETPARAMETERS="parameters         = var.policysetdefinition_$1_parameters"
+  else
+    POLICYSETPARAMETERS=""
+  fi
+    cat << EOF >$OUTDIR/policysetdefinition-${1}.tf
+resource "azurerm_policy_set_definition" "${1}" {
+  name               = "$POLICYSETNAME"
+  policy_type        = "Custom"
+  display_name       = "$POLICYSETDISPLAYNAME"
+  description        = "$POLICYSETDESCRIPTION"
+  policy_definitions = var.policysetdefinition_${1}_policydefinitions
+  $POLICYSETPARAMETERS
+}
+EOF
+}
+
+create_tfvars_setdef_file() {
+  cat << EOF >$OUTDIR/policysetdefinition-${1}.auto.tfvars
+policysetdefinition_${1}_policydefinitions = <<POLICYDEFINITIONS
+$(echo $POLICYJSON | jq '.parameters.input.value.properties.policydefinitions')
+POLICYDEFINITIONS
+
+EOF
+  local PARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.properties.parameters')
+  if [ ! "$PARAMETERS" == "{}" ] && [ ! "$PARAMETERS" == "null" ]; then
+    cat << EOF >>$OUTDIR/policysetdefinition-${1}.auto.tfvars
+policysetdefinition_${1}_parameters = <<PARAMETERS
 $PARAMETERS
 PARAMETERS
 
@@ -117,11 +157,22 @@ done
 
 POLICYDEFINITIONS=$(find $REFDIR -iname *policyDefinitions*)
 
-for POLICYDEFINITION in $POLICYDEFINITIONS; do
-  POLICYDEFINITIONBASE=$(basename $POLICYDEFINITION)
-  echo "Converting: $POLICYDEFINITIONBASE"
-  POLICYJSON=$(jq 'def recurse_key_rename: walk( if type == "object" then with_entries( .key |= ascii_downcase ) else . end); recurse_key_rename | .' $POLICYDEFINITION)
-  TFNAME=$(generate_tf_name $POLICYDEFINITIONBASE)
-  create_tf_file $TFNAME
-  create_tfvars_file $TFNAME
+for PD in $POLICYDEFINITIONS; do
+  PDBASE=$(basename $PD)
+  echo "Converting: $PDBASE"
+  POLICYJSON=$(jq 'def recurse_key_rename: walk( if type == "object" then with_entries( .key |= ascii_downcase ) else . end); recurse_key_rename | .' $PD)
+  TFNAME=$(generate_tf_name $PDBASE policyDefinitions)
+  create_tf_def_file $TFNAME
+  create_tfvars_def_file $TFNAME
+done
+
+POLICYSETDEFINITIONS=$(find $REFDIR -iname *policySetDefinitions*)
+
+for PSD in $POLICYSETDEFINITIONS; do
+  PSDBASE=$(basename $PSD)
+  echo "Converting: $PSDBASE"
+  POLICYJSON=$(jq 'def recurse_key_rename: walk( if type == "object" then with_entries( .key |= ascii_downcase ) else . end); recurse_key_rename | .' $PSD)
+  TFNAME=$(generate_tf_name $PSDBASE policySetDefinitions)
+  create_tf_setdef_file $TFNAME
+  create_tfvars_setdef_file $TFNAME
 done
