@@ -31,7 +31,7 @@ create_tf_file() {
   local POLICYMODE=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.mode')
   local POLICYPARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.properties.parameters')
   if [ ! "$POLICYPARAMETERS" == "{}" ] && [ ! "$POLICYPARAMETERS" == "null" ]; then
-    POLICYPARAMETERS="policy_parameters     = var.policyDefinition-$1-parameters"
+    POLICYPARAMETERS="parameters            = var.policydefinition_$1_parameters"
   else
     POLICYPARAMETERS=""
   fi

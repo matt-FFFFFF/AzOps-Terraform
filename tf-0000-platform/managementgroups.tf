@@ -35,7 +35,7 @@ resource "azurerm_management_group" "management" {
   name         = "ES-mawhi-management"
 
   parent_management_group_id = azurerm_management_group.platform.id
-  subscription_ids           = [var.my_subscription_id]
+  subscription_ids           = [var.mgmt_subscription_id]
 }
 
 resource "azurerm_management_group" "connectivity" {
