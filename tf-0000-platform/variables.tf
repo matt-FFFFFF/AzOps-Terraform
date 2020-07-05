@@ -1,10 +1,10 @@
-variable "my_object_id" {
+variable "admin_user_object_id" {
   type = string
 }
 
 variable "management_group_prefix" {
   type = string
-  default = "ES-"
+  default = "ES"
 }
 
 variable "mgmt_subscription_id" {
