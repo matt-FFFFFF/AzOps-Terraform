@@ -6,6 +6,6 @@ This project is in its early stages but intends to provide an alternate implemen
 
 The current scope of this project is as follows:
 
-[*] Platform foundation (partially complete)
-[] Regional hub template
-[] Landing zone template
+* Platform foundation (partially complete)
+* Regional hub template (not started)
+* Landing zone template (not started)
