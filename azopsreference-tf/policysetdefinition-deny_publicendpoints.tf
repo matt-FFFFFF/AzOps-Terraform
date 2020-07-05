@@ -6,3 +6,12 @@ resource "azurerm_policy_set_definition" "deny_publicendpoints" {
   policy_definitions = var.policysetdefinition_deny_publicendpoints_policydefinitions
   
 }
+
+variable "policysetdefinition_deny_publicendpoints_policydefinitions" {
+  type = string
+}
+
+variable "policysetdefinition_deny_publicendpoints_parameters" {
+  type    = string
+  default = ""
+}

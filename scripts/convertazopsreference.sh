@@ -98,11 +98,11 @@ resource "azurerm_policy_set_definition" "${1}" {
   $POLICYSETPARAMETERS
 }
 
-variable "var.policysetdefinition_${1}_policydefinitions" {
+variable "policysetdefinition_${1}_policydefinitions" {
   type = string
 }
 
-variable "var.policysetdefinition_$1_parameters" {
+variable "policysetdefinition_$1_parameters" {
   type    = string
   default = ""
 }

@@ -6,3 +6,12 @@ resource "azurerm_policy_set_definition" "deploy_sql_security" {
   policy_definitions = var.policysetdefinition_deploy_sql_security_policydefinitions
   parameters         = var.policysetdefinition_deploy_sql_security_parameters
 }
+
+variable "policysetdefinition_deploy_sql_security_policydefinitions" {
+  type = string
+}
+
+variable "policysetdefinition_deploy_sql_security_parameters" {
+  type    = string
+  default = ""
+}
