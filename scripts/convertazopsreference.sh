@@ -25,11 +25,11 @@ generate_tf_name() {
 }
 
 create_tf_def_file() {
-  local POLICYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.name')
-  local POLICYDISPLAYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.displayname')
-  local POLICYDESCRIPTION=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.description')
-  local POLICYMODE=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.mode')
-  local POLICYPARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.properties.parameters')
+  local POLICYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.Name')
+  local POLICYDISPLAYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.Properties.DisplayName')
+  local POLICYDESCRIPTION=$(echo $POLICYJSON | jq -r '.parameters.input.value.Properties.Description')
+  local POLICYMODE=$(echo $POLICYJSON | jq -r '.parameters.input.value.Properties.Mode')
+  local POLICYPARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.Properties.Parameters')
   if [ ! "$POLICYPARAMETERS" == "{}" ] && [ ! "$POLICYPARAMETERS" == "null" ]; then
     POLICYPARAMETERS="parameters            = var.policydefinition_$1_parameters"
   else
@@ -67,7 +67,7 @@ $(echo $POLICYJSON | jq '.parameters.input.value.properties.policyrule')
 POLICYRULE
 
 EOF
-  local PARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.properties.parameters')
+  local PARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.Properties.Parameters')
   if [ ! "$PARAMETERS" == "{}" ] && [ ! "$PARAMETERS" == "null" ]; then
     cat << EOF >>$OUTDIR/policydefinition-${1}.auto.tfvars
 policydefinition_${1}_parameters = <<PARAMETERS
@@ -79,12 +79,12 @@ EOF
 }
 
 create_tf_setdef_file() {
-  local POLICYSETNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.name')
-  local POLICYSETDISPLAYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.displayname')
-  local POLICYSETDESCRIPTION=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.description')
-  local POLICYSETPARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.properties.parameters')
+  local POLICYSETNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.Name')
+  local POLICYSETDISPLAYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.Properties.DisplayName')
+  local POLICYSETDESCRIPTION=$(echo $POLICYJSON | jq -r '.parameters.input.value.Properties.Description')
+  local POLICYSETPARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.Properties.Parameters')
   local POLICYSETDEPS=$(for dep in `echo $POLICYJSON \
-                        | jq -r '.parameters.input.value.properties.policydefinitions[].policydefinitionid' \
+                        | jq -r '.parameters.input.value.Properties.PolicyDefinitions[].policyDefinitionId' \
                         | cut -d / -f 9 \
                         | sort \
                         | tr '[:upper:]' '[:lower:]' \
@@ -124,11 +124,11 @@ EOF
 create_tfvars_setdef_file() {
   cat << EOF >$OUTDIR/policysetdefinition-${1}.auto.tfvars
 policysetdefinition_${1}_policydefinitions = <<POLICYDEFINITIONS
-$(echo $POLICYJSON | jq '.parameters.input.value.properties.policydefinitions')
+$(echo $POLICYJSON | jq '.parameters.input.value.Properties.PolicyDefinitions')
 POLICYDEFINITIONS
 
 EOF
-  local PARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.properties.parameters')
+  local PARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.Properties.Parameters')
   if [ ! "$PARAMETERS" == "{}" ] && [ ! "$PARAMETERS" == "null" ]; then
     cat << EOF >>$OUTDIR/policysetdefinition-${1}.auto.tfvars
 policysetdefinition_${1}_parameters = <<PARAMETERS
@@ -181,7 +181,7 @@ POLICYDEFINITIONS=$(find $REFDIR -iname *policyDefinitions*)
 for PD in $POLICYDEFINITIONS; do
   PDBASE=$(basename $PD)
   echo "Converting: $PDBASE"
-  POLICYJSON=$(jq 'def recurse_key_rename: walk( if type == "object" then with_entries( select( .value != null ) | .key |= ascii_downcase ) else . end); recurse_key_rename | .' $PD)
+  POLICYJSON=$(jq 'def recurse_remove_null: walk( if type == "object" then with_entries( select( .value != null ) ) else . end); recurse_remove_null | .' $PD)
   TFNAME=$(generate_tf_name $PDBASE policyDefinitions)
   create_tf_def_file $TFNAME
   create_tfvars_def_file $TFNAME
@@ -192,7 +192,7 @@ POLICYSETDEFINITIONS=$(find $REFDIR -iname *policySetDefinitions*)
 for PSD in $POLICYSETDEFINITIONS; do
   PSDBASE=$(basename $PSD)
   echo "Converting: $PSDBASE"
-  POLICYJSON=$(jq 'def recurse_key_rename: walk( if type == "object" then with_entries( select( .value != null ) | .key |= ascii_downcase ) else . end); recurse_key_rename | .' $PSD)
+  POLICYJSON=$(jq 'def recurse_remove_null: walk( if type == "object" then with_entries( select( .value != null ) ) else . end); recurse_remove_null | .' $PSD)
   TFNAME=$(generate_tf_name $PSDBASE policySetDefinitions)
   create_tf_setdef_file $TFNAME
   create_tfvars_setdef_file $TFNAME

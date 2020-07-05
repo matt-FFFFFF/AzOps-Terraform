@@ -21,7 +21,7 @@ PARAMETERS
 }
 
 resource "azurerm_policy_remediation" "deploy_diagnostics_activitylog" {
-  name                 = "activitylog"
+  name                 = "deploy-diag-activitylog"
   scope                = azurerm_management_group.es.id
   policy_assignment_id = azurerm_policy_assignment.deploy_diagnostics_activitylog.id
 }
