@@ -4,6 +4,6 @@ This project is in its early stages but intends to provide an alternate implemen
 
 The current scope of this project is as follows:
 
-* Platform foundation (partially complete)
-* Regional hub template (not started)
-* Landing zone template (not started)
+* :white_check_mark: [Enterprise Scle Foundation](https://github.com/Azure/Enterprise-Scale/tree/main/docs/reference/wingtip)
+* :black_square_button: Regional hub template (not started)
+* :black_square_button: Landing zone template (not started)
