@@ -15,8 +15,3 @@ variable "log_analytics_rg_name" {
   type = string
   default = "ES-mgmt"
 }
-
-variable "log_analytics_name_suffix" {
-  type = string
-  default = "-"
-}
