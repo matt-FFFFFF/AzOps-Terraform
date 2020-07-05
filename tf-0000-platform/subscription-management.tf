@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "es_mgmt" {
   name     = var.log_analytics_rg_name
-  location = var.defaultlocation
+  location = var.default_location
 }
 
 resource "azurerm_log_analytics_workspace" "mgmt" {
