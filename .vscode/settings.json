@@ -1,19 +1,9 @@
 {
     "editor.tabSize": 2,
     "terraform.languageServer": {
-        "enabled": true,
         "args": [
             "serve"
         ],
         "external": true
-    },
-    "terraform.indexing": {
-        "enabled": false,
-        "liveIndexing": false,
-        "delay": 500,
-        "exclude": [
-            ".terraform/**/*",
-            "**/.terraform/**/*"
-        ]
     }
 }
