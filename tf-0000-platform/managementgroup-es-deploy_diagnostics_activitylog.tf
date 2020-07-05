@@ -12,7 +12,7 @@ resource "azurerm_policy_assignment" "deploy_diagnostics_activitylog" {
 
   parameters = <<PARAMETERS
 {
-  "loganalytics": {
+  "logAnalytics": {
     "value": "${azurerm_log_analytics_workspace.mgmt.id}"
   }
 }
