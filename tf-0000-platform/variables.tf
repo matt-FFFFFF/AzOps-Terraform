@@ -2,11 +2,16 @@ variable "my_object_id" {
   type = string
 }
 
+variable "management_group_prefix" {
+  type = string
+  default = "ES-"
+}
+
 variable "mgmt_subscription_id" {
   type = string
 }
 
-variable "defaultlocation" {
+variable "default_location" {
   type    = string
   default = "westeurope"
 }
