@@ -83,7 +83,14 @@ create_tf_setdef_file() {
   local POLICYSETDISPLAYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.displayname')
   local POLICYSETDESCRIPTION=$(echo $POLICYJSON | jq -r '.parameters.input.value.properties.description')
   local POLICYSETPARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.properties.parameters')
-  local POLICYSETDEPS=$(for dep in `echo $POLICYJSON | jq -r '.parameters.input.value.properties.policydefinitions[].policydefinitionid' | cut -d / -f 9 | tr '[:upper:]' '[:lower:]' | sed 's/-/_/g'`; do echo "    "azurerm_policy_definition.$dep,; done)
+  local POLICYSETDEPS=$(for dep in `echo $POLICYJSON \
+                        | jq -r '.parameters.input.value.properties.policydefinitions[].policydefinitionid' \
+                        | cut -d / -f 9 \
+                        | sort \
+                        | tr '[:upper:]' '[:lower:]' \
+                        | sed 's/-/_/g'`; do \
+                            echo "    "azurerm_policy_definition.$dep,; \
+                        done)
   if [ ! "$POLICYSETPARAMETERS" == "{}" ] && [ ! "$POLICYSETPARAMETERS" == "null" ]; then
     POLICYSETPARAMETERS="parameters          = var.policysetdefinition_$1_parameters"
   else
