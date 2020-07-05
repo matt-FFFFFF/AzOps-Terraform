@@ -48,7 +48,7 @@ on:
   push:
     branches:
     - disabled
-  pull_request:
+#  pull_request:
 
 jobs:
   terraform:
