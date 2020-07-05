@@ -4,7 +4,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   display_name        = "Deploy-Diag-LogAnalytics"
   description         = "This initiative configures application Azure resources to forward diagnostic logs and metrics to an Azure Log Analytics workspace."
   management_group_id = azurerm_management_group.es.name
-  depends_on = [
+  depends_on          = [
     azurerm_policy_definition.deploy_diagnostics_aa,
     azurerm_policy_definition.deploy_diagnostics_aci,
     azurerm_policy_definition.deploy_diagnostics_acr,
@@ -56,8 +56,8 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
     azurerm_policy_definition.deploy_diagnostics_website,
     azurerm_policy_definition.deploy_diagnostics_iothub,
   ]
-  policy_definitions = var.policysetdefinition_deploy_diag_loganalytics_policydefinitions
-  parameters         = var.policysetdefinition_deploy_diag_loganalytics_parameters
+  policy_definitions  = var.policysetdefinition_deploy_diag_loganalytics_policydefinitions
+  parameters          = var.policysetdefinition_deploy_diag_loganalytics_parameters
 }
 
 variable "policysetdefinition_deploy_diag_loganalytics_policydefinitions" {

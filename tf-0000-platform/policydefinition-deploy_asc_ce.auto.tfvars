@@ -9,10 +9,10 @@ policydefinition_deploy_asc_ce_policyrule = <<POLICYRULE
     "details": {
       "type": "Microsoft.Security/automations",
       "name": "ExportToWorkspace",
-      "existencescope": "resourcegroup",
-      "resourcegroupname": "[concat(subscription().displayName, '-asc')]",
-      "deploymentscope": "subscription",
-      "roledefinitionids": [
+      "existenceScope": "resourcegroup",
+      "ResourceGroupName": "[concat(subscription().displayName, '-asc')]",
+      "deploymentScope": "subscription",
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ],
       "deployment": {
@@ -21,56 +21,56 @@ policydefinition_deploy_asc_ce_policyrule = <<POLICYRULE
           "mode": "incremental",
           "template": {
             "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
-              "resourcegrouplocation": {
+              "resourceGroupLocation": {
                 "type": "string"
               },
-              "exporteddatatypes": {
+              "exportedDataTypes": {
                 "type": "array"
               },
-              "recommendationnames": {
+              "recommendationNames": {
                 "type": "array"
               },
-              "recommendationseverities": {
+              "recommendationSeverities": {
                 "type": "array"
               },
-              "alertseverities": {
+              "alertSeverities": {
                 "type": "array"
               },
-              "workspaceresourceid": {
+              "workspaceResourceId": {
                 "type": "string"
               },
-              "subscriptionazureresourceid": {
+              "subscriptionAzureResourceId": {
                 "type": "string"
               },
-              "subscriptionid": {
+              "subscriptionId": {
                 "type": "string"
               }
             },
             "variables": {
-              "resourcegroupname": "[concat(subscription().displayName, '-asc')]",
-              "scopedescription": "scope for subscription {0}",
-              "recommendationnameslength": "[length(parameters('recommendationNames'))]",
-              "recommendationseveritieslength": "[length(parameters('recommendationSeverities'))]",
-              "alertseveritieslength": "[length(parameters('alertSeverities'))]",
-              "recommendationnameslengthifempty": "[if(equals(variables('recommendationNamesLength'), 0), 1, variables('recommendationNamesLength'))]",
-              "recommendationseveritieslengthifempty": "[if(equals(variables('recommendationSeveritiesLength'), 0), 1, variables('recommendationSeveritiesLength'))]",
-              "alertseveritieslengthifempty": "[if(equals(variables('alertSeveritiesLength'), 0), 1, variables('alertSeveritiesLength'))]",
-              "totalrulecombinationsforonerecommendationname": "[variables('recommendationSeveritiesLengthIfEmpty')]",
-              "totalrulecombinationsforonerecommendationseverity": 1,
-              "exporteddatatypeslength": "[length(parameters('exportedDataTypes'))]",
-              "exporteddatatypeslengthifempty": "[if(equals(variables('exportedDataTypesLength'), 0), 1, variables('exportedDataTypesLength'))]",
-              "datatypemap": {
-                "security recommendations": "Assessments",
-                "security alerts": "Alerts"
+              "resourceGroupName": "[concat(subscription().displayName, '-asc')]",
+              "scopeDescription": "scope for subscription {0}",
+              "recommendationNamesLength": "[length(parameters('recommendationNames'))]",
+              "recommendationSeveritiesLength": "[length(parameters('recommendationSeverities'))]",
+              "alertSeveritiesLength": "[length(parameters('alertSeverities'))]",
+              "recommendationNamesLengthIfEmpty": "[if(equals(variables('recommendationNamesLength'), 0), 1, variables('recommendationNamesLength'))]",
+              "recommendationSeveritiesLengthIfEmpty": "[if(equals(variables('recommendationSeveritiesLength'), 0), 1, variables('recommendationSeveritiesLength'))]",
+              "alertSeveritiesLengthIfEmpty": "[if(equals(variables('alertSeveritiesLength'), 0), 1, variables('alertSeveritiesLength'))]",
+              "totalRuleCombinationsForOneRecommendationName": "[variables('recommendationSeveritiesLengthIfEmpty')]",
+              "totalRuleCombinationsForOneRecommendationSeverity": 1,
+              "exportedDataTypesLength": "[length(parameters('exportedDataTypes'))]",
+              "exportedDataTypesLengthIfEmpty": "[if(equals(variables('exportedDataTypesLength'), 0), 1, variables('exportedDataTypesLength'))]",
+              "dataTypeMap": {
+                "Security recommendations": "Assessments",
+                "Security alerts": "Alerts"
               },
-              "alertseveritymap": {
-                "high": "high",
-                "medium": "medium",
-                "low": "low"
+              "alertSeverityMap": {
+                "High": "high",
+                "Medium": "medium",
+                "Low": "low"
               },
-              "rulesetsforassessmentsobj": {
+              "ruleSetsForAssessmentsObj": {
                 "copy": [
                   {
                     "name": "ruleSetsForAssessmentsArr",
@@ -78,15 +78,15 @@ policydefinition_deploy_asc_ce_policyrule = <<POLICYRULE
                     "input": {
                       "rules": [
                         {
-                          "propertyjpath": "[if(equals(variables('recommendationNamesLength'),0),'type','name')]",
-                          "propertytype": "string",
-                          "expectedvalue": "[if(equals(variables('recommendationNamesLength'),0),'Microsoft.Security/assessments',parameters('recommendationNames')[mod(div(copyIndex('ruleSetsForAssessmentsArr'),variables('totalRuleCombinationsForOneRecommendationName')),variables('recommendationNamesLength'))])]",
+                          "propertyJPath": "[if(equals(variables('recommendationNamesLength'),0),'type','name')]",
+                          "propertyType": "string",
+                          "expectedValue": "[if(equals(variables('recommendationNamesLength'),0),'Microsoft.Security/assessments',parameters('recommendationNames')[mod(div(copyIndex('ruleSetsForAssessmentsArr'),variables('totalRuleCombinationsForOneRecommendationName')),variables('recommendationNamesLength'))])]",
                           "operator": "Contains"
                         },
                         {
-                          "propertyjpath": "properties.metadata.severity",
-                          "propertytype": "string",
-                          "expectedvalue": "[parameters('recommendationSeverities')[mod(div(copyIndex('ruleSetsForAssessmentsArr'),variables('totalRuleCombinationsForOneRecommendationSeverity')),variables('recommendationSeveritiesLength'))]]",
+                          "propertyJPath": "properties.metadata.severity",
+                          "propertyType": "string",
+                          "expectedValue": "[parameters('recommendationSeverities')[mod(div(copyIndex('ruleSetsForAssessmentsArr'),variables('totalRuleCombinationsForOneRecommendationSeverity')),variables('recommendationSeveritiesLength'))]]",
                           "operator": "Equals"
                         }
                       ]
@@ -94,7 +94,7 @@ policydefinition_deploy_asc_ce_policyrule = <<POLICYRULE
                   }
                 ]
               },
-              "rulesetsforalertsobj": {
+              "ruleSetsForAlertsObj": {
                 "copy": [
                   {
                     "name": "ruleSetsForAlertsArr",
@@ -102,9 +102,9 @@ policydefinition_deploy_asc_ce_policyrule = <<POLICYRULE
                     "input": {
                       "rules": [
                         {
-                          "propertyjpath": "Severity",
-                          "propertytype": "string",
-                          "expectedvalue": "[variables('alertSeverityMap')[parameters('alertSeverities')[mod(copyIndex('ruleSetsForAlertsArr'),variables('alertSeveritiesLengthIfEmpty'))]]]",
+                          "propertyJPath": "Severity",
+                          "propertyType": "string",
+                          "expectedValue": "[variables('alertSeverityMap')[parameters('alertSeverities')[mod(copyIndex('ruleSetsForAlertsArr'),variables('alertSeveritiesLengthIfEmpty'))]]]",
                           "operator": "Equals"
                         }
                       ]
@@ -117,41 +117,41 @@ policydefinition_deploy_asc_ce_policyrule = <<POLICYRULE
               {
                 "name": "[variables('resourceGroupName')]",
                 "type": "Microsoft.Resources/resourceGroups",
-                "apiversion": "2019-10-01",
+                "apiVersion": "2019-10-01",
                 "location": "[parameters('resourceGroupLocation')]",
                 "tags": {},
                 "properties": {}
               },
               {
                 "type": "Microsoft.Resources/deployments",
-                "apiversion": "2019-10-01",
+                "apiVersion": "2019-10-01",
                 "name": "nestedAutomationDeployment",
-                "resourcegroup": "[variables('resourceGroupName')]",
-                "dependson": [
+                "resourceGroup": "[variables('resourceGroupName')]",
+                "dependsOn": [
                   "[resourceId('Microsoft.Resources/resourceGroups/', variables('resourceGroupName'))]"
                 ],
                 "properties": {
                   "mode": "Incremental",
                   "template": {
                     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-                    "contentversion": "1.0.0.0",
+                    "contentVersion": "1.0.0.0",
                     "parameters": {},
                     "variables": {},
                     "resources": [
                       {
                         "tags": {},
-                        "apiversion": "2019-01-01-preview",
+                        "apiVersion": "2019-01-01-preview",
                         "location": "[parameters('resourceGroupLocation')]",
                         "name": "ExportToWorkspace",
                         "type": "Microsoft.Security/automations",
-                        "dependson": [],
+                        "dependsOn": [],
                         "properties": {
                           "description": "Export Azure Security Center Alerts and/or Recommendations to Log Analytics Workspace via Policy",
-                          "isenabled": true,
+                          "isEnabled": true,
                           "scopes": [
                             {
                               "description": "[replace(variables('scopeDescription'),'{0}', parameters('subscriptionId'))]",
-                              "scopepath": "[parameters('subscriptionAzureResourceId')]"
+                              "scopePath": "[parameters('subscriptionAzureResourceId')]"
                             }
                           ],
                           "copy": [
@@ -159,15 +159,15 @@ policydefinition_deploy_asc_ce_policyrule = <<POLICYRULE
                               "name": "sources",
                               "count": "[variables('exportedDataTypesLengthIfEmpty')]",
                               "input": {
-                                "eventsource": "[variables('dataTypeMap')[parameters('exportedDataTypes')[copyIndex('sources')]]]",
-                                "rulesets": "[if(equals(parameters('exportedDataTypes')[copyIndex('sources')], 'Security recommendations'), variables('ruleSetsForAssessmentsObj').ruleSetsForAssessmentsArr, variables('ruleSetsForAlertsObj').ruleSetsForAlertsArr)]"
+                                "eventSource": "[variables('dataTypeMap')[parameters('exportedDataTypes')[copyIndex('sources')]]]",
+                                "ruleSets": "[if(equals(parameters('exportedDataTypes')[copyIndex('sources')], 'Security recommendations'), variables('ruleSetsForAssessmentsObj').ruleSetsForAssessmentsArr, variables('ruleSetsForAlertsObj').ruleSetsForAlertsArr)]"
                               }
                             }
                           ],
                           "actions": [
                             {
-                              "actiontype": "Workspace",
-                              "workspaceresourceid": "[parameters('workspaceResourceId')]"
+                              "actionType": "Workspace",
+                              "workspaceResourceId": "[parameters('workspaceResourceId')]"
                             }
                           ]
                         }
@@ -179,28 +179,28 @@ policydefinition_deploy_asc_ce_policyrule = <<POLICYRULE
             ]
           },
           "parameters": {
-            "resourcegrouplocation": {
+            "resourceGroupLocation": {
               "value": "[parameters('resourceGroupLocation')]"
             },
-            "exporteddatatypes": {
+            "exportedDataTypes": {
               "value": "[parameters('exportedDataTypes')]"
             },
-            "recommendationnames": {
+            "recommendationNames": {
               "value": "[parameters('recommendationNames')]"
             },
-            "recommendationseverities": {
+            "recommendationSeverities": {
               "value": "[parameters('recommendationSeverities')]"
             },
-            "alertseverities": {
+            "alertSeverities": {
               "value": "[parameters('alertSeverities')]"
             },
-            "workspaceresourceid": {
+            "workspaceResourceId": {
               "value": "[parameters('workspaceResourceId')]"
             },
-            "subscriptionazureresourceid": {
+            "subscriptionAzureResourceId": {
               "value": "[subscription().id]"
             },
-            "subscriptionid": {
+            "subscriptionId": {
               "value": "[subscription().subscriptionId]"
             }
           }
@@ -213,77 +213,77 @@ POLICYRULE
 
 policydefinition_deploy_asc_ce_parameters = <<PARAMETERS
 {
-  "resourcegrouplocation": {
+  "resourceGroupLocation": {
     "type": "String",
     "metadata": {
-      "displayname": "Resource group location",
+      "displayName": "Resource group location",
       "description": "If you inserted an existing resource group, please select its location. In case this is a new resource group, please choose a location for it",
-      "strongtype": "location"
+      "strongType": "location"
     }
   },
-  "exporteddatatypes": {
+  "exportedDataTypes": {
     "type": "Array",
     "metadata": {
-      "displayname": "Exported data types",
+      "displayName": "Exported data types",
       "description": "Choose the data type/s to be exported"
     },
-    "allowedvalues": [
+    "allowedValues": [
       "Security recommendations",
       "Security alerts"
     ],
-    "defaultvalue": [
+    "defaultValue": [
       "Security recommendations",
       "Security alerts"
     ]
   },
-  "recommendationnames": {
+  "recommendationNames": {
     "type": "Array",
     "metadata": {
-      "displayname": "Recommendation IDs (applicable only for export of security recommendations)",
+      "displayName": "Recommendation IDs (applicable only for export of security recommendations)",
       "description": "For all recommendations please leave empty. For specific recommendations please insert a list of recommendation IDs separated by ';'. Recommendation IDs are available through Assessments API (https://docs.microsoft.com/en-us/rest/api/securitycenter/assessments), or Azure Resource Graph Explorer (https://ms.portal.azure.com/#blade/HubsExtension/ArgQueryBlade), choose securityresources and microsoft.security/assessments"
     },
-    "defaultvalue": []
+    "defaultValue": []
   },
-  "recommendationseverities": {
+  "recommendationSeverities": {
     "type": "Array",
     "metadata": {
-      "displayname": "Recommendation severities (applicable only for export of security recommendations)",
+      "displayName": "Recommendation severities (applicable only for export of security recommendations)",
       "description": "To select specific recommendation severities, please untick the appropriate ones"
     },
-    "allowedvalues": [
+    "allowedValues": [
       "High",
       "Medium",
       "Low"
     ],
-    "defaultvalue": [
+    "defaultValue": [
       "High",
       "Medium",
       "Low"
     ]
   },
-  "alertseverities": {
+  "alertSeverities": {
     "type": "Array",
     "metadata": {
-      "displayname": "Alert severities (applicable only for export of security alerts)",
+      "displayName": "Alert severities (applicable only for export of security alerts)",
       "description": "To select specific alert severities, please untick the appropriate ones"
     },
-    "allowedvalues": [
+    "allowedValues": [
       "High",
       "Medium",
       "Low"
     ],
-    "defaultvalue": [
+    "defaultValue": [
       "High",
       "Medium",
       "Low"
     ]
   },
-  "workspaceresourceid": {
+  "workspaceResourceId": {
     "type": "String",
     "metadata": {
-      "displayname": "Log Analytics Workspace resource ID",
+      "displayName": "Log Analytics Workspace resource ID",
       "description": "Insert the resource ID of the Log Analytics Workspace for export",
-      "strongtype": "omsWorkspace"
+      "strongType": "omsWorkspace"
     }
   }
 }

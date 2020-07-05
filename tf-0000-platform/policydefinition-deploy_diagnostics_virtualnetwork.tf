@@ -1,9 +1,9 @@
 resource "azurerm_policy_definition" "deploy_diagnostics_virtualnetwork" {
-  name         = "Deploy-Diagnostics-VirtualNetwork"
-  policy_type  = "Custom"
-  mode         = "All"
-  display_name = "Deploy-Diagnostics-VirtualNetwork"
-  description  = "Apply diagnostic settings for Virtual Networks - Log Analytics"
+  name                  = "Deploy-Diagnostics-VirtualNetwork"
+  policy_type           = "Custom"
+  mode                  = "All"
+  display_name          = "Deploy-Diagnostics-VirtualNetwork"
+  description           = "Apply diagnostic settings for Virtual Networks - Log Analytics"
 
   management_group_name = azurerm_management_group.es.name
   policy_rule           = var.policydefinition_deploy_diagnostics_virtualnetwork_policyrule
@@ -11,10 +11,10 @@ resource "azurerm_policy_definition" "deploy_diagnostics_virtualnetwork" {
 }
 
 variable "policydefinition_deploy_diagnostics_virtualnetwork_policyrule" {
-  type = string
+    type = string
 }
 
 variable "policydefinition_deploy_diagnostics_virtualnetwork_parameters" {
-  type    = string
-  default = ""
+    type    = string
+    default = ""
 }

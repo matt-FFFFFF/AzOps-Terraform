@@ -1,7 +1,7 @@
 policydefinition_deploy_ddosprotection_policyrule = <<POLICYRULE
 {
   "if": {
-    "allof": [
+    "allOf": [
       {
         "field": "type",
         "equals": "Microsoft.Resources/subscriptions"
@@ -12,13 +12,13 @@ policydefinition_deploy_ddosprotection_policyrule = <<POLICYRULE
     "effect": "deployIfNotExists",
     "details": {
       "type": "Microsoft.Resources/resourceGroups",
-      "deploymentscope": "Subscription",
-      "existencescope": "Subscription",
-      "roledefinitionids": [
+      "deploymentScope": "Subscription",
+      "existenceScope": "Subscription",
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ],
-      "existencecondition": {
-        "allof": [
+      "existenceCondition": {
+        "allOf": [
           {
             "field": "name",
             "like": "[parameters('rgName')]"
@@ -38,7 +38,7 @@ policydefinition_deploy_ddosprotection_policyrule = <<POLICYRULE
         "properties": {
           "mode": "incremental",
           "parameters": {
-            "rgname": {
+            "rgName": {
               "value": "[parameters('rgName')]"
             },
             "ddosname": {
@@ -50,44 +50,44 @@ policydefinition_deploy_ddosprotection_policyrule = <<POLICYRULE
           },
           "template": {
             "$schema": "http://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
-              "rgname": {
+              "rgName": {
                 "type": "string"
               },
               "ddosname": {
                 "type": "string"
               },
-              "ddosregion": {
+              "ddosRegion": {
                 "type": "string"
               }
             },
             "resources": [
               {
                 "type": "Microsoft.Resources/resourceGroups",
-                "apiversion": "2018-05-01",
+                "apiVersion": "2018-05-01",
                 "name": "[parameters('rgName')]",
                 "location": "[deployment().location]",
                 "properties": {}
               },
               {
                 "type": "Microsoft.Resources/deployments",
-                "apiversion": "2018-05-01",
+                "apiVersion": "2018-05-01",
                 "name": "ddosprotection",
-                "resourcegroup": "[parameters('rgName')]",
-                "dependson": [
+                "resourceGroup": "[parameters('rgName')]",
+                "dependsOn": [
                   "[resourceId('Microsoft.Resources/resourceGroups/', parameters('rgName'))]"
                 ],
                 "properties": {
                   "mode": "Incremental",
                   "template": {
                     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
-                    "contentversion": "1.0.0.0",
+                    "contentVersion": "1.0.0.0",
                     "parameters": {},
                     "resources": [
                       {
                         "type": "Microsoft.Network/ddosProtectionPlans",
-                        "apiversion": "2019-12-01",
+                        "apiVersion": "2019-12-01",
                         "name": "[parameters('ddosName')]",
                         "location": "[parameters('ddosRegion')]",
                         "properties": {}
@@ -109,25 +109,25 @@ POLICYRULE
 
 policydefinition_deploy_ddosprotection_parameters = <<PARAMETERS
 {
-  "ddosname": {
+  "ddosName": {
     "type": "String",
     "metadata": {
-      "displayname": "ddosName",
+      "displayName": "ddosName",
       "description": "Name of the Virtual WAN"
     }
   },
-  "ddosregion": {
+  "ddosRegion": {
     "type": "String",
     "metadata": {
-      "displayname": "ddosRegion",
+      "displayName": "ddosRegion",
       "description": "Select Azure region for Virtual WAN",
-      "strongtype": "location"
+      "strongType": "location"
     }
   },
-  "rgname": {
+  "rgName": {
     "type": "String",
     "metadata": {
-      "displayname": "rgName",
+      "displayName": "rgName",
       "description": "Provide name for resource group."
     }
   }

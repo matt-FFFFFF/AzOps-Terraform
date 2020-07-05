@@ -1,7 +1,7 @@
 policydefinition_deploy_vhub_policyrule = <<POLICYRULE
 {
   "if": {
-    "allof": [
+    "allOf": [
       {
         "field": "type",
         "equals": "Microsoft.Resources/subscriptions"
@@ -13,10 +13,10 @@ policydefinition_deploy_vhub_policyrule = <<POLICYRULE
     "details": {
       "type": "Microsoft.Network/virtualHubs",
       "name": "[parameters('vHubName')]",
-      "deploymentscope": "Subscription",
-      "existencescope": "ResourceGroup",
-      "resourcegroupname": "[parameters('rgName')]",
-      "roledefinitionids": [
+      "deploymentScope": "Subscription",
+      "existenceScope": "ResourceGroup",
+      "ResourceGroupName": "[parameters('rgName')]",
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ],
       "deployment": {
@@ -24,13 +24,13 @@ policydefinition_deploy_vhub_policyrule = <<POLICYRULE
         "properties": {
           "mode": "incremental",
           "parameters": {
-            "rgname": {
+            "rgName": {
               "value": "[parameters('rgName')]"
             },
             "vwanname": {
               "value": "[parameters('vwanname')]"
             },
-            "vhub": {
+            "vHUB": {
               "value": "[parameters('vHUB')]"
             },
             "vpngw": {
@@ -42,13 +42,13 @@ policydefinition_deploy_vhub_policyrule = <<POLICYRULE
             "azfw": {
               "value": "[parameters('azfw')]"
             },
-            "vhubname": {
+            "vHUBName": {
               "value": "[parameters('vHUBName')]"
             }
           },
           "template": {
             "$schema": "http://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
               "vwanname": {
                 "type": "string",
@@ -56,7 +56,7 @@ policydefinition_deploy_vhub_policyrule = <<POLICYRULE
                   "description": "Name of the Virtual WAN"
                 }
               },
-              "vhub": {
+              "vHUB": {
                 "type": "object",
                 "metadata": {
                   "description": "Object describing Virtual WAN vHUB"
@@ -64,36 +64,36 @@ policydefinition_deploy_vhub_policyrule = <<POLICYRULE
               },
               "vpngw": {
                 "type": "object",
-                "defaultvalue": {},
+                "defaultValue": {},
                 "metadata": {
                   "description": "Object describing VPN gateway"
                 }
               },
               "ergw": {
                 "type": "object",
-                "defaultvalue": {},
+                "defaultValue": {},
                 "metadata": {
                   "description": "Object describing ExpressRoute gateway"
                 }
               },
               "azfw": {
                 "type": "object",
-                "defaultvalue": {},
+                "defaultValue": {},
                 "metadata": {
                   "description": "Object describing the Azure Firewall in vHUB"
                 }
               },
-              "rgname": {
+              "rgName": {
                 "type": "String",
                 "metadata": {
-                  "displayname": "rgName",
+                  "displayName": "rgName",
                   "description": "Provide name for resource group."
                 }
               },
-              "vhubname": {
+              "vHUBName": {
                 "type": "String",
                 "metadata": {
-                  "displayname": "vHUBName",
+                  "displayName": "vHUBName",
                   "description": "Name of the vHUB"
                 }
               }
@@ -105,38 +105,38 @@ policydefinition_deploy_vhub_policyrule = <<POLICYRULE
             "resources": [
               {
                 "type": "Microsoft.Resources/resourceGroups",
-                "apiversion": "2018-05-01",
+                "apiVersion": "2018-05-01",
                 "name": "[parameters('rgName')]",
                 "location": "[deployment().location]",
                 "properties": {}
               },
               {
                 "type": "Microsoft.Resources/deployments",
-                "apiversion": "2018-05-01",
+                "apiVersion": "2018-05-01",
                 "name": "[concat('vHUBdeploy-',parameters('vHUB').location)]",
-                "resourcegroup": "[parameters('rgName')]",
-                "dependson": [
+                "resourceGroup": "[parameters('rgName')]",
+                "dependsOn": [
                   "[resourceId('Microsoft.Resources/resourceGroups/', parameters('rgName'))]"
                 ],
                 "properties": {
                   "mode": "Incremental",
                   "template": {
                     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-                    "contentversion": "1.0.0.0",
+                    "contentVersion": "1.0.0.0",
                     "parameters": {},
                     "variables": {},
                     "resources": [
                       {
                         "type": "Microsoft.Network/virtualHubs",
-                        "apiversion": "2020-05-01",
+                        "apiVersion": "2020-05-01",
                         "location": "[parameters('vHUB').location]",
                         "name": "[parameters('vHUBname')]",
                         "properties": {
-                          "virtualwan": {
+                          "virtualWan": {
                             "id": "[variables('vwanresourceid')]"
                           },
-                          "addressprefix": "[parameters('vHUB').addressPrefix]",
-                          "vpngateway": "[if(not(empty(parameters('vHUB').vpnGateway)),parameters('vHUB').vpnGateway, json('null'))]"
+                          "addressPrefix": "[parameters('vHUB').addressPrefix]",
+                          "vpnGateway": "[if(not(empty(parameters('vHUB').vpnGateway)),parameters('vHUB').vpnGateway, json('null'))]"
                         }
                       }
                     ]
@@ -145,10 +145,10 @@ policydefinition_deploy_vhub_policyrule = <<POLICYRULE
               },
               {
                 "type": "Microsoft.Resources/deployments",
-                "apiversion": "2018-05-01",
+                "apiVersion": "2018-05-01",
                 "condition": "[greater(length(parameters('vpngw')),0)]",
-                "resourcegroup": "[parameters('rgName')]",
-                "dependson": [
+                "resourceGroup": "[parameters('rgName')]",
+                "dependsOn": [
                   "[concat('vHUBdeploy-',parameters('vHUB').location)]"
                 ],
                 "name": "[concat(parameters('vHUBName'),'-vpngw')]",
@@ -156,21 +156,21 @@ policydefinition_deploy_vhub_policyrule = <<POLICYRULE
                   "mode": "Incremental",
                   "template": {
                     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-                    "contentversion": "1.0.0.0",
+                    "contentVersion": "1.0.0.0",
                     "parameters": {},
                     "variables": {},
                     "resources": [
                       {
                         "type": "Microsoft.Network/vpnGateways",
-                        "apiversion": "2019-09-01",
+                        "apiVersion": "2019-09-01",
                         "location": "[parameters('vHUB').location]",
                         "name": "[parameters('vpngw').name]",
                         "properties": {
-                          "virtualhub": {
+                          "virtualHub": {
                             "id": "[variables('vwanhub')]"
                           },
-                          "bgpsettings": "[parameters('vpngw').bgpSettings]",
-                          "vpngatewayscaleunit": "[parameters('vpngw').vpnGatewayScaleUnit]"
+                          "bgpSettings": "[parameters('vpngw').bgpSettings]",
+                          "vpnGatewayScaleUnit": "[parameters('vpngw').vpnGatewayScaleUnit]"
                         }
                       }
                     ]
@@ -179,10 +179,10 @@ policydefinition_deploy_vhub_policyrule = <<POLICYRULE
               },
               {
                 "type": "Microsoft.Resources/deployments",
-                "apiversion": "2018-05-01",
+                "apiVersion": "2018-05-01",
                 "condition": "[greater(length(parameters('ergw')),0)]",
-                "resourcegroup": "[parameters('rgName')]",
-                "dependson": [
+                "resourceGroup": "[parameters('rgName')]",
+                "dependsOn": [
                   "[concat('vHUBdeploy-',parameters('vHUB').location)]"
                 ],
                 "name": "[concat(parameters('vHUBName'),'-ergw')]",
@@ -190,21 +190,21 @@ policydefinition_deploy_vhub_policyrule = <<POLICYRULE
                   "mode": "Incremental",
                   "template": {
                     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-                    "contentversion": "1.0.0.0",
+                    "contentVersion": "1.0.0.0",
                     "parameters": {},
                     "variables": {},
                     "resources": [
                       {
                         "type": "Microsoft.Network/expressRouteGateways",
-                        "apiversion": "2019-09-01",
+                        "apiVersion": "2019-09-01",
                         "location": "[parameters('vHUB').location]",
                         "name": "[parameters('ergw').name]",
                         "properties": {
-                          "virtualhub": {
+                          "virtualHub": {
                             "id": "[variables('vwanhub')]"
                           },
-                          "autoscaleconfiguration": "[parameters('ergw').autoScaleConfiguration]",
-                          "expressrouteconnections": "[parameters('ergw').expressRouteConnections]"
+                          "autoScaleConfiguration": "[parameters('ergw').autoScaleConfiguration]",
+                          "expressRouteConnections": "[parameters('ergw').expressRouteConnections]"
                         }
                       }
                     ]
@@ -213,10 +213,10 @@ policydefinition_deploy_vhub_policyrule = <<POLICYRULE
               },
               {
                 "type": "Microsoft.Resources/deployments",
-                "apiversion": "2018-05-01",
+                "apiVersion": "2018-05-01",
                 "condition": "[greater(length(parameters('azfw')),0)]",
-                "resourcegroup": "[parameters('rgName')]",
-                "dependson": [
+                "resourceGroup": "[parameters('rgName')]",
+                "dependsOn": [
                   "[concat('vHUBdeploy-',parameters('vHUB').location)]"
                 ],
                 "name": "[concat(parameters('vHUBName'),'-azfw')]",
@@ -224,23 +224,23 @@ policydefinition_deploy_vhub_policyrule = <<POLICYRULE
                   "mode": "Incremental",
                   "template": {
                     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-                    "contentversion": "1.0.0.0",
+                    "contentVersion": "1.0.0.0",
                     "parameters": {},
                     "resources": [
                       {
-                        "apiversion": "2019-09-01",
+                        "apiVersion": "2019-09-01",
                         "type": "Microsoft.Network/azureFirewalls",
                         "name": "[parameters('azfw').name]",
                         "location": "[parameters('vHUB').location]",
                         "properties": {
-                          "virtualhub": {
+                          "virtualHub": {
                             "id": "[variables('vwanhub')]"
                           },
                           "sku": {
-                            "name": "AZFW_Hub",
-                            "tier": "Standard"
+                            "Name": "AZFW_Hub",
+                            "Tier": "Standard"
                           },
-                          "firewallpolicy": {
+                          "firewallPolicy": {
                             "id": "[if(not(empty(parameters('azfw').firewallPolicy.id)),parameters('azfw').firewallPolicy.id, json('null'))]"
                           }
                         }
@@ -263,53 +263,53 @@ policydefinition_deploy_vhub_parameters = <<PARAMETERS
   "vwanname": {
     "type": "String",
     "metadata": {
-      "displayname": "vwanname",
+      "displayName": "vwanname",
       "description": "Name of the Virtual WAN"
     }
   },
-  "vhubname": {
+  "vHubName": {
     "type": "String",
     "metadata": {
-      "displayname": "vHubName",
+      "displayName": "vHubName",
       "description": "Name of the vHUB"
     },
-    "defaultvalue": ""
+    "defaultValue": ""
   },
-  "vhub": {
+  "vHUB": {
     "type": "Object",
     "metadata": {
-      "displayname": "vHUB",
+      "displayName": "vHUB",
       "description": "Object describing Virtual WAN vHUB"
     }
   },
   "vpngw": {
     "type": "Object",
     "metadata": {
-      "displayname": "vpngw",
+      "displayName": "vpngw",
       "description": "Object describing VPN gateway"
     },
-    "defaultvalue": {}
+    "defaultValue": {}
   },
   "ergw": {
     "type": "Object",
     "metadata": {
-      "displayname": "ergw",
+      "displayName": "ergw",
       "description": "Object describing ExpressRoute gateway"
     },
-    "defaultvalue": {}
+    "defaultValue": {}
   },
   "azfw": {
     "type": "Object",
     "metadata": {
-      "displayname": "azfw",
+      "displayName": "azfw",
       "description": "Object describing the Azure Firewall in vHUB"
     },
-    "defaultvalue": {}
+    "defaultValue": {}
   },
-  "rgname": {
+  "rgName": {
     "type": "String",
     "metadata": {
-      "displayname": "rgName",
+      "displayName": "rgName",
       "description": "Provide name for resource group."
     }
   }

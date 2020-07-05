@@ -1,16 +1,16 @@
 policydefinition_append_kv_softdelete_policyrule = <<POLICYRULE
 {
   "if": {
-    "anyof": [
+    "anyOf": [
       {
-        "allof": [
+        "allOf": [
           {
             "field": "type",
             "equals": "Microsoft.KeyVault/vaults"
           },
           {
             "field": "Microsoft.KeyVault/vaults/enableSoftDelete",
-            "notequals": false
+            "notEquals": false
           }
         ]
       }

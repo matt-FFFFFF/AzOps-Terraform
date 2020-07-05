@@ -1,28 +1,28 @@
 policysetdefinition_deploy_sql_security_policydefinitions = <<POLICYDEFINITIONS
 [
   {
-    "policydefinitionreferenceid": "Deploy-Sql-Tde",
-    "policydefinitionid": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-Tde",
+    "policyDefinitionReferenceId": "Deploy-Sql-Tde",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-Tde",
     "parameters": {}
   },
   {
-    "policydefinitionreferenceid": "Deploy-Sql-SecurityAlertPolicies",
-    "policydefinitionid": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-SecurityAlertPolicies",
+    "policyDefinitionReferenceId": "Deploy-Sql-SecurityAlertPolicies",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-SecurityAlertPolicies",
     "parameters": {}
   },
   {
-    "policydefinitionreferenceid": "Deploy-Sql-AuditingSettings",
-    "policydefinitionid": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-AuditingSettings",
+    "policyDefinitionReferenceId": "Deploy-Sql-AuditingSettings",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-AuditingSettings",
     "parameters": {}
   },
   {
-    "policydefinitionreferenceid": "Deploy-Sql-vulnerabilityAssessments",
-    "policydefinitionid": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-vulnerabilityAssessments",
+    "policyDefinitionReferenceId": "Deploy-Sql-vulnerabilityAssessments",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-vulnerabilityAssessments",
     "parameters": {
-      "vulnerabilityassessmentsemail": {
+      "vulnerabilityAssessmentsEmail": {
         "value": "[parameters('vulnerabilityAssessmentsEmail')]"
       },
-      "vulnerabilityassessmentsstorageid": {
+      "vulnerabilityAssessmentsStorageID": {
         "value": "[parameters('vulnerabilityAssessmentsStorageID')]"
       }
     }
@@ -32,18 +32,18 @@ POLICYDEFINITIONS
 
 policysetdefinition_deploy_sql_security_parameters = <<PARAMETERS
 {
-  "vulnerabilityassessmentsemail": {
+  "vulnerabilityAssessmentsEmail": {
     "type": "String",
     "metadata": {
       "description": "The email address to send alerts",
-      "displayname": "The email address to send alerts"
+      "displayName": "The email address to send alerts"
     }
   },
-  "vulnerabilityassessmentsstorageid": {
+  "vulnerabilityAssessmentsStorageID": {
     "type": "String",
     "metadata": {
       "description": "The storage account to store assessments",
-      "displayname": "The storage account to store assessments"
+      "displayName": "The storage account to store assessments"
     }
   }
 }

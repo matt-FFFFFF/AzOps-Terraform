@@ -1,9 +1,9 @@
 resource "azurerm_policy_definition" "deploy_vnet" {
-  name         = "Deploy-vNet"
-  policy_type  = "Custom"
-  mode         = "All"
-  display_name = "Deploy-vNet"
-  description  = "Deploy-vNet"
+  name                  = "Deploy-vNet"
+  policy_type           = "Custom"
+  mode                  = "All"
+  display_name          = "Deploy-vNet"
+  description           = "Deploy-vNet"
 
   management_group_name = azurerm_management_group.es.name
   policy_rule           = var.policydefinition_deploy_vnet_policyrule
@@ -11,10 +11,10 @@ resource "azurerm_policy_definition" "deploy_vnet" {
 }
 
 variable "policydefinition_deploy_vnet_policyrule" {
-  type = string
+    type = string
 }
 
 variable "policydefinition_deploy_vnet_parameters" {
-  type    = string
-  default = ""
+    type    = string
+    default = ""
 }

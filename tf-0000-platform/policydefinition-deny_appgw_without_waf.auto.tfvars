@@ -1,7 +1,7 @@
 policydefinition_deny_appgw_without_waf_policyrule = <<POLICYRULE
 {
   "if": {
-    "allof": [
+    "allOf": [
       {
         "field": "type",
         "equals": "Microsoft.Network/applicationGateways"

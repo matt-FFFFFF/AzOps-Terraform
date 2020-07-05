@@ -1,7 +1,7 @@
 policydefinition_deny_publicendpoint_storage_policyrule = <<POLICYRULE
 {
   "if": {
-    "allof": [
+    "allOf": [
       {
         "field": "type",
         "equals": "Microsoft.Storage/storageAccounts"

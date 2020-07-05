@@ -8,12 +8,12 @@ policydefinition_deploy_nsg_flowlogs_policyrule = <<POLICYRULE
     "effect": "deployIfNotExists",
     "details": {
       "type": "Microsoft.Network/networkWatchers/flowLogs",
-      "roledefinitionids": [
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ],
       "name": "[concat('NetworkWatcher_', field('location'), '/', 'Microsoft.Network', resourceGroup().name, field('name'))]",
-      "resourcegroupname": "NetworkWatcherRG",
-      "existencecondition": {
+      "resourceGroupName": "NetworkWatcherRG",
+      "existenceCondition": {
         "field": "Microsoft.Network/networkWatchers/flowLogs/enabled",
         "equals": "true"
       },
@@ -21,16 +21,16 @@ policydefinition_deploy_nsg_flowlogs_policyrule = <<POLICYRULE
         "properties": {
           "mode": "incremental",
           "parameters": {
-            "networksecuritygroupname": {
+            "networkSecurityGroupName": {
               "value": "[field('name')]"
             },
-            "resourcegroupname": {
+            "resourceGroupName": {
               "value": "[resourceGroup().name]"
             },
             "location": {
               "value": "[field('location')]"
             },
-            "storageaccountresourceid": {
+            "storageAccountResourceId": {
               "value": "[parameters('storageAccountResourceId')]"
             },
             "retention": {
@@ -39,37 +39,37 @@ policydefinition_deploy_nsg_flowlogs_policyrule = <<POLICYRULE
           },
           "template": {
             "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
-              "networksecuritygroupname": {
+              "networkSecurityGroupName": {
                 "type": "string"
               },
-              "resourcegroupname": {
+              "resourceGroupName": {
                 "type": "string"
               },
               "location": {
                 "type": "string"
               },
-              "storageaccountresourceid": {
+              "storageAccountResourceId": {
                 "type": "string"
               },
               "retention": {
                 "type": "int",
-                "defaultvalue": 5
+                "defaultValue": 5
               }
             },
             "variables": {},
             "resources": [
               {
                 "type": "Microsoft.Network/networkWatchers/flowLogs",
-                "apiversion": "2019-11-01",
+                "apiVersion": "2019-11-01",
                 "name": "[concat('NetworkWatcher_', toLower(parameters('location')), '/', 'flowLogs')]",
                 "location": "[parameters('location')]",
                 "properties": {
-                  "targetresourceid": "[resourceId(parameters('resourceGroupName'), 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
-                  "storageid": "[parameters('storageAccountResourceId')]",
+                  "targetResourceId": "[resourceId(parameters('resourceGroupName'), 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
+                  "storageId": "[parameters('storageAccountResourceId')]",
                   "enabled": true,
-                  "retentionpolicy": {
+                  "retentionPolicy": {
                     "enabled": true,
                     "days": "[parameters('retention')]"
                   },
@@ -94,13 +94,13 @@ policydefinition_deploy_nsg_flowlogs_parameters = <<PARAMETERS
   "retention": {
     "type": "Integer",
     "metadata": {
-      "displayname": "Retention"
+      "displayName": "Retention"
     }
   },
-  "storageaccountresourceid": {
+  "storageAccountResourceId": {
     "type": "String",
     "metadata": {
-      "displayname": "Storage Account Resource Id"
+      "displayName": "Storage Account Resource Id"
     }
   }
 }

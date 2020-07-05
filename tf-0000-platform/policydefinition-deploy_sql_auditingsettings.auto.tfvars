@@ -9,8 +9,8 @@ policydefinition_deploy_sql_auditingsettings_policyrule = <<POLICYRULE
     "details": {
       "type": "Microsoft.Sql/servers/databases/auditingSettings",
       "name": "default",
-      "existencecondition": {
-        "allof": [
+      "existenceCondition": {
+        "allOf": [
           {
             "field": "Microsoft.Sql/servers/databases/auditingSettings/state",
             "equals": "enabled"
@@ -26,15 +26,15 @@ policydefinition_deploy_sql_auditingsettings_policyrule = <<POLICYRULE
           "mode": "incremental",
           "template": {
             "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
               "location": {
                 "type": "string"
               },
-              "sqlservername": {
+              "sqlServerName": {
                 "type": "string"
               },
-              "sqlserverdatabasename": {
+              "sqlServerDataBaseName": {
                 "type": "string"
               }
             },
@@ -43,10 +43,10 @@ policydefinition_deploy_sql_auditingsettings_policyrule = <<POLICYRULE
               {
                 "name": "[concat( parameters('sqlServerName'),'/',parameters('sqlServerDataBaseName'),'/default')]",
                 "type": "Microsoft.Sql/servers/databases/auditingSettings",
-                "apiversion": "2017-03-01-preview",
+                "apiVersion": "2017-03-01-preview",
                 "properties": {
                   "state": "enabled",
-                  "auditactionsandgroups": [
+                  "auditActionsAndGroups": [
                     "BATCH_COMPLETED_GROUP",
                     "DATABASE_OBJECT_CHANGE_GROUP",
                     "SCHEMA_OBJECT_CHANGE_GROUP",
@@ -63,7 +63,7 @@ policydefinition_deploy_sql_auditingsettings_policyrule = <<POLICYRULE
                     "SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP",
                     "FAILED_DATABASE_AUTHENTICATION_GROUP"
                   ],
-                  "isazuremonitortargetenabled": true
+                  "isAzureMonitorTargetEnabled": true
                 }
               }
             ],
@@ -73,16 +73,16 @@ policydefinition_deploy_sql_auditingsettings_policyrule = <<POLICYRULE
             "location": {
               "value": "[field('location')]"
             },
-            "sqlservername": {
+            "sqlServerName": {
               "value": "[first(split(field('fullname'),'/'))]"
             },
-            "sqlserverdatabasename": {
+            "sqlServerDataBaseName": {
               "value": "[field('name')]"
             }
           }
         }
       },
-      "roledefinitionids": [
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ]
     }

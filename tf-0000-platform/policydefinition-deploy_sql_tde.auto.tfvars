@@ -8,8 +8,8 @@ policydefinition_deploy_sql_tde_policyrule = <<POLICYRULE
     "effect": "deployIfNotExists",
     "details": {
       "type": "Microsoft.Sql/servers/databases/transparentDataEncryption",
-      "existencecondition": {
-        "allof": [
+      "existenceCondition": {
+        "allOf": [
           {
             "field": "Microsoft.Sql/transparentDataEncryption.status",
             "equals": "Enabled"
@@ -21,15 +21,15 @@ policydefinition_deploy_sql_tde_policyrule = <<POLICYRULE
           "mode": "incremental",
           "template": {
             "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
               "location": {
                 "type": "string"
               },
-              "sqlservername": {
+              "sqlServerName": {
                 "type": "string"
               },
-              "sqlserverdatabasename": {
+              "sqlServerDataBaseName": {
                 "type": "string"
               }
             },
@@ -38,7 +38,7 @@ policydefinition_deploy_sql_tde_policyrule = <<POLICYRULE
               {
                 "name": "[concat( parameters('sqlServerName'),'/',parameters('sqlServerDataBaseName'),'/current')]",
                 "type": "Microsoft.Sql/servers/databases/transparentDataEncryption",
-                "apiversion": "2014-04-01",
+                "apiVersion": "2014-04-01",
                 "properties": {
                   "status": "Enabled"
                 }
@@ -50,16 +50,16 @@ policydefinition_deploy_sql_tde_policyrule = <<POLICYRULE
             "location": {
               "value": "[field('location')]"
             },
-            "sqlservername": {
+            "sqlServerName": {
               "value": "[first(split(field('fullname'),'/'))]"
             },
-            "sqlserverdatabasename": {
+            "sqlServerDataBaseName": {
               "value": "[field('name')]"
             }
           }
         }
       },
-      "roledefinitionids": [
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ]
     }

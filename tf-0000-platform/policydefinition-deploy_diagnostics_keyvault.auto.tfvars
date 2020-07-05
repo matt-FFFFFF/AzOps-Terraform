@@ -8,8 +8,8 @@ policydefinition_deploy_diagnostics_keyvault_policyrule = <<POLICYRULE
     "effect": "deployIfNotExists",
     "details": {
       "type": "Microsoft.Insights/diagnosticSettings",
-      "existencecondition": {
-        "allof": [
+      "existenceCondition": {
+        "allOf": [
           {
             "field": "Microsoft.Insights/diagnosticSettings/logs.enabled",
             "equals": "true"
@@ -25,7 +25,7 @@ policydefinition_deploy_diagnostics_keyvault_policyrule = <<POLICYRULE
         ]
       },
       "name": "setByPolicy",
-      "roledefinitionids": [
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ],
       "deployment": {
@@ -33,12 +33,12 @@ policydefinition_deploy_diagnostics_keyvault_policyrule = <<POLICYRULE
           "mode": "incremental",
           "template": {
             "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
-              "resourcename": {
+              "resourceName": {
                 "type": "string"
               },
-              "loganalytics": {
+              "logAnalytics": {
                 "type": "string"
               },
               "location": {
@@ -49,17 +49,17 @@ policydefinition_deploy_diagnostics_keyvault_policyrule = <<POLICYRULE
             "resources": [
               {
                 "type": "Microsoft.KeyVault/vaults/providers/diagnosticSettings",
-                "apiversion": "2017-05-01-preview",
+                "apiVersion": "2017-05-01-preview",
                 "name": "[concat(parameters('resourceName'), '/', 'Microsoft.Insights/setByPolicy')]",
                 "location": "[parameters('location')]",
-                "dependson": [],
+                "dependsOn": [],
                 "properties": {
-                  "workspaceid": "[parameters('logAnalytics')]",
+                  "workspaceId": "[parameters('logAnalytics')]",
                   "metrics": [
                     {
                       "category": "AllMetrics",
                       "enabled": true,
-                      "retentionpolicy": {
+                      "retentionPolicy": {
                         "days": 0,
                         "enabled": false
                       }
@@ -77,13 +77,13 @@ policydefinition_deploy_diagnostics_keyvault_policyrule = <<POLICYRULE
             "outputs": {}
           },
           "parameters": {
-            "loganalytics": {
+            "logAnalytics": {
               "value": "[parameters('logAnalytics')]"
             },
             "location": {
               "value": "[field('location')]"
             },
-            "resourcename": {
+            "resourceName": {
               "value": "[field('name')]"
             }
           }
@@ -96,12 +96,12 @@ POLICYRULE
 
 policydefinition_deploy_diagnostics_keyvault_parameters = <<PARAMETERS
 {
-  "loganalytics": {
+  "logAnalytics": {
     "type": "String",
     "metadata": {
-      "displayname": "Log Analytics workspace",
+      "displayName": "Log Analytics workspace",
       "description": "Select the Log Analytics workspace from dropdown list",
-      "strongtype": "omsWorkspace"
+      "strongType": "omsWorkspace"
     }
   }
 }
