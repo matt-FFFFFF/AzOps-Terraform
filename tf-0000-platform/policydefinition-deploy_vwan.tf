@@ -1,9 +1,9 @@
 resource "azurerm_policy_definition" "deploy_vwan" {
-  name                  = "Deploy-vWAN"
-  policy_type           = "Custom"
-  mode                  = "All"
-  display_name          = "Deploy-vWAN"
-  description           = "null"
+  name         = "Deploy-vWAN"
+  policy_type  = "Custom"
+  mode         = "All"
+  display_name = "Deploy-vWAN"
+  description  = "null"
 
   management_group_name = azurerm_management_group.es.name
   policy_rule           = var.policydefinition_deploy_vwan_policyrule
@@ -11,10 +11,10 @@ resource "azurerm_policy_definition" "deploy_vwan" {
 }
 
 variable "policydefinition_deploy_vwan_policyrule" {
-    type = string
+  type = string
 }
 
 variable "policydefinition_deploy_vwan_parameters" {
-    type    = string
-    default = ""
+  type    = string
+  default = ""
 }

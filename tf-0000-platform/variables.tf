@@ -3,7 +3,7 @@ variable "admin_user_object_id" {
 }
 
 variable "management_group_prefix" {
-  type = string
+  type    = string
   default = "ES"
 }
 
@@ -17,6 +17,6 @@ variable "default_location" {
 }
 
 variable "log_analytics_rg_name" {
-  type = string
+  type    = string
   default = "ES-mgmt"
 }
