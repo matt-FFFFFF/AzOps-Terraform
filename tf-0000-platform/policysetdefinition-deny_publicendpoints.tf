@@ -5,14 +5,14 @@ resource "azurerm_policy_set_definition" "deny_publicendpoints" {
   description         = "null"
   management_group_id = azurerm_management_group.es.name
   depends_on          = [
+    azurerm_policy_definition.deny_publicendpoint_aks,
     azurerm_policy_definition.deny_publicendpoint_cosmosdb,
+    azurerm_policy_definition.deny_publicendpoint_keyvault,
     azurerm_policy_definition.deny_publicendpoint_mariadb,
     azurerm_policy_definition.deny_publicendpoint_mysql,
     azurerm_policy_definition.deny_publicendpoint_postgresql,
-    azurerm_policy_definition.deny_publicendpoint_keyvault,
     azurerm_policy_definition.deny_publicendpoint_sql,
     azurerm_policy_definition.deny_publicendpoint_storage,
-    azurerm_policy_definition.deny_publicendpoint_aks,
   ]
   policy_definitions  = var.policysetdefinition_deny_publicendpoints_policydefinitions
   
