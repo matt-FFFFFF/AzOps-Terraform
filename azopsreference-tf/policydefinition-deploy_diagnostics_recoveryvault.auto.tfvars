@@ -9,7 +9,7 @@ policydefinition_deploy_diagnostics_recoveryvault_policyrule = <<POLICYRULE
     "details": {
       "type": "Microsoft.Insights/diagnosticSettings",
       "name": "setByPolicy",
-      "existencecondition": {
+      "existenceCondition": {
         "allof": [
           {
             "count": {
@@ -34,11 +34,11 @@ policydefinition_deploy_diagnostics_recoveryvault_policyrule = <<POLICYRULE
                 ]
               }
             },
-            "equals": 6
+            "Equals": 6
           },
           {
             "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
-            "notequals": "[parameters('logAnalytics')]"
+            "notEquals": "[parameters('logAnalytics')]"
           },
           {
             "field": "Microsoft.Insights/diagnosticSettings/logAnalyticsDestinationType",
@@ -46,7 +46,7 @@ policydefinition_deploy_diagnostics_recoveryvault_policyrule = <<POLICYRULE
           }
         ]
       },
-      "roledefinitionids": [
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ],
       "deployment": {
@@ -54,12 +54,12 @@ policydefinition_deploy_diagnostics_recoveryvault_policyrule = <<POLICYRULE
           "mode": "incremental",
           "template": {
             "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
-              "resourcename": {
+              "resourceName": {
                 "type": "string"
               },
-              "loganalytics": {
+              "logAnalytics": {
                 "type": "string"
               },
               "location": {
@@ -70,12 +70,12 @@ policydefinition_deploy_diagnostics_recoveryvault_policyrule = <<POLICYRULE
             "resources": [
               {
                 "type": "Microsoft.RecoveryServices/vaults/providers/diagnosticSettings",
-                "apiversion": "2017-05-01-preview",
+                "apiVersion": "2017-05-01-preview",
                 "name": "[concat(parameters('resourceName'), '/', 'Microsoft.Insights/', 'setByPolicy')]",
-                "dependson": [],
+                "dependsOn": [],
                 "properties": {
-                  "workspaceid": "[parameters('logAnalytics')]",
-                  "loganalyticsdestinationtype": "Dedicated",
+                  "workspaceId": "[parameters('logAnalytics')]",
+                  "logAnalyticsDestinationType": "Dedicated",
                   "metrics": [],
                   "logs": [
                     {
@@ -109,13 +109,13 @@ policydefinition_deploy_diagnostics_recoveryvault_policyrule = <<POLICYRULE
             "outputs": {}
           },
           "parameters": {
-            "loganalytics": {
+            "logAnalytics": {
               "value": "[parameters('logAnalytics')]"
             },
             "location": {
               "value": "[field('location')]"
             },
-            "resourcename": {
+            "resourceName": {
               "value": "[field('name')]"
             }
           }
@@ -128,12 +128,12 @@ POLICYRULE
 
 policydefinition_deploy_diagnostics_recoveryvault_parameters = <<PARAMETERS
 {
-  "loganalytics": {
+  "logAnalytics": {
     "type": "String",
     "metadata": {
-      "displayname": "Log Analytics workspace",
+      "displayName": "Log Analytics workspace",
       "description": "Select the Log Analytics workspace from dropdown list",
-      "strongtype": "omsWorkspace"
+      "strongType": "omsWorkspace"
     }
   }
 }

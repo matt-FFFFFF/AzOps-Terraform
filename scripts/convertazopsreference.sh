@@ -63,7 +63,7 @@ EOF
 create_tfvars_def_file() {
   cat << EOF >$OUTDIR/policydefinition-${1}.auto.tfvars
 policydefinition_${1}_policyrule = <<POLICYRULE
-$(echo $POLICYJSON | jq '.parameters.input.value.properties.policyrule')
+$(echo $POLICYJSON | jq '.parameters.input.value.Properties.PolicyRule')
 POLICYRULE
 
 EOF

@@ -1,7 +1,7 @@
 policydefinition_deploy_windows_domainjoin_policyrule = <<POLICYRULE
 {
   "if": {
-    "allof": [
+    "allOf": [
       {
         "field": "type",
         "equals": "Microsoft.Compute/virtualMachines"
@@ -82,11 +82,11 @@ policydefinition_deploy_windows_domainjoin_policyrule = <<POLICYRULE
     "effect": "deployIfNotExists",
     "details": {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "roledefinitionids": [
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ],
-      "existencecondition": {
-        "allof": [
+      "existenceCondition": {
+        "allOf": [
           {
             "field": "Microsoft.Compute/virtualMachines/extensions/type",
             "equals": "JsonADDomainExtension"
@@ -101,88 +101,88 @@ policydefinition_deploy_windows_domainjoin_policyrule = <<POLICYRULE
         "properties": {
           "mode": "incremental",
           "parameters": {
-            "vmname": {
+            "vmName": {
               "value": "[field('name')]"
             },
             "location": {
               "value": "[field('location')]"
             },
-            "domainusername": {
+            "domainUsername": {
               "reference": {
-                "keyvault": {
+                "keyVault": {
                   "id": "[parameters('keyVaultResourceId')]"
                 },
-                "secretname": "[parameters('domainUsername')]"
+                "secretName": "[parameters('domainUsername')]"
               }
             },
-            "domainpassword": {
+            "domainPassword": {
               "reference": {
-                "keyvault": {
+                "keyVault": {
                   "id": "[parameters('keyVaultResourceId')]"
                 },
-                "secretname": "[parameters('domainPassword')]"
+                "secretName": "[parameters('domainPassword')]"
               }
             },
-            "domainoupath": {
+            "domainOUPath": {
               "value": "[parameters('domainOUPath')]"
             },
-            "domainfqdn": {
+            "domainFQDN": {
               "value": "[parameters('domainFQDN')]"
             },
-            "keyvaultresourceid": {
+            "keyVaultResourceId": {
               "value": "[parameters('keyVaultResourceId')]"
             }
           },
           "template": {
             "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
-              "vmname": {
+              "vmName": {
                 "type": "string"
               },
               "location": {
                 "type": "string"
               },
-              "domainusername": {
+              "domainUsername": {
                 "type": "string"
               },
-              "domainpassword": {
+              "domainPassword": {
                 "type": "securestring"
               },
-              "domainfqdn": {
+              "domainFQDN": {
                 "type": "string"
               },
-              "domainoupath": {
+              "domainOUPath": {
                 "type": "string"
               },
-              "keyvaultresourceid": {
+              "keyVaultResourceId": {
                 "type": "string"
               }
             },
             "variables": {
-              "domainjoinoptions": 3,
-              "vmname": "[parameters('vmName')]"
+              "domainJoinOptions": 3,
+              "vmName": "[parameters('vmName')]"
             },
             "resources": [
               {
-                "apiversion": "2015-06-15",
+                "apiVersion": "2015-06-15",
                 "type": "Microsoft.Compute/virtualMachines/extensions",
                 "name": "[concat(variables('vmName'),'/joindomain')]",
                 "location": "[resourceGroup().location]",
                 "properties": {
                   "publisher": "Microsoft.Compute",
                   "type": "JsonADDomainExtension",
-                  "typehandlerversion": "1.3",
-                  "autoupgrademinorversion": true,
+                  "typeHandlerVersion": "1.3",
+                  "autoUpgradeMinorVersion": true,
                   "settings": {
-                    "name": "[parameters('domainFQDN')]",
-                    "user": "[parameters('domainUserName')]",
-                    "restart": "true",
-                    "options": "[variables('domainJoinOptions')]",
-                    "oupath": "[parameters('domainOUPath')]"
+                    "Name": "[parameters('domainFQDN')]",
+                    "User": "[parameters('domainUserName')]",
+                    "Restart": "true",
+                    "Options": "[variables('domainJoinOptions')]",
+                    "OUPath": "[parameters('domainOUPath')]"
                   },
-                  "protectedsettings": {
-                    "password": "[parameters('domainPassword')]"
+                  "protectedSettings": {
+                    "Password": "[parameters('domainPassword')]"
                   }
                 }
               }
@@ -198,34 +198,34 @@ POLICYRULE
 
 policydefinition_deploy_windows_domainjoin_parameters = <<PARAMETERS
 {
-  "domainusername": {
+  "domainUsername": {
     "type": "String",
     "metadata": {
-      "displayname": "domainUsername"
+      "displayName": "domainUsername"
     }
   },
-  "domainpassword": {
+  "domainPassword": {
     "type": "String",
     "metadata": {
-      "displayname": "domainPassword"
+      "displayName": "domainPassword"
     }
   },
-  "domainfqdn": {
+  "domainFQDN": {
     "type": "String",
     "metadata": {
-      "displayname": "domainFQDN"
+      "displayName": "domainFQDN"
     }
   },
-  "domainoupath": {
+  "domainOUPath": {
     "type": "String",
     "metadata": {
-      "displayname": "domainOUPath"
+      "displayName": "domainOUPath"
     }
   },
-  "keyvaultresourceid": {
+  "keyVaultResourceId": {
     "type": "String",
     "metadata": {
-      "displayname": "keyVaultResourceId"
+      "displayName": "keyVaultResourceId"
     }
   }
 }

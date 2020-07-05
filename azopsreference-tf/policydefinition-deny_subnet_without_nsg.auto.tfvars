@@ -1,7 +1,7 @@
 policydefinition_deny_subnet_without_nsg_policyrule = <<POLICYRULE
 {
   "if": {
-    "allof": [
+    "allOf": [
       {
         "field": "type",
         "equals": "Microsoft.Network/virtualNetworks/subnets"

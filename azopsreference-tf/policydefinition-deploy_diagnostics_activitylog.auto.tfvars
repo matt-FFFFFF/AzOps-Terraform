@@ -1,7 +1,7 @@
 policydefinition_deploy_diagnostics_activitylog_policyrule = <<POLICYRULE
 {
   "if": {
-    "allof": [
+    "allOf": [
       {
         "field": "type",
         "equals": "Microsoft.Resources/subscriptions"
@@ -12,10 +12,10 @@ policydefinition_deploy_diagnostics_activitylog_policyrule = <<POLICYRULE
     "effect": "deployIfNotExists",
     "details": {
       "type": "Microsoft.Insights/diagnosticSettings",
-      "deploymentscope": "Subscription",
-      "existencescope": "Subscription",
-      "existencecondition": {
-        "allof": [
+      "deploymentScope": "Subscription",
+      "existenceScope": "Subscription",
+      "existenceCondition": {
+        "allOf": [
           {
             "field": "Microsoft.Insights/diagnosticSettings/logs.enabled",
             "equals": "true"
@@ -32,9 +32,9 @@ policydefinition_deploy_diagnostics_activitylog_policyrule = <<POLICYRULE
           "mode": "incremental",
           "template": {
             "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
-              "loganalytics": {
+              "logAnalytics": {
                 "type": "string"
               }
             },
@@ -43,10 +43,10 @@ policydefinition_deploy_diagnostics_activitylog_policyrule = <<POLICYRULE
               {
                 "name": "subscriptionLogsToLogAnalytics",
                 "type": "Microsoft.Insights/diagnosticSettings",
-                "apiversion": "2017-05-01-preview",
+                "apiVersion": "2017-05-01-preview",
                 "location": "Global",
                 "properties": {
-                  "workspaceid": "[parameters('logAnalytics')]",
+                  "workspaceId": "[parameters('logAnalytics')]",
                   "logs": [
                     {
                       "category": "Administrative",
@@ -87,13 +87,13 @@ policydefinition_deploy_diagnostics_activitylog_policyrule = <<POLICYRULE
             "outputs": {}
           },
           "parameters": {
-            "loganalytics": {
+            "logAnalytics": {
               "value": "[parameters('logAnalytics')]"
             }
           }
         }
       },
-      "roledefinitionids": [
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
       ]
     }
@@ -103,12 +103,12 @@ POLICYRULE
 
 policydefinition_deploy_diagnostics_activitylog_parameters = <<PARAMETERS
 {
-  "loganalytics": {
+  "logAnalytics": {
     "type": "String",
     "metadata": {
-      "displayname": "Primary Log Analytics workspace",
+      "displayName": "Primary Log Analytics workspace",
       "description": "Select Log Analytics workspace from dropdown list",
-      "strongtype": "omsWorkspace"
+      "strongType": "omsWorkspace"
     }
   }
 }

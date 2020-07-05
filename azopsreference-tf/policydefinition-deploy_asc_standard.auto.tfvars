@@ -1,7 +1,7 @@
 policydefinition_deploy_asc_standard_policyrule = <<POLICYRULE
 {
   "if": {
-    "allof": [
+    "allOf": [
       {
         "field": "type",
         "equals": "Microsoft.Resources/subscriptions"
@@ -12,13 +12,13 @@ policydefinition_deploy_asc_standard_policyrule = <<POLICYRULE
     "effect": "deployIfNotExists",
     "details": {
       "type": "Microsoft.Security/pricings",
-      "deploymentscope": "subscription",
-      "existencescope": "subscription",
-      "roledefinitionids": [
+      "deploymentScope": "subscription",
+      "existenceScope": "subscription",
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
       ],
-      "existencecondition": {
-        "allof": [
+      "existenceCondition": {
+        "allOf": [
           {
             "field": "Microsoft.Security/pricings/pricingTier",
             "equals": "Standard"
@@ -34,96 +34,96 @@ policydefinition_deploy_asc_standard_policyrule = <<POLICYRULE
         "properties": {
           "mode": "incremental",
           "parameters": {
-            "emailsecuritycontact": {
+            "emailSecurityContact": {
               "value": "[parameters('emailSecurityContact')]"
             },
-            "phonesecuritycontact": {
+            "phoneSecurityContact": {
               "value": "[parameters('phoneSecurityContact')]"
             },
-            "pricingtiervms": {
+            "pricingTierVMs": {
               "value": "[parameters('pricingTierVMs')]"
             },
-            "pricingtiersqlservers": {
+            "pricingTierSqlServers": {
               "value": "[parameters('pricingTierSqlServers')]"
             },
-            "pricingtierappservices": {
+            "pricingTierAppServices": {
               "value": "[parameters('pricingTierAppServices')]"
             },
-            "pricingtierstorageaccounts": {
+            "pricingTierStorageAccounts": {
               "value": "[parameters('pricingTierStorageAccounts')]"
             },
-            "pricingtiercontainerregistry": {
+            "pricingTierContainerRegistry": {
               "value": "[parameters('pricingTierContainerRegistry')]"
             },
-            "pricingtierkeyvaults": {
+            "pricingTierKeyVaults": {
               "value": "[parameters('pricingTierKeyVaults')]"
             },
-            "pricingtierkubernetesservice": {
+            "pricingTierKubernetesService": {
               "value": "[parameters('pricingTierKubernetesService')]"
             },
-            "pricingsqlservervirtualmachines": {
+            "pricingSqlServerVirtualMachines": {
               "value": "[parameters('pricingSqlServerVirtualMachines')]"
             }
           },
           "template": {
             "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
-              "emailsecuritycontact": {
+              "emailSecurityContact": {
                 "type": "string",
                 "metadata": {
                   "description": "email address of the contact, in the form of john@doe.com"
                 }
               },
-              "phonesecuritycontact": {
+              "phoneSecurityContact": {
                 "type": "string",
                 "metadata": {
                   "description": "phone number of the Security Contact"
                 }
               },
-              "pricingtiervms": {
+              "pricingTierVMs": {
                 "type": "string",
                 "metadata": {
                   "description": "pricingTierVMs"
                 }
               },
-              "pricingtiersqlservers": {
+              "pricingTierSqlServers": {
                 "type": "string",
                 "metadata": {
                   "description": "pricingTierSqlServers"
                 }
               },
-              "pricingtierappservices": {
+              "pricingTierAppServices": {
                 "type": "string",
                 "metadata": {
                   "description": "pricingTierAppServices"
                 }
               },
-              "pricingtierstorageaccounts": {
+              "pricingTierStorageAccounts": {
                 "type": "string",
                 "metadata": {
                   "description": "pricingTierStorageAccounts"
                 }
               },
-              "pricingtiercontainerregistry": {
+              "pricingTierContainerRegistry": {
                 "type": "string",
                 "metadata": {
                   "description": "pricingTierContainerRegistry"
                 }
               },
-              "pricingtierkeyvaults": {
+              "pricingTierKeyVaults": {
                 "type": "string",
                 "metadata": {
                   "description": "pricingTierKeyVaults"
                 }
               },
-              "pricingtierkubernetesservice": {
+              "pricingTierKubernetesService": {
                 "type": "string",
                 "metadata": {
                   "description": "pricingTierKubernetesService"
                 }
               },
-              "pricingsqlservervirtualmachines": {
+              "pricingSqlServerVirtualMachines": {
                 "type": "string",
                 "metadata": {
                   "description": "pricingSqlServerVirtualMachines"
@@ -135,97 +135,97 @@ policydefinition_deploy_asc_standard_policyrule = <<POLICYRULE
               {
                 "type": "Microsoft.Security/securityContacts",
                 "name": "default1",
-                "apiversion": "2017-08-01-preview",
+                "apiVersion": "2017-08-01-preview",
                 "properties": {
                   "email": "[parameters('emailSecurityContact')]",
                   "phone": "[parameters('phoneSecurityContact')]",
-                  "alertnotifications": "On",
-                  "alertstoadmins": "On"
+                  "alertNotifications": "On",
+                  "alertsToAdmins": "On"
                 }
               },
               {
                 "type": "Microsoft.Security/pricings",
-                "apiversion": "2018-06-01",
+                "apiVersion": "2018-06-01",
                 "name": "VirtualMachines",
                 "properties": {
-                  "pricingtier": "[parameters('pricingTierVMs')]"
+                  "pricingTier": "[parameters('pricingTierVMs')]"
                 }
               },
               {
                 "type": "Microsoft.Security/pricings",
-                "apiversion": "2018-06-01",
+                "apiVersion": "2018-06-01",
                 "name": "StorageAccounts",
-                "dependson": [
+                "dependsOn": [
                   "[concat('Microsoft.Security/pricings/VirtualMachines')]"
                 ],
                 "properties": {
-                  "pricingtier": "[parameters('pricingTierStorageAccounts')]"
+                  "pricingTier": "[parameters('pricingTierStorageAccounts')]"
                 }
               },
               {
                 "type": "Microsoft.Security/pricings",
-                "apiversion": "2018-06-01",
+                "apiVersion": "2018-06-01",
                 "name": "AppServices",
-                "dependson": [
+                "dependsOn": [
                   "[concat('Microsoft.Security/pricings/StorageAccounts')]"
                 ],
                 "properties": {
-                  "pricingtier": "[parameters('pricingTierAppServices')]"
+                  "pricingTier": "[parameters('pricingTierAppServices')]"
                 }
               },
               {
                 "type": "Microsoft.Security/pricings",
-                "apiversion": "2018-06-01",
+                "apiVersion": "2018-06-01",
                 "name": "SqlServers",
-                "dependson": [
+                "dependsOn": [
                   "[concat('Microsoft.Security/pricings/AppServices')]"
                 ],
                 "properties": {
-                  "pricingtier": "[parameters('pricingTierSqlServers')]"
+                  "pricingTier": "[parameters('pricingTierSqlServers')]"
                 }
               },
               {
                 "type": "Microsoft.Security/pricings",
-                "apiversion": "2018-06-01",
+                "apiVersion": "2018-06-01",
                 "name": "KeyVaults",
-                "dependson": [
+                "dependsOn": [
                   "[concat('Microsoft.Security/pricings/SqlServers')]"
                 ],
                 "properties": {
-                  "pricingtier": "[parameters('pricingTierKeyVaults')]"
+                  "pricingTier": "[parameters('pricingTierKeyVaults')]"
                 }
               },
               {
                 "type": "Microsoft.Security/pricings",
-                "apiversion": "2018-06-01",
+                "apiVersion": "2018-06-01",
                 "name": "KubernetesService",
-                "dependson": [
+                "dependsOn": [
                   "[concat('Microsoft.Security/pricings/KeyVaults')]"
                 ],
                 "properties": {
-                  "pricingtier": "[parameters('pricingTierKubernetesService')]"
+                  "pricingTier": "[parameters('pricingTierKubernetesService')]"
                 }
               },
               {
                 "type": "Microsoft.Security/pricings",
-                "apiversion": "2018-06-01",
+                "apiVersion": "2018-06-01",
                 "name": "ContainerRegistry",
-                "dependson": [
+                "dependsOn": [
                   "[concat('Microsoft.Security/pricings/KubernetesService')]"
                 ],
                 "properties": {
-                  "pricingtier": "[parameters('pricingTierContainerRegistry')]"
+                  "pricingTier": "[parameters('pricingTierContainerRegistry')]"
                 }
               },
               {
                 "type": "Microsoft.Security/pricings",
-                "apiversion": "2018-06-01",
+                "apiVersion": "2018-06-01",
                 "name": "SqlServerVirtualMachines",
-                "dependson": [
+                "dependsOn": [
                   "[concat('Microsoft.Security/pricings/ContainerRegistry')]"
                 ],
                 "properties": {
-                  "pricingtier": "[parameters('pricingSqlServerVirtualMachines')]"
+                  "pricingTier": "[parameters('pricingSqlServerVirtualMachines')]"
                 }
               }
             ],
@@ -240,107 +240,107 @@ POLICYRULE
 
 policydefinition_deploy_asc_standard_parameters = <<PARAMETERS
 {
-  "emailsecuritycontact": {
+  "emailSecurityContact": {
     "type": "String",
     "metadata": {
-      "displayname": "emailSecurityContact",
+      "displayName": "emailSecurityContact",
       "description": "email address of the contact, in the form of john@doe.com"
     }
   },
-  "phonesecuritycontact": {
+  "phoneSecurityContact": {
     "type": "String",
     "metadata": {
-      "displayname": "phoneSecurityContact",
+      "displayName": "phoneSecurityContact",
       "description": "phone number of the Security Contact"
     }
   },
-  "pricingtiervms": {
+  "pricingTierVMs": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierVMs"
+      "displayName": "pricingTierVMs"
     },
-    "allowedvalues": [
+    "allowedValues": [
       "Standard",
       "Free"
     ],
-    "defaultvalue": "Standard"
+    "defaultValue": "Standard"
   },
-  "pricingtiersqlservers": {
+  "pricingTierSqlServers": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierSqlServers"
+      "displayName": "pricingTierSqlServers"
     },
-    "allowedvalues": [
+    "allowedValues": [
       "Standard",
       "Free"
     ],
-    "defaultvalue": "Standard"
+    "defaultValue": "Standard"
   },
-  "pricingtierappservices": {
+  "pricingTierAppServices": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierAppServices"
+      "displayName": "pricingTierAppServices"
     },
-    "allowedvalues": [
+    "allowedValues": [
       "Standard",
       "Free"
     ],
-    "defaultvalue": "Standard"
+    "defaultValue": "Standard"
   },
-  "pricingtierstorageaccounts": {
+  "pricingTierStorageAccounts": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierStorageAccounts"
+      "displayName": "pricingTierStorageAccounts"
     },
-    "allowedvalues": [
+    "allowedValues": [
       "Standard",
       "Free"
     ],
-    "defaultvalue": "Standard"
+    "defaultValue": "Standard"
   },
-  "pricingtiercontainerregistry": {
+  "pricingTierContainerRegistry": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierContainerRegistry"
+      "displayName": "pricingTierContainerRegistry"
     },
-    "allowedvalues": [
+    "allowedValues": [
       "Standard",
       "Free"
     ],
-    "defaultvalue": "Standard"
+    "defaultValue": "Standard"
   },
-  "pricingtierkeyvaults": {
+  "pricingTierKeyVaults": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierKeyVaults"
+      "displayName": "pricingTierKeyVaults"
     },
-    "allowedvalues": [
+    "allowedValues": [
       "Standard",
       "Free"
     ],
-    "defaultvalue": "Standard"
+    "defaultValue": "Standard"
   },
-  "pricingtierkubernetesservice": {
+  "pricingTierKubernetesService": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierKubernetesService"
+      "displayName": "pricingTierKubernetesService"
     },
-    "allowedvalues": [
+    "allowedValues": [
       "Standard",
       "Free"
     ],
-    "defaultvalue": "Standard"
+    "defaultValue": "Standard"
   },
-  "pricingsqlservervirtualmachines": {
+  "pricingSqlServerVirtualMachines": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingSqlServerVirtualMachines"
+      "displayName": "pricingSqlServerVirtualMachines"
     },
-    "allowedvalues": [
+    "allowedValues": [
       "Standard",
       "Free"
     ],
-    "defaultvalue": "Standard"
+    "defaultValue": "Standard"
   }
 }
 PARAMETERS

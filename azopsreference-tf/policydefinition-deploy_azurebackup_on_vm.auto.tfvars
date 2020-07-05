@@ -1,15 +1,15 @@
 policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
 {
   "if": {
-    "allof": [
+    "allOf": [
       {
         "field": "type",
         "equals": "Microsoft.Compute/virtualMachines"
       },
       {
-        "anyof": [
+        "anyOf": [
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "MicrosoftWindowsServer"
@@ -47,7 +47,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "MicrosoftWindowsServer"
@@ -67,7 +67,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "MicrosoftWindowsServerHPCPack"
@@ -79,13 +79,13 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "MicrosoftSQLServer"
               },
               {
-                "anyof": [
+                "anyOf": [
                   {
                     "field": "Microsoft.Compute/imageOffer",
                     "like": "*-WS2016"
@@ -107,7 +107,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "MicrosoftRServer"
@@ -119,7 +119,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "MicrosoftVisualStudio"
@@ -134,7 +134,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "MicrosoftDynamicsAX"
@@ -150,7 +150,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "microsoft-ads"
@@ -162,7 +162,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "MicrosoftWindowsDesktop"
@@ -174,7 +174,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "RedHat"
@@ -187,7 +187,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
                 ]
               },
               {
-                "anyof": [
+                "anyOf": [
                   {
                     "field": "Microsoft.Compute/imageSKU",
                     "like": "6.*"
@@ -201,7 +201,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "SUSE"
@@ -221,7 +221,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
                 ]
               },
               {
-                "anyof": [
+                "anyOf": [
                   {
                     "field": "Microsoft.Compute/imageSKU",
                     "like": "12*"
@@ -231,7 +231,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "Canonical"
@@ -241,7 +241,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
                 "equals": "UbuntuServer"
               },
               {
-                "anyof": [
+                "anyOf": [
                   {
                     "field": "Microsoft.Compute/imageSKU",
                     "like": "14.04*LTS"
@@ -259,7 +259,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "Oracle"
@@ -269,7 +269,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
                 "equals": "Oracle-Linux"
               },
               {
-                "anyof": [
+                "anyOf": [
                   {
                     "field": "Microsoft.Compute/imageSKU",
                     "like": "6.*"
@@ -283,7 +283,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "OpenLogic"
@@ -297,7 +297,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
                 ]
               },
               {
-                "anyof": [
+                "anyOf": [
                   {
                     "field": "Microsoft.Compute/imageSKU",
                     "like": "6.*"
@@ -311,7 +311,7 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             ]
           },
           {
-            "allof": [
+            "allOf": [
               {
                 "field": "Microsoft.Compute/imagePublisher",
                 "equals": "cloudera"
@@ -333,12 +333,12 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
   "then": {
     "effect": "deployIfNotExists",
     "details": {
-      "resourcegroupname": "[resourceGroup().name]",
+      "resourceGroupName": "[resourceGroup().name]",
       "type": "Microsoft.RecoveryServices/backupprotecteditems",
-      "roledefinitionids": [
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ],
-      "existencecondition": {
+      "existenceCondition": {
         "field": "name",
         "like": "*"
       },
@@ -347,15 +347,15 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
           "mode": "incremental",
           "template": {
             "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
-              "vmname": {
+              "vmName": {
                 "type": "string",
                 "metadata": {
                   "description": "Name of Azure Virtual Machines"
                 }
               },
-              "vmrgname": {
+              "vmRgName": {
                 "type": "string",
                 "metadata": {
                   "description": "Resource group containing the virtual machines."
@@ -369,18 +369,18 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
               }
             },
             "variables": {
-              "backupfabric": "Azure",
-              "backuppolicy": "DefaultPolicy",
-              "v2vmtype": "Microsoft.Compute/virtualMachines",
-              "v2vmcontainer": "iaasvmcontainer;iaasvmcontainerv2;",
-              "v2vm": "vm;iaasvmcontainerv2;",
-              "vaultname": "[concat(resourceGroup().name, '-backupvault')]"
+              "backupFabric": "Azure",
+              "backupPolicy": "DefaultPolicy",
+              "v2VmType": "Microsoft.Compute/virtualMachines",
+              "v2VmContainer": "iaasvmcontainer;iaasvmcontainerv2;",
+              "v2Vm": "vm;iaasvmcontainerv2;",
+              "vaultName": "[concat(resourceGroup().name, '-backupvault')]"
             },
             "resources": [
               {
                 "name": "[variables('vaultName')]",
                 "type": "Microsoft.RecoveryServices/vaults",
-                "apiversion": "2016-06-01",
+                "apiVersion": "2016-06-01",
                 "location": "[parameters('location')]",
                 "properties": {},
                 "sku": {
@@ -389,16 +389,16 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
               },
               {
                 "name": "[concat(variables('vaultName'), '/', variables('backupFabric'), '/', variables('v2VmContainer'), concat(parameters('vmRgName'),';',parameters('vmName')), '/', variables('v2Vm'), concat(parameters('vmRgName'),';',parameters('vmName')))]",
-                "apiversion": "2016-12-01",
+                "apiVersion": "2016-12-01",
                 "location": "[parameters('location')]",
                 "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems",
-                "dependson": [
+                "dependsOn": [
                   "[resourceId('Microsoft.RecoveryServices/vaults/', variables('vaultName'))]"
                 ],
                 "properties": {
-                  "protecteditemtype": "[variables('v2VmType')]",
-                  "policyid": "[resourceId('Microsoft.RecoveryServices/vaults/backupPolicies', variables('vaultName'),variables('backupPolicy'))]",
-                  "sourceresourceid": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('vmRgName'), '/providers/Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
+                  "protectedItemType": "[variables('v2VmType')]",
+                  "policyId": "[resourceId('Microsoft.RecoveryServices/vaults/backupPolicies', variables('vaultName'),variables('backupPolicy'))]",
+                  "sourceResourceId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('vmRgName'), '/providers/Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
                 }
               }
             ],
@@ -410,13 +410,13 @@ policydefinition_deploy_azurebackup_on_vm_policyrule = <<POLICYRULE
             }
           },
           "parameters": {
-            "vmname": {
+            "vmName": {
               "value": "[field('name')]"
             },
             "location": {
               "value": "[field('location')]"
             },
-            "vmrgname": {
+            "vmRgName": {
               "value": "[resourceGroup().name]"
             }
           }

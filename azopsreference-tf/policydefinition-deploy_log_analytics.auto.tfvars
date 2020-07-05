@@ -1,7 +1,7 @@
 policydefinition_deploy_log_analytics_policyrule = <<POLICYRULE
 {
   "if": {
-    "allof": [
+    "allOf": [
       {
         "field": "type",
         "equals": "Microsoft.Resources/subscriptions"
@@ -12,13 +12,13 @@ policydefinition_deploy_log_analytics_policyrule = <<POLICYRULE
     "effect": "deployIfNotExists",
     "details": {
       "type": "Microsoft.OperationalInsights/workspaces",
-      "deploymentscope": "Subscription",
-      "existencescope": "Subscription",
-      "roledefinitionids": [
+      "deploymentScope": "Subscription",
+      "existenceScope": "Subscription",
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ],
-      "existencecondition": {
-        "allof": [
+      "existenceCondition": {
+        "allOf": [
           {
             "field": "name",
             "like": "[parameters('workspaceName')]"
@@ -30,39 +30,39 @@ policydefinition_deploy_log_analytics_policyrule = <<POLICYRULE
         "properties": {
           "mode": "incremental",
           "parameters": {
-            "rgname": {
+            "rgName": {
               "value": "[parameters('rgName')]"
             },
-            "workspacename": {
+            "workspaceName": {
               "value": "[parameters('workspaceName')]"
             },
-            "workspaceregion": {
+            "workspaceRegion": {
               "value": "[parameters('workspaceRegion')]"
             },
-            "automationaccountname": {
+            "automationAccountName": {
               "value": "[parameters('automationAccountName')]"
             },
-            "automationregion": {
+            "automationRegion": {
               "value": "[parameters('automationRegion')]"
             }
           },
           "template": {
             "$schema": "http://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
-              "rgname": {
+              "rgName": {
                 "type": "string"
               },
-              "workspacename": {
+              "workspaceName": {
                 "type": "string"
               },
-              "workspaceregion": {
+              "workspaceRegion": {
                 "type": "string"
               },
-              "automationaccountname": {
+              "automationAccountName": {
                 "type": "string"
               },
-              "automationregion": {
+              "automationRegion": {
                 "type": "string"
               }
             },
@@ -70,24 +70,24 @@ policydefinition_deploy_log_analytics_policyrule = <<POLICYRULE
             "resources": [
               {
                 "type": "Microsoft.Resources/resourceGroups",
-                "apiversion": "2018-05-01",
+                "apiVersion": "2018-05-01",
                 "name": "[parameters('rgName')]",
                 "location": "[deployment().location]",
                 "properties": {}
               },
               {
                 "type": "Microsoft.Resources/deployments",
-                "apiversion": "2018-05-01",
+                "apiVersion": "2018-05-01",
                 "name": "log-analytics",
-                "resourcegroup": "[parameters('rgName')]",
-                "dependson": [
+                "resourceGroup": "[parameters('rgName')]",
+                "dependsOn": [
                   "[resourceId('Microsoft.Resources/resourceGroups/', parameters('rgName'))]"
                 ],
                 "properties": {
                   "mode": "Incremental",
                   "template": {
                     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
-                    "contentversion": "1.0.0.0",
+                    "contentVersion": "1.0.0.0",
                     "parameters": {},
                     "variables": {},
                     "resources": [
@@ -104,7 +104,7 @@ policydefinition_deploy_log_analytics_policyrule = <<POLICYRULE
                         }
                       },
                       {
-                        "apiversion": "2017-03-15-preview",
+                        "apiVersion": "2017-03-15-preview",
                         "location": "[parameters('workspaceRegion')]",
                         "name": "[parameters('workspaceName')]",
                         "type": "Microsoft.OperationalInsights/workspaces",
@@ -112,19 +112,19 @@ policydefinition_deploy_log_analytics_policyrule = <<POLICYRULE
                           "sku": {
                             "name": "pernode"
                           },
-                          "enablelogaccessusingonlyresourcepermissions": true
+                          "enableLogAccessUsingOnlyResourcePermissions": true
                         },
                         "resources": [
                           {
                             "name": "Automation",
                             "type": "linkedServices",
-                            "apiversion": "2015-11-01-preview",
-                            "dependson": [
+                            "apiVersion": "2015-11-01-preview",
+                            "dependsOn": [
                               "[resourceId('Microsoft.OperationalInsights/workspaces/', parameters('workspaceName'))]",
                               "[resourceId('Microsoft.Automation/automationAccounts/', parameters('AutomationAccountName'))]"
                             ],
                             "properties": {
-                              "resourceid": "[concat(subscription().id, '/resourceGroups/', parameters('rgName'), '/providers/Microsoft.Automation/automationAccounts/', parameters('AutomationAccountName'))]"
+                              "resourceId": "[concat(subscription().id, '/resourceGroups/', parameters('rgName'), '/providers/Microsoft.Automation/automationAccounts/', parameters('AutomationAccountName'))]"
                             }
                           }
                         ]
@@ -146,38 +146,38 @@ POLICYRULE
 
 policydefinition_deploy_log_analytics_parameters = <<PARAMETERS
 {
-  "workspacename": {
+  "workspaceName": {
     "type": "String",
     "metadata": {
-      "displayname": "workspaceName",
+      "displayName": "workspaceName",
       "description": "Provide name for log analytics workspace"
     }
   },
-  "automationaccountname": {
+  "automationAccountName": {
     "type": "String",
     "metadata": {
-      "displayname": "automationAccountName",
+      "displayName": "automationAccountName",
       "description": "Provide name for automation account"
     }
   },
-  "workspaceregion": {
+  "workspaceRegion": {
     "type": "String",
     "metadata": {
-      "displayname": "workspaceRegion",
+      "displayName": "workspaceRegion",
       "description": "Select Azure region for Log Analytics"
     }
   },
-  "automationregion": {
+  "automationRegion": {
     "type": "String",
     "metadata": {
-      "displayname": "automationRegion",
+      "displayName": "automationRegion",
       "description": "Select Azure region for Automation account"
     }
   },
-  "rgname": {
+  "rgName": {
     "type": "String",
     "metadata": {
-      "displayname": "rgName",
+      "displayName": "rgName",
       "description": "Provide name for resource group."
     }
   }

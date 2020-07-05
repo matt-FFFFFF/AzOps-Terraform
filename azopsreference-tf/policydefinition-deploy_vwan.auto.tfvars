@@ -1,7 +1,7 @@
 policydefinition_deploy_vwan_policyrule = <<POLICYRULE
 {
   "if": {
-    "allof": [
+    "allOf": [
       {
         "field": "type",
         "equals": "Microsoft.Resources/subscriptions"
@@ -12,11 +12,11 @@ policydefinition_deploy_vwan_policyrule = <<POLICYRULE
     "effect": "deployIfNotExists",
     "details": {
       "type": "Microsoft.Network/virtualWans",
-      "deploymentscope": "Subscription",
-      "existencescope": "ResourceGroup",
+      "deploymentScope": "Subscription",
+      "existenceScope": "ResourceGroup",
       "name": "[parameters('vwanname')]",
-      "resourcegroupname": "[parameters('rgName')]",
-      "roledefinitionids": [
+      "resourceGroupName": "[parameters('rgName')]",
+      "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ],
       "deployment": {
@@ -24,27 +24,27 @@ policydefinition_deploy_vwan_policyrule = <<POLICYRULE
         "properties": {
           "mode": "incremental",
           "parameters": {
-            "rgname": {
+            "rgName": {
               "value": "[parameters('rgName')]"
             },
             "vwanname": {
               "value": "[parameters('vwanname')]"
             },
-            "vwanregion": {
+            "vwanRegion": {
               "value": "[parameters('vwanRegion')]"
             }
           },
           "template": {
             "$schema": "http://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json",
-            "contentversion": "1.0.0.0",
+            "contentVersion": "1.0.0.0",
             "parameters": {
-              "rgname": {
+              "rgName": {
                 "type": "string"
               },
               "vwanname": {
                 "type": "string"
               },
-              "vwanregion": {
+              "vwanRegion": {
                 "type": "string"
               }
             },
@@ -54,34 +54,34 @@ policydefinition_deploy_vwan_policyrule = <<POLICYRULE
             "resources": [
               {
                 "type": "Microsoft.Resources/resourceGroups",
-                "apiversion": "2018-05-01",
+                "apiVersion": "2018-05-01",
                 "name": "[parameters('rgName')]",
                 "location": "[deployment().location]",
                 "properties": {}
               },
               {
                 "type": "Microsoft.Resources/deployments",
-                "apiversion": "2018-05-01",
+                "apiVersion": "2018-05-01",
                 "name": "vwan",
-                "resourcegroup": "[parameters('rgName')]",
-                "dependson": [
+                "resourceGroup": "[parameters('rgName')]",
+                "dependsOn": [
                   "[resourceId('Microsoft.Resources/resourceGroups/', parameters('rgName'))]"
                 ],
                 "properties": {
                   "mode": "Incremental",
                   "template": {
                     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
-                    "contentversion": "1.0.0.0",
+                    "contentVersion": "1.0.0.0",
                     "parameters": {},
                     "resources": [
                       {
                         "type": "Microsoft.Network/virtualWans",
-                        "apiversion": "2019-09-01",
+                        "apiVersion": "2019-09-01",
                         "location": "[parameters('vwanRegion')]",
                         "name": "[parameters('vwanname')]",
                         "properties": {
-                          "virtualhubs": [],
-                          "vpnsites": [],
+                          "virtualHubs": [],
+                          "vpnSites": [],
                           "type": "[variables('vwansku')]"
                         }
                       }
@@ -105,22 +105,22 @@ policydefinition_deploy_vwan_parameters = <<PARAMETERS
   "vwanname": {
     "type": "String",
     "metadata": {
-      "displayname": "vwanname",
+      "displayName": "vwanname",
       "description": "Name of the Virtual WAN"
     }
   },
-  "vwanregion": {
+  "vwanRegion": {
     "type": "String",
     "metadata": {
-      "displayname": "vwanRegion",
+      "displayName": "vwanRegion",
       "description": "Select Azure region for Virtual WAN",
-      "strongtype": "location"
+      "strongType": "location"
     }
   },
-  "rgname": {
+  "rgName": {
     "type": "String",
     "metadata": {
-      "displayname": "rgName",
+      "displayName": "rgName",
       "description": "Provide name for resource group."
     }
   }
