@@ -257,8 +257,7 @@ policydefinition_deploy_asc_standard_parameters = <<PARAMETERS
   "pricingtiervms": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierVMs",
-      "description": null
+      "displayname": "pricingTierVMs"
     },
     "allowedvalues": [
       "Standard",
@@ -269,8 +268,7 @@ policydefinition_deploy_asc_standard_parameters = <<PARAMETERS
   "pricingtiersqlservers": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierSqlServers",
-      "description": null
+      "displayname": "pricingTierSqlServers"
     },
     "allowedvalues": [
       "Standard",
@@ -281,8 +279,7 @@ policydefinition_deploy_asc_standard_parameters = <<PARAMETERS
   "pricingtierappservices": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierAppServices",
-      "description": null
+      "displayname": "pricingTierAppServices"
     },
     "allowedvalues": [
       "Standard",
@@ -293,8 +290,7 @@ policydefinition_deploy_asc_standard_parameters = <<PARAMETERS
   "pricingtierstorageaccounts": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierStorageAccounts",
-      "description": null
+      "displayname": "pricingTierStorageAccounts"
     },
     "allowedvalues": [
       "Standard",
@@ -305,8 +301,7 @@ policydefinition_deploy_asc_standard_parameters = <<PARAMETERS
   "pricingtiercontainerregistry": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierContainerRegistry",
-      "description": null
+      "displayname": "pricingTierContainerRegistry"
     },
     "allowedvalues": [
       "Standard",
@@ -317,8 +312,7 @@ policydefinition_deploy_asc_standard_parameters = <<PARAMETERS
   "pricingtierkeyvaults": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierKeyVaults",
-      "description": null
+      "displayname": "pricingTierKeyVaults"
     },
     "allowedvalues": [
       "Standard",
@@ -329,8 +323,7 @@ policydefinition_deploy_asc_standard_parameters = <<PARAMETERS
   "pricingtierkubernetesservice": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingTierKubernetesService",
-      "description": null
+      "displayname": "pricingTierKubernetesService"
     },
     "allowedvalues": [
       "Standard",
@@ -341,8 +334,7 @@ policydefinition_deploy_asc_standard_parameters = <<PARAMETERS
   "pricingsqlservervirtualmachines": {
     "type": "String",
     "metadata": {
-      "displayname": "pricingSqlServerVirtualMachines",
-      "description": null
+      "displayname": "pricingSqlServerVirtualMachines"
     },
     "allowedvalues": [
       "Standard",

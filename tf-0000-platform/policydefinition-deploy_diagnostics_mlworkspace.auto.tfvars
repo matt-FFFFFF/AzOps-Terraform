@@ -62,8 +62,7 @@ policydefinition_deploy_diagnostics_mlworkspace_policyrule = <<POLICYRULE
                       "retentionpolicy": {
                         "days": 0,
                         "enabled": false
-                      },
-                      "timegrain": null
+                      }
                     },
                     {
                       "category": "Model",
@@ -79,8 +78,7 @@ policydefinition_deploy_diagnostics_mlworkspace_policyrule = <<POLICYRULE
                       "retentionpolicy": {
                         "days": 0,
                         "enabled": false
-                      },
-                      "timegrain": null
+                      }
                     },
                     {
                       "category": "Resource",
@@ -88,8 +86,7 @@ policydefinition_deploy_diagnostics_mlworkspace_policyrule = <<POLICYRULE
                       "retentionpolicy": {
                         "days": 0,
                         "enabled": false
-                      },
-                      "timegrain": null
+                      }
                     }
                   ],
                   "logs": [

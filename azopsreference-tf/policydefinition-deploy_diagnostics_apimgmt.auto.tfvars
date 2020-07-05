@@ -62,8 +62,7 @@ policydefinition_deploy_diagnostics_apimgmt_policyrule = <<POLICYRULE
                       "retentionpolicy": {
                         "days": 0,
                         "enabled": false
-                      },
-                      "timegrain": null
+                      }
                     },
                     {
                       "category": "Capacity",
@@ -71,8 +70,7 @@ policydefinition_deploy_diagnostics_apimgmt_policyrule = <<POLICYRULE
                       "retentionpolicy": {
                         "days": 0,
                         "enabled": false
-                      },
-                      "timegrain": null
+                      }
                     },
                     {
                       "category": "EventHub Events",
@@ -80,8 +78,7 @@ policydefinition_deploy_diagnostics_apimgmt_policyrule = <<POLICYRULE
                       "retentionpolicy": {
                         "days": 0,
                         "enabled": false
-                      },
-                      "timegrain": null
+                      }
                     }
                   ],
                   "logs": [

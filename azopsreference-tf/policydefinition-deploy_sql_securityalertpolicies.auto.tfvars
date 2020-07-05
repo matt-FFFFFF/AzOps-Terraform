@@ -48,7 +48,6 @@ policydefinition_deploy_sql_securityalertpolicies_policyrule = <<POLICYRULE
                     "admin@contoso.com"
                   ],
                   "emailaccountadmins": true,
-                  "storageendpoint": null,
                   "storageaccountaccesskey": "",
                   "retentiondays": 0
                 }

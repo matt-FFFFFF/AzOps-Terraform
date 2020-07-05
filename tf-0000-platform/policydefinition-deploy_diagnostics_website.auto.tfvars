@@ -58,8 +58,7 @@ policydefinition_deploy_diagnostics_website_policyrule = <<POLICYRULE
                       "retentionpolicy": {
                         "days": 0,
                         "enabled": false
-                      },
-                      "timegrain": null
+                      }
                     }
                   ],
                   "logs": []

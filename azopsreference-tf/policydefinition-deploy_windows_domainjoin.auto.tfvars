@@ -201,36 +201,31 @@ policydefinition_deploy_windows_domainjoin_parameters = <<PARAMETERS
   "domainusername": {
     "type": "String",
     "metadata": {
-      "displayname": "domainUsername",
-      "description": null
+      "displayname": "domainUsername"
     }
   },
   "domainpassword": {
     "type": "String",
     "metadata": {
-      "displayname": "domainPassword",
-      "description": null
+      "displayname": "domainPassword"
     }
   },
   "domainfqdn": {
     "type": "String",
     "metadata": {
-      "displayname": "domainFQDN",
-      "description": null
+      "displayname": "domainFQDN"
     }
   },
   "domainoupath": {
     "type": "String",
     "metadata": {
-      "displayname": "domainOUPath",
-      "description": null
+      "displayname": "domainOUPath"
     }
   },
   "keyvaultresourceid": {
     "type": "String",
     "metadata": {
-      "displayname": "keyVaultResourceId",
-      "description": null
+      "displayname": "keyVaultResourceId"
     }
   }
 }

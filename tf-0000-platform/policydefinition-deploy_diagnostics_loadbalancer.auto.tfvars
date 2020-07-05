@@ -58,7 +58,6 @@ policydefinition_deploy_diagnostics_loadbalancer_policyrule = <<POLICYRULE
                   "metrics": [
                     {
                       "category": "AllMetrics",
-                      "timegrain": null,
                       "enabled": true,
                       "retentionpolicy": {
                         "enabled": false,

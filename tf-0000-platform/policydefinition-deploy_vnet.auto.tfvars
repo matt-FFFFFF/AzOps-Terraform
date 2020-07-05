@@ -275,8 +275,7 @@ policydefinition_deploy_vnet_parameters = <<PARAMETERS
   "ipam": {
     "type": "Array",
     "metadata": {
-      "displayname": "ipam",
-      "description": null
+      "displayname": "ipam"
     },
     "defaultvalue": []
   }

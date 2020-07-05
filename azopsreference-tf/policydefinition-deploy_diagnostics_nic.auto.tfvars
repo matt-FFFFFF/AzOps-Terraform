@@ -54,7 +54,6 @@ policydefinition_deploy_diagnostics_nic_policyrule = <<POLICYRULE
                   "metrics": [
                     {
                       "category": "AllMetrics",
-                      "timegrain": null,
                       "enabled": true,
                       "retentionpolicy": {
                         "enabled": false,

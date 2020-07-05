@@ -58,7 +58,6 @@ policydefinition_deploy_diagnostics_publicip_policyrule = <<POLICYRULE
                   "metrics": [
                     {
                       "category": "AllMetrics",
-                      "timegrain": null,
                       "enabled": true,
                       "retentionpolicy": {
                         "enabled": false,
