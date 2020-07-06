@@ -22,10 +22,11 @@ PARAMETERS
 
 resource "azurerm_policy_remediation" "deploy_diag_loganalytics" {
   count                          = length(module.azopsreference.diagnostic_policy_definitions)
-  name                           = "deploy-diag-${count.index}"
+  name                           = uuidv5("dns", "www.${module.azopsreference.diagnostic_policy_definitions[count.index].name}.com")
   scope                          = azurerm_management_group.es.id
   policy_assignment_id           = azurerm_policy_assignment.deploy_diag_loganalytics.id
   policy_definition_reference_id = module.azopsreference.diagnostic_policy_definitions[count.index].id
+  location_filters               = ["West Europe", "North Europe", "UK South"]
 }
 
 resource "azurerm_role_assignment" "deploy_diag_loganalytics" {
