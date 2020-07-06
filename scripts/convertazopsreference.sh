@@ -110,7 +110,7 @@ resource "azurerm_policy_set_definition" "${TFNAME}" {
 $POLICYSETDEPS
   ]
   policy_definitions  = <<POLICYDEFINITIONS
-$(echo $POLICYJSON | jq '.parameters.input.value.Properties.PolicyDefinitions[] | .policyDefinitionReferenceId = ( .policyDefinitionId | split("/")[8] )')
+$(echo $POLICYJSON | jq '.parameters.input.value.Properties.PolicyDefinitions[] | .policyDefinitionReferenceId = ( .policyDefinitionId | split("/")[8] )' | jq '. |= [inputs]')
 POLICYDEFINITIONS
   $POLICYSETPARAMETERLINE
 }

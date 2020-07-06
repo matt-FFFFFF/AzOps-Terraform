@@ -16,46 +16,43 @@ resource "azurerm_policy_set_definition" "deny_publicendpoints" {
     azurerm_policy_definition.deny_publicendpoint_storage,
   ]
   policy_definitions = <<POLICYDEFINITIONS
-{
-  "policyDefinitionReferenceId": "Deny-PublicEndpoint-CosmosDB",
-  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-CosmosDB",
-  "parameters": {}
-}
-{
-  "policyDefinitionReferenceId": "Deny-PublicEndpoint-MariaDB",
-  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-MariaDB",
-  "parameters": {}
-}
-{
-  "policyDefinitionReferenceId": "Deny-PublicEndpoint-MySQL",
-  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-MySQL",
-  "parameters": {}
-}
-{
-  "policyDefinitionReferenceId": "Deny-PublicEndpoint-PostgreSql",
-  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-PostgreSql",
-  "parameters": {}
-}
-{
-  "policyDefinitionReferenceId": "Deny-PublicEndpoint-KeyVault",
-  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-KeyVault",
-  "parameters": {}
-}
-{
-  "policyDefinitionReferenceId": "Deny-PublicEndpoint-Sql",
-  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-Sql",
-  "parameters": {}
-}
-{
-  "policyDefinitionReferenceId": "Deny-PublicEndpoint-Storage",
-  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-Storage",
-  "parameters": {}
-}
-{
-  "policyDefinitionReferenceId": "Deny-PublicEndpoint-Aks",
-  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-Aks",
-  "parameters": {}
-}
+[
+  {
+    "policyDefinitionReferenceId": "Deny-PublicEndpoint-MariaDB",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-MariaDB",
+    "parameters": {}
+  },
+  {
+    "policyDefinitionReferenceId": "Deny-PublicEndpoint-MySQL",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-MySQL",
+    "parameters": {}
+  },
+  {
+    "policyDefinitionReferenceId": "Deny-PublicEndpoint-PostgreSql",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-PostgreSql",
+    "parameters": {}
+  },
+  {
+    "policyDefinitionReferenceId": "Deny-PublicEndpoint-KeyVault",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-KeyVault",
+    "parameters": {}
+  },
+  {
+    "policyDefinitionReferenceId": "Deny-PublicEndpoint-Sql",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-Sql",
+    "parameters": {}
+  },
+  {
+    "policyDefinitionReferenceId": "Deny-PublicEndpoint-Storage",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-Storage",
+    "parameters": {}
+  },
+  {
+    "policyDefinitionReferenceId": "Deny-PublicEndpoint-Aks",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-Aks",
+    "parameters": {}
+  }
+]
 POLICYDEFINITIONS
 
 }

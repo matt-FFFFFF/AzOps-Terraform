@@ -12,33 +12,30 @@ resource "azurerm_policy_set_definition" "deploy_sql_security" {
     azurerm_policy_definition.deploy_sql_vulnerabilityassessments,
   ]
   policy_definitions = <<POLICYDEFINITIONS
-{
-  "policyDefinitionReferenceId": "Deploy-Sql-Tde",
-  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-Tde",
-  "parameters": {}
-}
-{
-  "policyDefinitionReferenceId": "Deploy-Sql-SecurityAlertPolicies",
-  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-SecurityAlertPolicies",
-  "parameters": {}
-}
-{
-  "policyDefinitionReferenceId": "Deploy-Sql-AuditingSettings",
-  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-AuditingSettings",
-  "parameters": {}
-}
-{
-  "policyDefinitionReferenceId": "Deploy-Sql-vulnerabilityAssessments",
-  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-vulnerabilityAssessments",
-  "parameters": {
-    "vulnerabilityAssessmentsEmail": {
-      "value": "[parameters('vulnerabilityAssessmentsEmail')]"
-    },
-    "vulnerabilityAssessmentsStorageID": {
-      "value": "[parameters('vulnerabilityAssessmentsStorageID')]"
+[
+  {
+    "policyDefinitionReferenceId": "Deploy-Sql-SecurityAlertPolicies",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-SecurityAlertPolicies",
+    "parameters": {}
+  },
+  {
+    "policyDefinitionReferenceId": "Deploy-Sql-AuditingSettings",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-AuditingSettings",
+    "parameters": {}
+  },
+  {
+    "policyDefinitionReferenceId": "Deploy-Sql-vulnerabilityAssessments",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-vulnerabilityAssessments",
+    "parameters": {
+      "vulnerabilityAssessmentsEmail": {
+        "value": "[parameters('vulnerabilityAssessmentsEmail')]"
+      },
+      "vulnerabilityAssessmentsStorageID": {
+        "value": "[parameters('vulnerabilityAssessmentsStorageID')]"
+      }
     }
   }
-}
+]
 POLICYDEFINITIONS
   parameters         = <<PARAMETERS
 {
