@@ -3,6 +3,7 @@
     "dockerFile": "Dockerfile",
     "forwardPorts": [],
     "remoteUser": "vscode",
+    "containerUser": "vscode",
     "extensions": [
         "hashicorp.terraform",
         "coenraads.bracket-pair-colorizer-2"
