@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deny_publicendpoint_mysql" {
   name         = "Deny-PublicEndpoint-MySQL"
   policy_type  = "Custom"

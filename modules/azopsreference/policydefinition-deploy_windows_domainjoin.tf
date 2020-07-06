@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_windows_domainjoin" {
   name         = "Deploy-Windows-DomainJoin"
   policy_type  = "Custom"

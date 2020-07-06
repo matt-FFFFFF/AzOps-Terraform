@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_set_definition" "deny_publicendpoints" {
   name                = "Deny-PublicEndpoints"
   policy_type         = "Custom"
@@ -15,48 +16,46 @@ resource "azurerm_policy_set_definition" "deny_publicendpoints" {
     azurerm_policy_definition.deny_publicendpoint_storage,
   ]
   policy_definitions = <<POLICYDEFINITIONS
-[
-  {
-    "policyDefinitionReferenceId": "2305471075076999555",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-CosmosDB",
-    "parameters": {}
-  },
-  {
-    "policyDefinitionReferenceId": "9147011493650353598",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-MariaDB",
-    "parameters": {}
-  },
-  {
-    "policyDefinitionReferenceId": "12408670082151357639",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-MySQL",
-    "parameters": {}
-  },
-  {
-    "policyDefinitionReferenceId": "12661820429455827739",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-PostgreSql",
-    "parameters": {}
-  },
-  {
-    "policyDefinitionReferenceId": "4034941732885719677",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-KeyVault",
-    "parameters": {}
-  },
-  {
-    "policyDefinitionReferenceId": "3088050605787531398",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-Sql",
-    "parameters": {}
-  },
-  {
-    "policyDefinitionReferenceId": "9863399000097702281",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-Storage",
-    "parameters": {}
-  },
-  {
-    "policyDefinitionReferenceId": "8251035221074005943",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-Aks",
-    "parameters": {}
-  }
-]
+{
+  "policyDefinitionReferenceId": "Deny-PublicEndpoint-CosmosDB",
+  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-CosmosDB",
+  "parameters": {}
+}
+{
+  "policyDefinitionReferenceId": "Deny-PublicEndpoint-MariaDB",
+  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-MariaDB",
+  "parameters": {}
+}
+{
+  "policyDefinitionReferenceId": "Deny-PublicEndpoint-MySQL",
+  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-MySQL",
+  "parameters": {}
+}
+{
+  "policyDefinitionReferenceId": "Deny-PublicEndpoint-PostgreSql",
+  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-PostgreSql",
+  "parameters": {}
+}
+{
+  "policyDefinitionReferenceId": "Deny-PublicEndpoint-KeyVault",
+  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-KeyVault",
+  "parameters": {}
+}
+{
+  "policyDefinitionReferenceId": "Deny-PublicEndpoint-Sql",
+  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-Sql",
+  "parameters": {}
+}
+{
+  "policyDefinitionReferenceId": "Deny-PublicEndpoint-Storage",
+  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-Storage",
+  "parameters": {}
+}
+{
+  "policyDefinitionReferenceId": "Deny-PublicEndpoint-Aks",
+  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-Aks",
+  "parameters": {}
+}
 POLICYDEFINITIONS
 
 }

@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_sql_auditingsettings" {
   name         = "Deploy-Sql-AuditingSettings"
   policy_type  = "Custom"

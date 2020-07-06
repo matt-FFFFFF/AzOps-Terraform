@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_datafactory" {
   name         = "Deploy-Diagnostics-DataFactory"
   policy_type  = "Custom"

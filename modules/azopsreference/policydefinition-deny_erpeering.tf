@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deny_erpeering" {
   name         = "Deny-ERPeering"
   policy_type  = "Custom"

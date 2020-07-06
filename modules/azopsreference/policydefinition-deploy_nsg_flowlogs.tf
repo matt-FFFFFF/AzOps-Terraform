@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
   name         = "Deploy-Nsg-FlowLogs"
   policy_type  = "Custom"

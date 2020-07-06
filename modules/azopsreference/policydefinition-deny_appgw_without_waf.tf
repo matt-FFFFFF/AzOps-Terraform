@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deny_appgw_without_waf" {
   name         = "Deny-AppGW-Without-WAF"
   policy_type  = "Custom"

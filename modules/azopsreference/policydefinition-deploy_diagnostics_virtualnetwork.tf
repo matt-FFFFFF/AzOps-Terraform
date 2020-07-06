@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_virtualnetwork" {
   name         = "Deploy-Diagnostics-VirtualNetwork"
   policy_type  = "Custom"

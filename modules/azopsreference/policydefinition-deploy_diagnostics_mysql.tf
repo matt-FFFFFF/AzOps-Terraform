@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_mysql" {
   name         = "Deploy-Diagnostics-MySQL"
   policy_type  = "Custom"

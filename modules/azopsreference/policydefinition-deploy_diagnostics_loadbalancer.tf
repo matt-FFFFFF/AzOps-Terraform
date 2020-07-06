@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_loadbalancer" {
   name         = "Deploy-Diagnostics-LoadBalancer"
   policy_type  = "Custom"

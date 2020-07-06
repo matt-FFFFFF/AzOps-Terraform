@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_sqlelasticpools" {
   name         = "Deploy-Diagnostics-SQLElasticPools"
   policy_type  = "Custom"

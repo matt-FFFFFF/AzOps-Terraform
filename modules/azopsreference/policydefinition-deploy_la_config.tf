@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_la_config" {
   name         = "Deploy-LA-Config"
   policy_type  = "Custom"

@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_ddosprotection" {
   name         = "Deploy-DDoSProtection"
   policy_type  = "Custom"

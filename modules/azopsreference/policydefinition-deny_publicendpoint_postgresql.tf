@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deny_publicendpoint_postgresql" {
   name         = "Deny-PublicEndpoint-PostgreSql"
   policy_type  = "Custom"

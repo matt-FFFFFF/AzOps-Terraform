@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_vnet" {
   name         = "Deploy-vNet"
   policy_type  = "Custom"

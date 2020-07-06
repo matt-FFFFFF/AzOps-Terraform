@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_sql_securityalertpolicies" {
   name         = "Deploy-Sql-SecurityAlertPolicies"
   policy_type  = "Custom"

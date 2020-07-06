@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_vnetgw" {
   name         = "Deploy-Diagnostics-VNetGW"
   policy_type  = "Custom"

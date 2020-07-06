@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deny_publicendpoint_storage" {
   name         = "Deny-PublicEndpoint-Storage"
   policy_type  = "Custom"

@@ -1,3 +1,4 @@
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_dlanalytics" {
   name         = "Deploy-Diagnostics-DLAnalytics"
   policy_type  = "Custom"
