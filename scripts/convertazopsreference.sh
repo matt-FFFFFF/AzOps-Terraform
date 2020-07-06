@@ -3,6 +3,11 @@ set -e
 
 export MANAGEMENTGROUPNAMEREFERENCE="var.management_group_name"
 
+###############################################################################
+#
+# Script functions
+#
+
 usage() { 
   echo "Usage: $0 [-r <refdir>] [-o <outdir>]" 1>&2; exit 1;
 }
@@ -26,87 +31,6 @@ generate_tf_name() {
   echo $TFNAME
 }
 
-create_tf_def_file() {
-  local POLICYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.Name')
-  local POLICYDISPLAYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.Properties.DisplayName')
-  local POLICYDESCRIPTION=$(echo $POLICYJSON | jq -r '.parameters.input.value.Properties.Description')
-  local POLICYMODE=$(echo $POLICYJSON | jq -r '.parameters.input.value.Properties.Mode')
-  local POLICYPARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.Properties.Parameters')
-  if [ ! "$POLICYPARAMETERS" == "{}" ] && [ ! "$POLICYPARAMETERS" == "null" ]; then
-    local POLICYPARAMETERLINE="  parameters            = <<PARAMETERS
-$POLICYPARAMETERS
-PARAMETERS
-"
-  else
-    local POLICYPARAMETERLINE=""
-  fi
-
-  cat << EOF >$OUTDIR/policydefinition-${1}.tf
-resource "azurerm_policy_definition" "${1}" {
-  name                  = "$POLICYNAME"
-  policy_type           = "Custom"
-  mode                  = "$POLICYMODE"
-  display_name          = "$POLICYDISPLAYNAME"
-  description           = "$POLICYDESCRIPTION"
-
-  management_group_name = $MANAGEMENTGROUPNAMEREFERENCE
-  policy_rule           = <<POLICYRULE
-$(echo $POLICYJSON | jq '.parameters.input.value.Properties.PolicyRule')
-POLICYRULE
-
-$POLICYPARAMETERLINE
-}
-
-output "policydefinition_$1" {
-  value = azurerm_policy_definition.$1
-}
-
-EOF
-}
-
-create_tf_setdef_file() {
-  local POLICYSETNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.Name')
-  local POLICYSETDISPLAYNAME=$(echo $POLICYJSON | jq -r '.parameters.input.value.Properties.DisplayName')
-  local POLICYSETDESCRIPTION=$(echo $POLICYJSON | jq -r '.parameters.input.value.Properties.Description')
-  local POLICYSETPARAMETERS=$(echo $POLICYJSON | jq '.parameters.input.value.Properties.Parameters')
-  local POLICYSETDEPS=$(for dep in `echo $POLICYJSON \
-                        | jq -r '.parameters.input.value.Properties.PolicyDefinitions[].policyDefinitionId' \
-                        | cut -d / -f 9 \
-                        | sort \
-                        | tr '[:upper:]' '[:lower:]' \
-                        | sed 's/-/_/g'`; do \
-                            echo "    "azurerm_policy_definition.$dep,; \
-                        done)
-  if [ ! "$POLICYSETPARAMETERS" == "{}" ] && [ ! "$POLICYSETPARAMETERS" == "null" ]; then
-    local POLICYSETPARAMETERLINE="parameters          = <<PARAMETERS
-$POLICYSETPARAMETERS
-PARAMETERS"
-  else
-    local POLICYSETPARAMETERLINE=""
-  fi
-    cat << EOF >$OUTDIR/policysetdefinition-${1}.tf
-resource "azurerm_policy_set_definition" "${1}" {
-  name                = "$POLICYSETNAME"
-  policy_type         = "Custom"
-  display_name        = "$POLICYSETDISPLAYNAME"
-  description         = "$POLICYSETDESCRIPTION"
-  management_group_id = $MANAGEMENTGROUPNAMEREFERENCE
-  depends_on          = [
-$POLICYSETDEPS
-  ]
-  policy_definitions  = <<POLICYDEFINITIONS
-$(echo $POLICYJSON | jq '.parameters.input.value.Properties.PolicyDefinitions')
-POLICYDEFINITIONS
-  $POLICYSETPARAMETERLINE
-}
-
-output "policysetdefinition_$1" {
-  value = azurerm_policy_set_definition.$1
-}
-
-EOF
-}
-
 process_policydef() {
   local PDBASE=$(basename $1)
   echo "Converting: $PDBASE"
@@ -127,6 +51,7 @@ PARAMETERS
   fi
 
   cat << EOF >$2/policydefinition-${TFNAME}.tf
+# This fine was auto generated
 resource "azurerm_policy_definition" "${TFNAME}" {
   name                  = "$POLICYNAME"
   policy_type           = "Custom"
@@ -161,9 +86,9 @@ process_policysetdef() {
   local POLICYSETDEPS=$(for dep in `echo $POLICYJSON \
                         | jq -r '.parameters.input.value.Properties.PolicyDefinitions[].policyDefinitionId' \
                         | cut -d / -f 9 \
-                        | sort \
                         | tr '[:upper:]' '[:lower:]' \
-                        | sed 's/-/_/g'`; do \
+                        | sed 's/-/_/g' \
+                        | sort `; do \
                             echo "    "azurerm_policy_definition.$dep,; \
                         done)
   if [ ! "$POLICYSETPARAMETERS" == "{}" ] && [ ! "$POLICYSETPARAMETERS" == "null" ]; then
@@ -174,6 +99,7 @@ PARAMETERS"
     local POLICYSETPARAMETERLINE=""
   fi
     cat << EOF >$2/policysetdefinition-${TFNAME}.tf
+# This fine was auto generated
 resource "azurerm_policy_set_definition" "${TFNAME}" {
   name                = "$POLICYSETNAME"
   policy_type         = "Custom"
@@ -184,7 +110,7 @@ resource "azurerm_policy_set_definition" "${TFNAME}" {
 $POLICYSETDEPS
   ]
   policy_definitions  = <<POLICYDEFINITIONS
-$(echo $POLICYJSON | jq '.parameters.input.value.Properties.PolicyDefinitions')
+$(echo $POLICYJSON | jq '.parameters.input.value.Properties.PolicyDefinitions[] | .policyDefinitionReferenceId = ( .policyDefinitionId | split("/")[8] )')
 POLICYDEFINITIONS
   $POLICYSETPARAMETERLINE
 }
@@ -196,13 +122,21 @@ output "policysetdefinition_$TFNAME" {
 EOF
 }
 
-while getopts ":r:o:" o; do
+###############################################################################
+#
+# Script starts here
+#
+
+while getopts ":r:o:n:" o; do
     case "${o}" in
         r)
             REFDIR=${OPTARG}
             ;;
         o)
             OUTDIR=${OPTARG}
+            ;;
+        n)
+            MGNAMEPREFIX=${OPTARG}
             ;;
         *)
             usage
@@ -233,31 +167,30 @@ for COMMAND in $COMMANDS; do
   fi
 done
 
+# Export required functions for xargs to work
 export -f generate_tf_name
 export -f process_policydef
 export -f process_policysetdef
 
-#POLICYDEFINITIONS=$(find $REFDIR -iname *policyDefinitions*)
+# Find all policyDefinitions and convert in parallel
+find $REFDIR -iname *policyDefinitions* | xargs -I % -n 1 -P 8 bash -c "process_policydef % $OUTDIR"
 
-#for PD in $POLICYDEFINITIONS; do
-#  PDBASE=$(basename $PD)
-#  echo "Converting: $PDBASE"
-#  POLICYJSON=$(jq 'def recurse_remove_null: walk( if type == "object" then with_entries( select( .value != null ) ) else . end); recurse_remove_null | .' $PD)
-#  TFNAME=$(generate_tf_name $PDBASE policyDefinitions)
-#  create_tf_def_file $TFNAME
-#  #create_tfvars_def_file $TFNAME
-#done
+# Find all policySetDefinitions and convert in parallel
+find $REFDIR -iname *policySetDefinitions* | xargs -I % -n 1 -P 8 bash -c "process_policysetdef % $OUTDIR"
 
-find $REFDIR -iname *policyDefinitions* | xargs -I % -n 1 -P 10 bash -c "process_policydef % $OUTDIR"
+# Replace MG prefix if specified
+if [ $MGNAMEPREFIX ]; then
+  echo "Changing policyDefinitions refs to: $MGNAMEPREFIX"
+  find $OUTDIR -iname \*policyset\*.tf | xargs -n 1 -P 8 sed -i "s/\/ES\//\/${MGNAMEPREFIX}\//g"
+fi
 
-find $REFDIR -iname *policySetDefinitions* | xargs -I % -n 1 -P 10 bash -c "process_policysetdef % $OUTDIR"
-
-
+# Terraform fmt
 if [ $(command -v terraform) ]; then
   echo "Terraform executable found, running fmt"
   terraform fmt -list=false $OUTDIR
 fi
 
+# Clean up
 unset MANAGEMENTGROUPNAMEREFERENCE
 unset -f generate_tf_name
 unset -f process_policydef
