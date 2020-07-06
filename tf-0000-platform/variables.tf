@@ -26,11 +26,11 @@ variable "log_analytics_rg_name" {
 }
 
 variable "vwan_rg_name" {
-  type = string
+  type    = string
   default = "ES-vwan"
 }
 
 variable "vwan_name" {
-  type = string
+  type    = string
   default = "ES-global-vwan"
 }

@@ -20,11 +20,13 @@ PARAMETERS
 
 }
 
-resource "azurerm_policy_remediation" "deploy_diag_loganalytics" {
-  name                 = "deploy-diag-loganalytics"
-  scope                = azurerm_management_group.es.id
-  policy_assignment_id = azurerm_policy_assignment.deploy_diag_loganalytics.id
-}
+/* resource "azurerm_policy_remediation" "deploy_diag_loganalytics" {
+  count                          = length(var.diagnostic_policies)
+  name                           = "deploy-diag-loganalytics"
+  scope                          = azurerm_management_group.es.id
+  policy_assignment_id           = azurerm_policy_assignment.deploy_diag_loganalytics.id
+  policy_definition_reference_id = var.diagnostic_policies[count.index]
+} */
 
 resource "azurerm_role_assignment" "deploy_diag_loganalytics" {
   scope                = azurerm_management_group.es.id

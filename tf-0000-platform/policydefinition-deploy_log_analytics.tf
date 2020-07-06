@@ -1,9 +1,9 @@
 resource "azurerm_policy_definition" "deploy_log_analytics" {
-  name                  = "Deploy-Log-Analytics"
-  policy_type           = "Custom"
-  mode                  = "All"
-  display_name          = "Deploy-LogAnalytics"
-  description           = "null"
+  name         = "Deploy-Log-Analytics"
+  policy_type  = "Custom"
+  mode         = "All"
+  display_name = "Deploy-LogAnalytics"
+  description  = "null"
 
   management_group_name = azurerm_management_group.es.name
   policy_rule           = var.policydefinition_deploy_log_analytics_policyrule
@@ -11,10 +11,10 @@ resource "azurerm_policy_definition" "deploy_log_analytics" {
 }
 
 variable "policydefinition_deploy_log_analytics_policyrule" {
-    type = string
+  type = string
 }
 
 variable "policydefinition_deploy_log_analytics_parameters" {
-    type    = string
-    default = ""
+  type    = string
+  default = ""
 }
