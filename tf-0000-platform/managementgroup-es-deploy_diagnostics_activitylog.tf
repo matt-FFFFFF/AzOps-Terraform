@@ -1,7 +1,7 @@
 resource "azurerm_policy_assignment" "deploy_diagnostics_activitylog" {
   name                 = "Deploy-Diag-ActivityLog"
   scope                = azurerm_management_group.es.id
-  policy_definition_id = azurerm_policy_definition.deploy_diagnostics_activitylog.id
+  policy_definition_id = module.azopsreference.policydefinition_deploy_diagnostics_activitylog.id
   description          = "Ensure subscriptions have activity logs sent to log analytics"
   display_name         = "Deploy-Diagnotics-ActivityLog"
   location             = var.default_location

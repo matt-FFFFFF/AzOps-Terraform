@@ -1,7 +1,7 @@
 resource "azurerm_policy_assignment" "deploy_diag_loganalytics" {
   name                 = "Deploy-Diag-LogAnalytics"
   scope                = azurerm_management_group.es.id
-  policy_definition_id = azurerm_policy_set_definition.deploy_diag_loganalytics.id
+  policy_definition_id = module.azopsreference.policysetdefinition_deploy_diag_loganalytics.id
   description          = "Ensure resources have diagnostic settings configured to forward to Log Analytics"
   display_name         = "Deploy-Diag-LogAnalytics"
   location             = var.default_location
@@ -20,13 +20,13 @@ PARAMETERS
 
 }
 
-/* resource "azurerm_policy_remediation" "deploy_diag_loganalytics" {
-  count                          = length(var.diagnostic_policies)
-  name                           = "deploy-diag-loganalytics"
+resource "azurerm_policy_remediation" "deploy_diag_loganalytics" {
+  count                          = length(module.azopsreference.diagnostic_policy_definitions)
+  name                           = "deploy-diag-${count.index}"
   scope                          = azurerm_management_group.es.id
   policy_assignment_id           = azurerm_policy_assignment.deploy_diag_loganalytics.id
-  policy_definition_reference_id = var.diagnostic_policies[count.index]
-} */
+  policy_definition_reference_id = module.azopsreference.diagnostic_policy_definitions[count.index].id
+}
 
 resource "azurerm_role_assignment" "deploy_diag_loganalytics" {
   scope                = azurerm_management_group.es.id
