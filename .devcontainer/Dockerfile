@@ -21,19 +21,19 @@ RUN groupadd --gid $USER_GID $USERNAME \
     #
     # Install required packages (and zsh)
     #
-    && apt-get install -y git \
-                          curl \
-                          wget \
-                          bash \
-                          zsh \
-                          zsh-syntax-highlighting \
-                          zsh-autosuggestions \
-                          software-properties-common \
-                          apt-transport-https \
-                          jq \
-                          unzip \
-                          gnupg \
-                          lsb-release \
+    && apt-get --yes install git \
+                             curl \
+                             wget \
+                             bash \
+                             zsh \
+                             zsh-syntax-highlighting \
+                             zsh-autosuggestions \
+                             software-properties-common \
+                             apt-transport-https \
+                             jq \
+                             unzip \
+                             gnupg \
+                             lsb-release \
     #
     # Install az cli
     #
