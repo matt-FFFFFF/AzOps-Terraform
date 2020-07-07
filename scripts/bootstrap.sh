@@ -24,6 +24,7 @@ exit_abnormal() {
 
 SUBSCRIPTION_ID=$(az account list --query '[?isDefault].id' --output tsv)
 echo "Using subscription id: $SUBSCRIPTION_ID"
+echo "Using location: $LOCATION"
 
 if [ ! $SUBSCRIPTION_ID ]; then
   exit_abnormal 'Not logged in with az cli or no subscriptions'
@@ -38,21 +39,21 @@ export AZURE_CORE_OUTPUT=none
 az configure --defaults group=$TF_RG_NAME location=$LOCATION \
              --scope local
 
-echo "Creating service primcipal and assigning $SP_ROOT_ROLE_ASSIGNMENT at tenant root scope '/'"
+echo "Creating service principal and assigning $SP_ROOT_ROLE_ASSIGNMENT role at tenant root scope '/'"
 SP=$(az ad sp create-for-rbac -n $SP_NAME \
-                               --role $SP_ROOT_ROLE_ASSIGNMENT \
+                               --role "$SP_ROOT_ROLE_ASSIGNMENT" \
                                --scopes '/' \
                                --output json)
 
 echo "Waiting for the new SPN to appear in the Azure AD Graph"
-while [ ! $SP_OBJECT ]; do
+while [ ! "$SP_OBJECT" ]; do
   echo '.'
   SP_OBJECT=$(az ad sp show --id "http://$SP_NAME" --output json)
   sleep 5
 done
 
 
-# Create resource group
+echo "Creating resource group $TF_RG_NAME"
 az group create --name $TF_RG_NAME 
 
 echo "Creating storage account $TF_STORAGE_ACCT_NAME"
@@ -71,7 +72,8 @@ echo "Adding 'Storage Blob Data Contributor' role assignment for $(echo $ADMIN_U
 TOBEREMOVED=$(az role assignment create --role 'Storage Blob Data Contributor' \
                           --assignee-object-id $(echo $ADMIN_USER | jq -r .objectId) \
                           --assignee-principal-type User \
-                          --scope "/subscriptions/$SUBSCRIPTION_ID/resourceGroups/$TF_RG_NAME/providers/Microsoft.Storage/storageAccounts/$TF_STORAGE_ACCT_NAME")
+                          --scope "/subscriptions/$SUBSCRIPTION_ID/resourceGroups/$TF_RG_NAME/providers/Microsoft.Storage/storageAccounts/$TF_STORAGE_ACCT_NAME" \
+                          --output json)
 
 echo "Creating blob container for Terraform backend"
 az storage container create --account-name $TF_STORAGE_ACCT_NAME \
