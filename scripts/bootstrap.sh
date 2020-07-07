@@ -135,7 +135,7 @@ sed -i "s/mybackendkey.tfstate/$TF_STATE_FILE_NAME/" backend.hcl
 
 echo "Creating service principal for the GitHub Action/Azure DevOps pipeline (copy into your action/pipeline)"
 echo "-------------------------------"
-echo $SP_ACTION
+echo $SP_ACTION | jq
 echo "-------------------------------"
 
 unset AZURE_CORE_OUTPUT
