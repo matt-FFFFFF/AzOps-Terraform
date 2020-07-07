@@ -33,6 +33,7 @@
             ],
             "maxNumberOfProblems": 100,
             "trace.server": "off"
-        }
+        },
+        "terminal.integrated.copyOnSelection": true
     }
 }
