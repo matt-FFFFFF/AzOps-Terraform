@@ -51,7 +51,7 @@ PARAMETERS
   fi
 
   cat << EOF >$2/policydefinition-${TFNAME}.tf
-# This fine was auto generated
+# This file was auto generated
 resource "azurerm_policy_definition" "${TFNAME}" {
   name                  = "$POLICYNAME"
   policy_type           = "Custom"
@@ -99,7 +99,7 @@ PARAMETERS"
     local POLICYSETPARAMETERLINE=""
   fi
     cat << EOF >$2/policysetdefinition-${TFNAME}.tf
-# This fine was auto generated
+# This file was auto generated
 resource "azurerm_policy_set_definition" "${TFNAME}" {
   name                = "$POLICYSETNAME"
   policy_type         = "Custom"

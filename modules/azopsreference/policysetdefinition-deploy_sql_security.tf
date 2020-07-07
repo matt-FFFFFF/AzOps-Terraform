@@ -14,17 +14,17 @@ resource "azurerm_policy_set_definition" "deploy_sql_security" {
   policy_definitions = <<POLICYDEFINITIONS
 [
   {
-    "policyDefinitionReferenceId": "Deploy-Sql-SecurityAlertPolicies",
+    "policyDefinitionReferenceId": "DeploySqlSecurityAlertPolicies",
     "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-SecurityAlertPolicies",
     "parameters": {}
   },
   {
-    "policyDefinitionReferenceId": "Deploy-Sql-AuditingSettings",
+    "policyDefinitionReferenceId": "DeploySqlAuditingSettings",
     "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-AuditingSettings",
     "parameters": {}
   },
   {
-    "policyDefinitionReferenceId": "Deploy-Sql-vulnerabilityAssessments",
+    "policyDefinitionReferenceId": "DeploySqlvulnerabilityAssessments",
     "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-vulnerabilityAssessments",
     "parameters": {
       "vulnerabilityAssessmentsEmail": {
