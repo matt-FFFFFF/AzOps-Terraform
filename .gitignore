@@ -16,3 +16,6 @@
 
 # Terraform plan
 tfplan
+
+# az cli files
+.azure
