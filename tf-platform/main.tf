@@ -4,6 +4,6 @@ terraform {
 }
 
 module "azopsreference" {
-  source = "../modules/azopsreference"
+  source                = "../modules/azopsreference"
   management_group_name = azurerm_management_group.es.name
 }
