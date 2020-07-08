@@ -22,8 +22,8 @@ Create a container in the storage account to store the Terraform state.
 The output will look similar to this:
 
 ```plain
-...
-Creating service principal for the GitHub Action/Azure DevOps pipeline (copy into your action/pipeline)
+<snip>
+Here are the servcie principal details for your action/pipeline (create the AZURE_CREDENTIALS secret with this content):
 -------------------------------
 {
   "clientId": "00000000-0000-0000-0000-000000000000",
