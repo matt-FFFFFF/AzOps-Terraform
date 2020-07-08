@@ -32,6 +32,13 @@ if [ ! "$SUBSCRIPTION_ID" ]; then
   exit_abnormal 'Not logged in with az cli or no subscriptions'
 fi
 
+# Create backend.hcl
+cp -f backend.hcl.example backend.hcl
+sed -i "s/myrg/$TF_RG_NAME/" backend.hcl
+sed -i "s/mystorageaccount/$TF_RANDOM_NAME/" backend.hcl
+sed -i "s/mystatecontainer/$TF_STORAGE_CONTAINER_NAME/" backend.hcl
+sed -i "s/mybackendkey.tfstate/$TF_STATE_FILE_NAME/" backend.hcl
+
 ADMIN_USER=$(az ad signed-in-user show --output json)
 
 # Configure az cli for silent output and defaults
@@ -70,8 +77,8 @@ az storage account create --name $TF_RANDOM_NAME \
                           --kind StorageV2 \
                           --sku $TF_STORAGE_ACCT_SKU
 
-echo "Adding 'Storage Blob Data Contributor' role assignment for SPN"
-az role assignment create --role 'Storage Blob Data Contributor' \
+echo "Adding 'Reader and Data Access' role assignment for SPN"
+az role assignment create --role 'Reader and Data Access' \
                           --assignee-object-id $(echo $SP_OBJECT | jq -r .objectId) \
                           --assignee-principal-type ServicePrincipal \
                           --scope "/subscriptions/$SUBSCRIPTION_ID/resourceGroups/$TF_RG_NAME/providers/Microsoft.Storage/storageAccounts/$TF_RANDOM_NAME"
@@ -101,7 +108,7 @@ az keyvault set-policy --name $TF_RANDOM_NAME \
                        --object-id $(echo $SP_ACTION_OBJECT | jq -r .objectId) \
                        --secret-permissions get list
 
-echo "Creating secrets: ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_TENANT_ID & ARM_SUBSCRIPTION_ID"
+echo "Creating secrets: arm-client-id, arm-client-secret, arm-tenant-id, arm-subscription-id & tf-backend-file"
 az keyvault secret set --vault-name $TF_RANDOM_NAME \
                 --name arm-client-id \
                 --value $(echo $SP | jq -r .appId)
@@ -114,6 +121,9 @@ az keyvault secret set --vault-name $TF_RANDOM_NAME \
 az keyvault secret set --vault-name $TF_RANDOM_NAME \
                 --name arm-tenant-id \
                 --value $(echo $SUBSCRIPTION | jq -r '.[].tenantId')
+az keyvault secret set --vault-name $TF_RANDOM_NAME \
+                --name tf-backend-file \
+                --value $(cat backend.hcl)
 
 echo "Removing key vault access policy for $(echo $ADMIN_USER | jq -r .userPrincipalName)"
 az keyvault delete-policy --name $TF_RANDOM_NAME \
@@ -125,11 +135,6 @@ az configure --defaults group='' location='' \
 echo "Removing 'Storage Blob Data Contributor' role assignment for $(echo $ADMIN_USER | jq -r .userPrincipalName)"
 az role assignment delete --ids $(echo $TOBEREMOVED | jq -r .id )
 
-cp backend.hcl.example backend.hcl
-sed -i "s/myrg/$TF_RG_NAME/" backend.hcl
-sed -i "s/mystorageaccount/$TF_RANDOM_NAME/" backend.hcl
-sed -i "s/mystatecontainer/$TF_STORAGE_CONTAINER_NAME/" backend.hcl
-sed -i "s/mybackendkey.tfstate/$TF_STATE_FILE_NAME/" backend.hcl
 
 echo "You will need to create the following secrets in GitHub or Azure Devops"
 echo
@@ -142,11 +147,7 @@ echo "KEYVAULT_NAME:"
 echo "-------------------------------"
 echo $TF_RANDOM_NAME
 echo "-------------------------------"
-echo
-echo "TF_BACKEND_FILE:"
-echo "-------------------------------"
-cat backend.hcl
-echo "-------------------------------"
+
 
 #TODO #14
 
