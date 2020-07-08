@@ -49,7 +49,7 @@ jobs:
     - name: Terraform Init
       run: |
         pushd ./tf-platform
-        terraform init
+        terraform init -backend-config=backend.hcl
         popd
       env:
         ARM_CLIENT_ID: ${{ steps.myGetSecretAction.outputs.arm-client-id }}
