@@ -36,7 +36,7 @@ resource "azurerm_management_group" "management" {
   name         = "${azurerm_management_group.es.name}-management"
 
   parent_management_group_id = azurerm_management_group.platform.id
-  subscription_ids           = [var.mgmt_subscription_id]
+  subscription_ids           = [data.azurerm_sibscription.management.subscription_id]
 }
 
 resource "azurerm_management_group" "connectivity" {

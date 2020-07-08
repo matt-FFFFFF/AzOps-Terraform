@@ -8,10 +8,6 @@ variable "management_group_prefix" {
   default = "ES"
 }
 
-variable "mgmt_subscription_id" {
-  type = string
-}
-
 variable "default_location" {
   type    = string
   default = "westeurope"
