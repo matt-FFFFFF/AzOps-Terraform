@@ -61,7 +61,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
 [
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsAA",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-AA",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-AA",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -70,7 +70,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsPublicIP",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-PublicIP",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-PublicIP",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -79,7 +79,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsLoadBalancer",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-LoadBalancer",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-LoadBalancer",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -88,7 +88,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsNetworkSecurityGroups",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-NetworkSecurityGroups",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-NetworkSecurityGroups",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -97,7 +97,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsKeyVault",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-KeyVault",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-KeyVault",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -106,7 +106,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsCognitiveServices",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-CognitiveServices",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-CognitiveServices",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -115,7 +115,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsDLAnalytics",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-DLAnalytics",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-DLAnalytics",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -124,7 +124,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsDataLakeStore",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-DataLakeStore",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-DataLakeStore",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -133,7 +133,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsEventHub",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-EventHub",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-EventHub",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -142,7 +142,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsiotHub",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-iotHub",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-iotHub",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -151,7 +151,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsLogicAppsWF",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-LogicAppsWF",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-LogicAppsWF",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -160,7 +160,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsLogicAppsISE",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-LogicAppsISE",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-LogicAppsISE",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -169,7 +169,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsRecoveryVault",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-RecoveryVault",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-RecoveryVault",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -178,7 +178,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsSearchServices",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-SearchServices",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-SearchServices",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -187,7 +187,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsServiceBus",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-ServiceBus",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-ServiceBus",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -196,7 +196,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsSQLDBs",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-SQLDBs",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-SQLDBs",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -205,7 +205,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsSQLElasticPools",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-SQLElasticPools",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-SQLElasticPools",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -214,7 +214,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsAPIMgmt",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-APIMgmt",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-APIMgmt",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -223,7 +223,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsApplicationGateway",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-ApplicationGateway",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-ApplicationGateway",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -232,7 +232,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsBatch",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-Batch",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-Batch",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -241,7 +241,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsMySQL",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-MySQL",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-MySQL",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -250,7 +250,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsPostgreSQL",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-PostgreSQL",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-PostgreSQL",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -259,7 +259,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsCDNEndpoints",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-CDNEndpoints",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-CDNEndpoints",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -268,7 +268,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsCosmosDB",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-CosmosDB",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-CosmosDB",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -277,7 +277,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsDataFactory",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-DataFactory",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-DataFactory",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -286,7 +286,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsFirewall",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-Firewall",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-Firewall",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -295,7 +295,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsPowerBIEmbedded",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-PowerBIEmbedded",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-PowerBIEmbedded",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -304,7 +304,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsStreamAnalytics",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-StreamAnalytics",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-StreamAnalytics",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -313,7 +313,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsExpressRoute",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-ExpressRoute",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-ExpressRoute",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -322,7 +322,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsACI",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-ACI",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-ACI",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -331,7 +331,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsACR",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-ACR",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-ACR",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -340,7 +340,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsVirtualNetwork",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-VirtualNetwork",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-VirtualNetwork",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -349,7 +349,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsVM",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-VM",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-VM",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -358,7 +358,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsVMSS",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-VMSS",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-VMSS",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -367,7 +367,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsVNetGW",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-VNetGW",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-VNetGW",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -376,7 +376,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsAKS",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-AKS",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-AKS",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -385,7 +385,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsWebsite",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-Website",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-Website",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -394,7 +394,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsAnalysisService",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-AnalysisService",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-AnalysisService",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -403,7 +403,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsEventGridTopic",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-EventGridTopic",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-EventGridTopic",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -412,7 +412,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsEventGridSub",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-EventGridSub",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-EventGridSub",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -421,7 +421,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsHDInsight",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-HDInsight",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-HDInsight",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -430,7 +430,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsRedisCache",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-RedisCache",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-RedisCache",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -439,7 +439,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsRelay",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-Relay",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-Relay",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -448,7 +448,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsSignalR",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-SignalR",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-SignalR",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -457,7 +457,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsTrafficManager",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-TrafficManager",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-TrafficManager",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -466,7 +466,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsWebServerFarm",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-WebServerFarm",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-WebServerFarm",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -475,7 +475,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsSQLMI",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-SQLMI",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-SQLMI",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -484,7 +484,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsTimeSeriesInsights",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-TimeSeriesInsights",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-TimeSeriesInsights",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"
@@ -493,7 +493,7 @@ resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
   },
   {
     "policyDefinitionReferenceId": "DeployDiagnosticsMlWorkspace",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-MlWorkspace",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Diagnostics-MlWorkspace",
     "parameters": {
       "logAnalytics": {
         "value": "[parameters('logAnalytics')]"

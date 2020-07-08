@@ -15,17 +15,17 @@ resource "azurerm_policy_set_definition" "deploy_sql_security" {
 [
   {
     "policyDefinitionReferenceId": "DeploySqlSecurityAlertPolicies",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-SecurityAlertPolicies",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-SecurityAlertPolicies",
     "parameters": {}
   },
   {
     "policyDefinitionReferenceId": "DeploySqlAuditingSettings",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-AuditingSettings",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-AuditingSettings",
     "parameters": {}
   },
   {
     "policyDefinitionReferenceId": "DeploySqlvulnerabilityAssessments",
-    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/ES-mawhi/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-vulnerabilityAssessments",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/${var.management_group_name}/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-vulnerabilityAssessments",
     "parameters": {
       "vulnerabilityAssessmentsEmail": {
         "value": "[parameters('vulnerabilityAssessmentsEmail')]"
