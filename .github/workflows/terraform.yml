@@ -21,7 +21,7 @@ on:
 jobs:
   terraform:
     name: 'Terraform'
-    if: github.event_name != 'workflow_dispatch' && github.event.inputs.action != 'forceunlock')
+    if: github.event_name != 'workflow_dispatch' && github.event.inputs.action != 'forceunlock'
     runs-on: ubuntu-latest
     defaults:
       run:
