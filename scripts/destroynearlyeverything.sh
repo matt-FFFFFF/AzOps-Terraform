@@ -12,8 +12,6 @@ fi
 
 TENANT_ID=$(az account list | jq -r '.[] | select(.isDefault) | .tenantId')
 
-
-
 recurse_delete_mg() {
   echo "Recurse delete $1"
   az account management-group show --name $1 \
@@ -23,9 +21,10 @@ recurse_delete_mg() {
   az account management-group delete --name $1
 }
 
-
 echo 'Moving subscriptions into root management group'
-az account list --refresh --all | jq -r '.[].id' | xargs -n 1 -P 5 az account management-group subscription add --name $TENANT_ID --subscription
+az account list --refresh --all \
+                | jq -r '.[].id' \
+                | xargs -n 1 -P 5 az account management-group subscription add --name $TENANT_ID --subscription
 
 echo 'Removing tenant deployments'
 az deployment tenant list | \
