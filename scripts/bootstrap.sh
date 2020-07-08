@@ -95,13 +95,11 @@ az keyvault create --name $TF_RANDOM_NAME
 
 echo "Adding key vault access policy for $(echo $ADMIN_USER | jq -r .userPrincipalName)"
 az keyvault set-policy --name $TF_RANDOM_NAME \
-                       --resource-group $TF_RG_NAME \
                        --object-id $(echo $ADMIN_USER | jq -r .objectId) \
                        --secret-permissions get list set
 
 echo "Adding kay vault access policy for action/pipeline service principal"
 az keyvault set-policy --name $TF_RANDOM_NAME \
-                       --resource-group $TF_RG_NAME \
                        --object-id $(echo $SP_ACTION_OBJECT | jq -r .objectId) \
                        --secret-permissions get list
 
@@ -125,6 +123,10 @@ az configure --defaults group='' location='' \
 
 echo "Removing 'Storage Blob Data Contributor' role assignment for $(echo $ADMIN_USER | jq -r .userPrincipalName)"
 az role assignment delete --ids $(echo $TOBEREMOVED | jq -r .id )
+
+echo "Removing key vault access policy for $(echo $ADMIN_USER | jq -r .userPrincipalName)"
+az keyvault set-policy --name $TF_RANDOM_NAME \
+                       --object-id $(echo $ADMIN_USER | jq -r .objectId)
 
 echo "Creating Terraform backend file"
 cp backend.hcl.example backend.hcl

@@ -1,0 +1,59 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "input": {
+      "value": {
+        "Name": "Append-Subnet-Specific-RouteTable",
+        "ResourceType": "Microsoft.Authorization/policyDefinitions",
+        "SubscriptionId": null,
+        "Properties": {
+          "description": "Appends a specific route table onto any subnet created",
+          "displayName": "Append-Subnet-Specific-RouteTable",
+          "mode": "All",
+          "parameters": {
+            "rtResourceGroupName": {
+              "type": "String",
+              "metadata": {
+                "description": "Resource group name containing the route table",
+                "displayName": "Route table resource group name"
+              }
+            },
+            "rtName": {
+              "type": "String",
+              "metadata": {
+                "description": "Route table name containing",
+                "displayName": "Route table name"
+              }
+            }
+          },
+          "policyRule": {
+            "if": {
+              "allOf": [
+                {
+                  "field": "type",
+                  "equals": "Microsoft.Network/virtualNetworks/subnets"
+                },
+                {
+                  "not": {
+                    "field": "Microsoft.Network/virtualNetworks/subnets/routeTable.id",
+                    "equals": "[concat(subscription().id,'/resourceGroups/',parameters('rtResourceGroupName'),'/providers/Microsoft.Network/routeTables/',parameters('rtName'))]"
+                  }
+                }
+              ]
+            },
+            "then": {
+              "effect": "append",
+              "details": [
+                {
+                  "field": "Microsoft.Network/virtualNetworks/subnets/routeTable.id",
+                  "value": "[concat(subscription().id'/resourceGroups/',parameters('rtResourceGroupName'),'/providers/Microsoft.Network/routeTables/',parameters('rtName'))]"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
