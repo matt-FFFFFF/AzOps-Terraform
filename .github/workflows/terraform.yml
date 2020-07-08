@@ -20,7 +20,7 @@ on:
 
 jobs:
   terraform:
-    name: Plan/Apply
+    name: Plan/apply
     if: github.event.inputs.action != 'forceunlock'
     runs-on: ubuntu-latest
     defaults:
