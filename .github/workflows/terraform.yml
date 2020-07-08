@@ -36,7 +36,7 @@ jobs:
     - uses: Azure/get-keyvault-secrets@v1.0
       with:
         keyvault: ${{ secrets.KEYVAULT_NAME }}
-        secrets: 'arm-client-id, arm-client-secret, arm-subscription-id, arm-tenant-id'
+        secrets: 'arm-client-id, arm-client-secret, arm-subscription-id, arm-tenant-id,tf-backend-file'
       id: kvsecrets
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token 
@@ -45,32 +45,39 @@ jobs:
       with:
         terraform_version: '0.12.28'
 
+    - name: Create backend.hcl
+      run: |
+        cat << EOF >backend.hcl
+        ${{ steps.kvsecrets.outputs.tf-backend-file }}
+        EOF
+
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: |
-        pushd ./tf-platform
+        ln -s ../backend.hcl
         terraform init -backend-config=backend.hcl
-        popd
+      env:
+        ARM_CLIENT_ID: ${{ steps.kvsecrets.outputs.arm-client-id }}
+        ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
+        ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
+        ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
+      working-directory: tf-platform
+
+    # Checks that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Format
+      run: terraform fmt -check
+      working-directory: tf-platform
+
+    # Generates an execution plan for Terraform
+    - name: Terraform Plan
+      run: terraform plan
       env:
         ARM_CLIENT_ID: ${{ steps.myGetSecretAction.outputs.arm-client-id }}
         ARM_CLIENT_SECRET: ${{ steps.myGetSecretAction.outputs.arm-client-secret }}
         ARM_SUBSCRIPTION_ID: ${{ steps.myGetSecretAction.outputs.arm-subscription-id }}
         ARM_TENANT_ID: ${{ steps.myGetSecretAction.outputs.arm-tenant-id }}
-
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      run: |
-        pushd ./tf-platform
-        terraform fmt -check
-        popd
-
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      run: |
-        pushd ./tf-platform
-        terraform plan
-        popd
-        
+      working-directory: tf-platform
+      
       # On push to master, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
