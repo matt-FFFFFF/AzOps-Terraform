@@ -4,9 +4,10 @@ resource "azurerm_management_group" "es" {
 }
 
 resource "azurerm_role_assignment" "admin_user" {
+  count                = "${var.admin_user_object_id == "" ? 0 : 1}"
   scope                = azurerm_management_group.es.id
   principal_id         = var.admin_user_object_id
-  role_definition_name = "Owner"
+  role_definition_name = "Reader"
 }
 
 resource "azurerm_management_group" "platform" {
