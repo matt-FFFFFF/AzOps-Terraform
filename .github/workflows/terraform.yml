@@ -72,10 +72,10 @@ jobs:
     - name: Terraform Plan
       run: terraform plan
       env:
-        ARM_CLIENT_ID: ${{ steps.myGetSecretAction.outputs.arm-client-id }}
-        ARM_CLIENT_SECRET: ${{ steps.myGetSecretAction.outputs.arm-client-secret }}
-        ARM_SUBSCRIPTION_ID: ${{ steps.myGetSecretAction.outputs.arm-subscription-id }}
-        ARM_TENANT_ID: ${{ steps.myGetSecretAction.outputs.arm-tenant-id }}
+        ARM_CLIENT_ID: ${{ steps.kvsecrets.outputs.arm-client-id }}
+        ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
+        ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
+        ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
       working-directory: tf-platform
       
       # On push to master, build or change infrastructure according to Terraform configuration files
@@ -83,3 +83,9 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push' && false
       run: terraform apply -auto-approve
+      env:
+        ARM_CLIENT_ID: ${{ steps.kvsecrets.outputs.arm-client-id }}
+        ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
+        ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
+        ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
+      working-directory: tf-platform
