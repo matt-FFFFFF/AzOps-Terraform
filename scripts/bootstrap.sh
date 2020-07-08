@@ -77,11 +77,18 @@ az storage account create --name $TF_RANDOM_NAME \
                           --kind StorageV2 \
                           --sku $TF_STORAGE_ACCT_SKU
 
-echo "Adding 'Reader and Data Access' role assignment for SPN"
+echo "Adding 'Reader and Data Access' role assignment on storage account for SPN"
 az role assignment create --role 'Reader and Data Access' \
                           --assignee-object-id $(echo $SP_OBJECT | jq -r .objectId) \
                           --assignee-principal-type ServicePrincipal \
                           --scope "/subscriptions/$SUBSCRIPTION_ID/resourceGroups/$TF_RG_NAME/providers/Microsoft.Storage/storageAccounts/$TF_RANDOM_NAME"
+
+echo "Adding 'Owner' role assignment for SPN on the subscription for SPN"
+az role assignment create --role 'Owner' \
+                          --assignee-object-id $(echo $SP_OBJECT | jq -r .objectId) \
+                          --assignee-principal-type ServicePrincipal \
+                          --scope "/subscriptions/$SUBSCRIPTION_ID"
+
 
 echo "Adding 'Storage Blob Data Contributor' role assignment for $(echo $ADMIN_USER | jq -r .userPrincipalName)"
 TOBEREMOVED=$(az role assignment create --role 'Storage Blob Data Contributor' \
