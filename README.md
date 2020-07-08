@@ -18,12 +18,12 @@ Create a container in the storage account to store the Terraform state.
 
 * Clone the repo locally (or use Visual Studio CodeSpaces)
 
-* Run the `bootstrap.sh` script, this will deploy the required resources to you management subscription and provide you with the service principal details required for hte GitHub Action.
+* Run the `bootstrap.sh` script, this will deploy the required resources to you management subscription and provide you with the service principal details required for the GitHub Action.
 The output will look similar to this:
 
 ```plain
 <snip>
-Here are the servcie principal details for your action/pipeline (create the AZURE_CREDENTIALS secret with this content):
+Here are the service principal details for your action/pipeline (create the AZURE_CREDENTIALS secret with this content):
 -------------------------------
 {
   "clientId": "00000000-0000-0000-0000-000000000000",
