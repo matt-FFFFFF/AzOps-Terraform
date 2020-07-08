@@ -1,6 +1,12 @@
 name: 'Terraform'
 
 on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to trigger (plan or apply)'
+        required: false
+        default: 'plan' 
   push:
     branches:
       - main
