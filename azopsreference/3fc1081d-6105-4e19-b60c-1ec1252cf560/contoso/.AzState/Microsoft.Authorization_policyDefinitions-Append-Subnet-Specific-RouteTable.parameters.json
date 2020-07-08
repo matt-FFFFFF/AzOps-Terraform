@@ -8,10 +8,10 @@
         "ResourceType": "Microsoft.Authorization/policyDefinitions",
         "SubscriptionId": null,
         "Properties": {
-          "description": "Appends a specific route table onto any subnet created",
-          "displayName": "Append-Subnet-Specific-RouteTable",
-          "mode": "All",
-          "parameters": {
+          "Description": "Appends a specific route table onto any subnet created",
+          "DisplayName": "Append-Subnet-Specific-RouteTable",
+          "Mode": "All",
+          "Parameters": {
             "rtResourceGroupName": {
               "type": "String",
               "metadata": {
@@ -22,7 +22,7 @@
             "rtName": {
               "type": "String",
               "metadata": {
-                "description": "Route table name containing",
+                "description": "Route table name",
                 "displayName": "Route table name"
               }
             }
