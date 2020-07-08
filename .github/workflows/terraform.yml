@@ -4,9 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: 'Action to trigger (plan or apply)'
+        description: 'Action to trigger (plan, apply or forceunlock)'
         required: true
-        default: 'plan' 
+        default: 'plan'
+      lockid:
+        description: 'Lock ID to release'
+        required: false
+        default: ''
   push:
     branches:
       - main
@@ -17,9 +21,8 @@ on:
 jobs:
   terraform:
     name: 'Terraform'
+    if: ! (github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'forceunlock')
     runs-on: ubuntu-latest
-
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         shell: bash
@@ -89,3 +92,12 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
         ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
       working-directory: tf-platform
+  
+  forceunlock:
+    name: forceunlock
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'forceunlock'
+    
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
