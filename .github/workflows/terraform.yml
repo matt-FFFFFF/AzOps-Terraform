@@ -26,8 +26,6 @@ jobs:
     defaults:
       run:
         shell: bash
-
-    # Checkout the repository to the GitHub Actions runner
     steps:
     - name: Checkout
       uses: actions/checkout@v2.3.1
@@ -42,7 +40,6 @@ jobs:
         secrets: 'arm-client-id, arm-client-secret, arm-subscription-id, arm-tenant-id,tf-backend-file'
       id: kvsecrets
 
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1.1.0
       with:
@@ -54,7 +51,6 @@ jobs:
         ${{ steps.kvsecrets.outputs.tf-backend-file }}
         EOF
 
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: |
         ln -s ../backend.hcl
@@ -66,12 +62,10 @@ jobs:
         ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
       working-directory: tf-platform
 
-    # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt -check
       working-directory: tf-platform
 
-    # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan
       env:
@@ -81,8 +75,6 @@ jobs:
         ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
       working-directory: tf-platform
       
-      # On push to master, build or change infrastructure according to Terraform configuration files
-      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push' || github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'apply'
       run: terraform apply -auto-approve
@@ -101,3 +93,44 @@ jobs:
     defaults:
       run:
         shell: bash
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.3.1
+    
+    - uses: Azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - uses: Azure/get-keyvault-secrets@v1.0
+      with:
+        keyvault: ${{ secrets.KEYVAULT_NAME }}
+        secrets: 'arm-client-id, arm-client-secret, arm-subscription-id, arm-tenant-id,tf-backend-file'
+      id: kvsecrets
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1.1.0
+      with:
+        terraform_version: '0.12.28'
+
+    - name: Create backend.hcl
+      run: |
+        cat << EOF >backend.hcl
+        ${{ steps.kvsecrets.outputs.tf-backend-file }}
+        EOF
+
+    - name: Terraform Init
+      run: |
+        ln -s ../backend.hcl
+        terraform init -backend-config=backend.hcl
+      env:
+        ARM_CLIENT_ID: ${{ steps.kvsecrets.outputs.arm-client-id }}
+        ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
+        ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
+        ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
+      working-directory: tf-platform
+      
+    - name: Force unlock
+      run: terraform force-unlock -force ${{ github.event.inputs.lockid }}
+      working-directory: tf-platform
+
+       
