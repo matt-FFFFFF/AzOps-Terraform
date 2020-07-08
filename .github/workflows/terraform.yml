@@ -20,7 +20,7 @@ on:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: Plan/Apply
     if: github.event_name != 'workflow_dispatch' && github.event.inputs.action != 'forceunlock'
     runs-on: ubuntu-latest
     defaults:
@@ -86,7 +86,7 @@ jobs:
       working-directory: tf-platform
   
   forceunlock:
-    name: forceunlock
+    name: Force unlock
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'forceunlock'
     
     runs-on: ubuntu-latest
@@ -131,6 +131,11 @@ jobs:
       
     - name: Force unlock
       run: terraform force-unlock -force ${{ github.event.inputs.lockid }}
+      env:
+        ARM_CLIENT_ID: ${{ steps.kvsecrets.outputs.arm-client-id }}
+        ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
+        ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
+        ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
       working-directory: tf-platform
 
        
