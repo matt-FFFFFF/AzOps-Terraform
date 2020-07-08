@@ -50,9 +50,13 @@ jobs:
         cat << EOF >backend.hcl
         ${{ steps.kvsecrets.outputs.arm-client-id }}
         EOF
+
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: terraform init -backend-config=backend.hcl
+      run: |
+        pwd
+        ls -l
+        terraform init -backend-config=backend.hcl
       env:
         ARM_CLIENT_ID: ${{ steps.kvsecrets.outputs.arm-client-id }}
         ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
