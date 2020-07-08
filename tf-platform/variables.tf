@@ -1,5 +1,6 @@
 variable "admin_user_object_id" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "management_group_prefix" {
