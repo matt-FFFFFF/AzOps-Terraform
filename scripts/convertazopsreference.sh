@@ -127,16 +127,13 @@ EOF
 # Script starts here
 #
 
-while getopts ":r:o:n:" o; do
+while getopts ":r:o:" o; do
     case "${o}" in
         r)
             REFDIR=${OPTARG}
             ;;
         o)
             OUTDIR=${OPTARG}
-            ;;
-        n)
-            MGNAMEPREFIX=${OPTARG}
             ;;
         *)
             usage
@@ -179,10 +176,8 @@ find $REFDIR -iname *policyDefinitions* | xargs -I % -n 1 -P 8 bash -c "process_
 find $REFDIR -iname *policySetDefinitions* | xargs -I % -n 1 -P 8 bash -c "process_policysetdef % $OUTDIR"
 
 # Replace MG prefix if specified
-if [ $MGNAMEPREFIX ]; then
-  echo "Changing policyDefinitions refs to: $MGNAMEPREFIX"
-  find $OUTDIR -iname \*policyset\*.tf | xargs -n 1 -P 8 sed -i "s/\/ES\//\/${MGNAMEPREFIX}\//g"
-fi
+echo "Changing policyDefinitions refs in policysets"
+find $OUTDIR -iname \*policyset\*.tf | xargs -n 1 -P 8 sed -i 's/\/ES\//\/${var.management_group_name}\//g'
 
 # Terraform fmt
 if [ $(command -v terraform) ]; then
