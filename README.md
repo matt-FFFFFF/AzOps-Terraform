@@ -14,23 +14,30 @@ The current scope of this project is as follows:
 This subscription will become your `management` subscription.
 Create a container in the storage account to store the Terraform state.
 
-* You will need a Service Principal that has `Management Group Contributor` rights and `Owner` rights on the subscription that you have.
-Create environment variables with the SPN credentials:
+* Click the 'Use this template' button to create a copy of this repo
 
-```shell
-export ARM_CLIENT_ID=xxxx
-export ARM_CLIENT_SECRET=xxxx
-export ARM_SUBSCRIPTION_ID=xxxx
-export ARM_TENANT_ID=xxxx
+* Clone the repo locally (or use Visual Studio CodeSpaces)
+
+* Run the `bootstrap.sh` script, this will deploy the required resources to you management subscription and provide you with the service principal details required for hte GitHub Action.
+The output will look similar to this:
+
+```plain
+...
+Creating service principal for the GitHub Action/Azure DevOps pipeline (copy into your action/pipeline)
+-------------------------------
+{
+  "clientId": "00000000-0000-0000-0000-000000000000",
+  "clientSecret": "<redacted>",
+  "subscriptionId": "00000000-0000-0000-0000-000000000000",
+  "tenantId": "00000000-0000-0000-0000-000000000000",
+  "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",
+  "resourceManagerEndpointUrl": "https://management.azure.com/",
+  "activeDirectoryGraphResourceId": "https://graph.windows.net/",
+  "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",
+  "galleryEndpointUrl": "https://gallery.azure.com/",
+  "managementEndpointUrl": "https://management.core.windows.net/"
+}
+-------------------------------
 ```
 
-* Grant the service principal `Storage Blob Data Contributor` rights to the storage account
-
-* Create a [copy](https://github.com/matt-FFFFFF/AzOps-Terraform/generate) of this repo.
-
-* Create your `backend.hcl` file from the example, this is symlinked into the required folders
-
-* Inside the `tf-0000-platform` folder, run `terraform init`.
-This should succeed without errors.
-
-TBC
+* Using **your** JSON output, create a repository secret called AZURE_CREDENTIALS
