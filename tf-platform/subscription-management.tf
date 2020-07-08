@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "es_mgmt" {
 }
 
 resource "azurerm_log_analytics_workspace" "mgmt" {
-  name                = "ES-la-${var.mgmt_subscription_id}"
+  name                = "ES-la-${data.azurerm_subscription.management.subscription_id}"
   location            = azurerm_resource_group.es_mgmt.location
   resource_group_name = azurerm_resource_group.es_mgmt.name
   sku                 = "PerGB2018"
@@ -12,7 +12,7 @@ resource "azurerm_log_analytics_workspace" "mgmt" {
 }
 
 resource "azurerm_automation_account" "mgmt" {
-  name                = "ES-a-${var.mgmt_subscription_id}"
+  name                = "ES-a-${data.azurerm_subscription.management.subscription_id}"
   location            = azurerm_resource_group.es_mgmt.location
   resource_group_name = azurerm_resource_group.es_mgmt.name
 
