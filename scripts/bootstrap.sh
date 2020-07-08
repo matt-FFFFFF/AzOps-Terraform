@@ -125,16 +125,29 @@ az configure --defaults group='' location='' \
 echo "Removing 'Storage Blob Data Contributor' role assignment for $(echo $ADMIN_USER | jq -r .userPrincipalName)"
 az role assignment delete --ids $(echo $TOBEREMOVED | jq -r .id )
 
-echo "Creating Terraform backend file"
 cp backend.hcl.example backend.hcl
 sed -i "s/myrg/$TF_RG_NAME/" backend.hcl
 sed -i "s/mystorageaccount/$TF_RANDOM_NAME/" backend.hcl
 sed -i "s/mystatecontainer/$TF_STORAGE_CONTAINER_NAME/" backend.hcl
 sed -i "s/mybackendkey.tfstate/$TF_STATE_FILE_NAME/" backend.hcl
 
-echo "Here are the servcie principal details for your action/pipeline (create the AZURE_CREDENTIALS secret with this content):"
+echo "You will need to create the following secrets in GitHub or Azure Devops"
+echo
+echo "AZURE_CREDENTIALS:"
 echo "-------------------------------"
 echo $SP_ACTION | jq
 echo "-------------------------------"
+echo 
+echo "KEYVAULT_NAME:"
+echo "-------------------------------"
+echo $TF_RANDOM_NAME
+echo "-------------------------------"
+echo
+echo "TF_BACKEND_FILE:"
+echo "-------------------------------"
+cat backend.hcl
+echo "-------------------------------"
+
+#TODO #14
 
 unset AZURE_CORE_OUTPUT
