@@ -30,8 +30,6 @@ echo "Using location: $LOCATION"
 
 if [ ! "$SUBSCRIPTION_ID" ]; then
   exit_abnormal 'Not logged in with az cli or no subscriptions'
-  usage
-  exit 1
 fi
 
 ADMIN_USER=$(az ad signed-in-user show --output json)
@@ -117,16 +115,15 @@ az keyvault secret set --vault-name $TF_RANDOM_NAME \
                 --name arm-tenant-id \
                 --value $(echo $SUBSCRIPTION | jq -r '.[].tenantId')
 
+echo "Removing key vault access policy for $(echo $ADMIN_USER | jq -r .userPrincipalName)"
+az keyvault delete-policy --name $TF_RANDOM_NAME \
+                       --object-id $(echo $ADMIN_USER | jq -r .objectId)
 
 az configure --defaults group='' location='' \
              --scope local
 
 echo "Removing 'Storage Blob Data Contributor' role assignment for $(echo $ADMIN_USER | jq -r .userPrincipalName)"
 az role assignment delete --ids $(echo $TOBEREMOVED | jq -r .id )
-
-echo "Removing key vault access policy for $(echo $ADMIN_USER | jq -r .userPrincipalName)"
-az keyvault set-policy --name $TF_RANDOM_NAME \
-                       --object-id $(echo $ADMIN_USER | jq -r .objectId)
 
 echo "Creating Terraform backend file"
 cp backend.hcl.example backend.hcl
@@ -135,7 +132,7 @@ sed -i "s/mystorageaccount/$TF_RANDOM_NAME/" backend.hcl
 sed -i "s/mystatecontainer/$TF_STORAGE_CONTAINER_NAME/" backend.hcl
 sed -i "s/mybackendkey.tfstate/$TF_STATE_FILE_NAME/" backend.hcl
 
-echo "Creating service principal for the GitHub Action/Azure DevOps pipeline (copy into your action/pipeline)"
+echo "Here are the servcie principal details for your action/pipeline (create the AZURE_CREDENTIALS secret with this content):"
 echo "-------------------------------"
 echo $SP_ACTION | jq
 echo "-------------------------------"
