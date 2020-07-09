@@ -143,7 +143,7 @@ echo "Removing 'Storage Blob Data Contributor' role assignment for $(echo $ADMIN
 az role assignment delete --ids $(echo $TOBEREMOVED | jq -r .id )
 
 
-echo "You will need to create the following secrets in GitHub or Azure Devops"
+echo "You will need to create the following secrets in GitHub or Azure DevOps"
 echo
 echo "AZURE_CREDENTIALS:"
 echo "-------------------------------"

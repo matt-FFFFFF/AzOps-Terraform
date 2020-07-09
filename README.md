@@ -23,7 +23,9 @@ The output will look similar to this:
 
 ```plain
 <snip>
-Here are the service principal details for your action/pipeline (create the AZURE_CREDENTIALS secret with this content):
+You will need to create the following secrets in GitHub or Azure DevOps
+
+AZURE_CREDENTIALS:
 -------------------------------
 {
   "clientId": "00000000-0000-0000-0000-000000000000",
@@ -38,6 +40,18 @@ Here are the service principal details for your action/pipeline (create the AZUR
   "managementEndpointUrl": "https://management.core.windows.net/"
 }
 -------------------------------
+
+KEYVAULT_NAME:
+-------------------------------
+estf00000000
+-------------------------------
 ```
 
-* Using **your** JSON output, create a repository secret called AZURE_CREDENTIALS
+* Using **your** JSON output, create a repository secret called `AZURE_CREDENTIALS` & `KEYVAULT_NAME`
+
+* Run the action/pipeline in `plan` mode to check everything checks out. 
+
+  * In GitHub, use the `workflow_dispatch` capability to do this.
+  * In Azure DevOps #TODO [#10](https://github.com/matt-FFFFFF/AzOps-Terraform/issues/10)
+
+
