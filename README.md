@@ -47,7 +47,7 @@ estf00000000
 -------------------------------
 ```
 
-* Using **your** JSON output, create a repository secret called `AZURE_CREDENTIALS` & `KEYVAULT_NAME`
+ Using **your** output, create a repository secret called `AZURE_CREDENTIALS` & `KEYVAULT_NAME`
 
 * Run the action/pipeline in `plan` mode to check everything checks out. 
 
