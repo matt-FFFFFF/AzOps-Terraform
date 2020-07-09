@@ -15,7 +15,7 @@
 *.hcl
 
 # Terraform plan
-tfplan
+*tfplan*
 
 # az cli files
 .azure
