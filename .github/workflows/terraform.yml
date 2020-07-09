@@ -18,6 +18,9 @@ on:
       - tf-management/**
 #  pull_request:
 
+env:
+  TF_VERSION: '0.12.28'
+
 jobs:
   # Plan and Apply job
   #TODO #16
@@ -32,60 +35,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2.3.1
     
-    - uses: Azure/login@v1.1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
-    - uses: Azure/get-keyvault-secrets@v1.0
-      with:
-        keyvault: ${{ secrets.KEYVAULT_NAME }}
-        secrets: 'arm-client-id, arm-client-secret, arm-subscription-id, arm-tenant-id,tf-backend-file'
-      id: kvsecrets
-
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1.1.0
-      with:
-        terraform_version: '0.12.28'
-
-    - name: Create backend.hcl
-      run: |
-        cat << EOF >backend.hcl
-        ${{ steps.kvsecrets.outputs.tf-backend-file }}
-        EOF
-
-    - name: Terraform Init
-      run: |
-        ln -s ../backend.hcl
-        terraform init -backend-config=backend.hcl
-      env:
-        ARM_CLIENT_ID: ${{ steps.kvsecrets.outputs.arm-client-id }}
-        ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
-        ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
-        ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
-      working-directory: tf-management
-
-    - name: Terraform Format
-      run: terraform fmt -check
-      working-directory: tf-management
-
-    - name: Terraform Plan
-      run: terraform plan
-      env:
-        ARM_CLIENT_ID: ${{ steps.kvsecrets.outputs.arm-client-id }}
-        ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
-        ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
-        ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
-      working-directory: tf-management
+    - uses: mattffffff/AzOpsTFRun@v0.1
+      name: AzOpsTFRun
       
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push' || github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'apply'
-      run: terraform apply -auto-approve
-      env:
-        ARM_CLIENT_ID: ${{ steps.kvsecrets.outputs.arm-client-id }}
-        ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
-        ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
-        ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
-      working-directory: tf-management
   
   # This job removes the state lock (ID supplied as an input) on the backend
   forceunlock:
