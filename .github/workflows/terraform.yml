@@ -15,7 +15,7 @@ on:
     branches:
       - main
     paths: 
-      - tf-platform/**
+      - tf-management/**
 #  pull_request:
 
 jobs:
@@ -60,11 +60,11 @@ jobs:
         ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
         ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
         ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
-      working-directory: tf-platform
+      working-directory: tf-management
 
     - name: Terraform Format
       run: terraform fmt -check
-      working-directory: tf-platform
+      working-directory: tf-management
 
     - name: Terraform Plan
       run: terraform plan
@@ -73,7 +73,7 @@ jobs:
         ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
         ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
         ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
-      working-directory: tf-platform
+      working-directory: tf-management
       
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push' || github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'apply'
@@ -83,7 +83,7 @@ jobs:
         ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
         ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
         ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
-      working-directory: tf-platform
+      working-directory: tf-management
   
   forceunlock:
     name: Force unlock
@@ -127,7 +127,7 @@ jobs:
         ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
         ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
         ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
-      working-directory: tf-platform
+      working-directory: tf-management
       
     - name: Force unlock
       run: terraform force-unlock -force ${{ github.event.inputs.lockid }}
@@ -136,6 +136,6 @@ jobs:
         ARM_CLIENT_SECRET: ${{ steps.kvsecrets.outputs.arm-client-secret }}
         ARM_SUBSCRIPTION_ID: ${{ steps.kvsecrets.outputs.arm-subscription-id }}
         ARM_TENANT_ID: ${{ steps.kvsecrets.outputs.arm-tenant-id }}
-      working-directory: tf-platform
+      working-directory: tf-management
 
        
