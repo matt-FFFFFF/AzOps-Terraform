@@ -1,1 +1,0 @@
-../scripts/terraform-init.sh
