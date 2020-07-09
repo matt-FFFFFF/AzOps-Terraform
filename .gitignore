@@ -1,6 +1,9 @@
 #  Local .terraform directories
 **/.terraform
 
+# Crash log files
+**/crash.log
+
 # .tfstate files
 *.tfstate
 *.tfstate.*
