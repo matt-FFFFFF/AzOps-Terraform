@@ -20,6 +20,8 @@ on:
 
 env:
   TF_VERSION: '0.12.28'
+  AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  KEYVAULT_NAME: ${{ secrets.KEYVAULT_NAME }}
 
 jobs:
   # Plan and Apply job
