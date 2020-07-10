@@ -21,6 +21,8 @@ on:
 
 env:
   TF_VERSION: '0.12.28'
+  GITHUB_EVENT_NAME: ${{ github.event_name }}
+  GITHUB_EVENT_INPUTS_ACTION: ${{ github.event.inputs.action }}
   AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   KEYVAULT_NAME: ${{ secrets.KEYVAULT_NAME }}
 
@@ -37,7 +39,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2.3.1
     
-    - uses: matt-FFFFFF/AzOpsTFRun@v1.0
+    - uses: matt-FFFFFF/AzOpsTFRun@rolling-main
       name: AzOpsTFRun
       
   
