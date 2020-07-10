@@ -1,10 +1,10 @@
 # This fine was auto generated
 resource "azurerm_policy_set_definition" "deploy_sql_security" {
-  name                = "Deploy-Sql-Security"
-  policy_type         = "Custom"
-  display_name        = "Deploy-Sql-Security"
-  description         = "Recommended built-in security policies for the North Star architecture"
-  management_group_id = var.management_group_name
+  name                  = "Deploy-Sql-Security"
+  policy_type           = "Custom"
+  display_name          = "Deploy-Sql-Security"
+  description           = "Recommended built-in security policies for the North Star architecture"
+  management_group_name = var.management_group_name
   depends_on = [
     azurerm_policy_definition.deploy_sql_auditingsettings,
     azurerm_policy_definition.deploy_sql_securityalertpolicies,

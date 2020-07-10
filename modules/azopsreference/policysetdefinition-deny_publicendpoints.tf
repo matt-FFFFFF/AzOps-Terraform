@@ -1,10 +1,10 @@
 # This fine was auto generated
 resource "azurerm_policy_set_definition" "deny_publicendpoints" {
-  name                = "Deny-PublicEndpoints"
-  policy_type         = "Custom"
-  display_name        = "Deny-Public-Endpoints-for-PaaS-Services"
-  description         = "null"
-  management_group_id = var.management_group_name
+  name                  = "Deny-PublicEndpoints"
+  policy_type           = "Custom"
+  display_name          = "Deny-Public-Endpoints-for-PaaS-Services"
+  description           = "null"
+  management_group_name = var.management_group_name
   depends_on = [
     azurerm_policy_definition.deny_publicendpoint_aks,
     azurerm_policy_definition.deny_publicendpoint_cosmosdb,

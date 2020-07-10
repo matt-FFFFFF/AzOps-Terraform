@@ -1,10 +1,10 @@
 # This fine was auto generated
 resource "azurerm_policy_set_definition" "deploy_diag_loganalytics" {
-  name                = "Deploy-Diag-LogAnalytics"
-  policy_type         = "Custom"
-  display_name        = "Deploy-Diag-LogAnalytics"
-  description         = "This initiative configures application Azure resources to forward diagnostic logs and metrics to an Azure Log Analytics workspace."
-  management_group_id = var.management_group_name
+  name                  = "Deploy-Diag-LogAnalytics"
+  policy_type           = "Custom"
+  display_name          = "Deploy-Diag-LogAnalytics"
+  description           = "This initiative configures application Azure resources to forward diagnostic logs and metrics to an Azure Log Analytics workspace."
+  management_group_name = var.management_group_name
   depends_on = [
     azurerm_policy_definition.deploy_diagnostics_aa,
     azurerm_policy_definition.deploy_diagnostics_aci,
