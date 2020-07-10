@@ -92,7 +92,7 @@ process_policysetdef() {
                             echo "    "azurerm_policy_definition.$dep,; \
                         done)
   if [ ! "$POLICYSETPARAMETERS" == "{}" ] && [ ! "$POLICYSETPARAMETERS" == "null" ]; then
-    local POLICYSETPARAMETERLINE="parameters          = <<PARAMETERS
+    local POLICYSETPARAMETERLINE="parameters            = <<PARAMETERS
 $POLICYSETPARAMETERS
 PARAMETERS"
   else
@@ -101,12 +101,12 @@ PARAMETERS"
     cat << EOF >$2/policysetdefinition-${TFNAME}.tf
 # This file was auto generated
 resource "azurerm_policy_set_definition" "${TFNAME}" {
-  name                = "$POLICYSETNAME"
-  policy_type         = "Custom"
-  display_name        = "$POLICYSETDISPLAYNAME"
-  description         = "$POLICYSETDESCRIPTION"
-  management_group_id = $MANAGEMENTGROUPNAMEREFERENCE
-  depends_on          = [
+  name                  = "$POLICYSETNAME"
+  policy_type           = "Custom"
+  display_name          = "$POLICYSETDISPLAYNAME"
+  description           = "$POLICYSETDESCRIPTION"
+  management_group_name = $MANAGEMENTGROUPNAMEREFERENCE
+  depends_on            = [
 $POLICYSETDEPS
   ]
   policy_definitions  = <<POLICYDEFINITIONS
