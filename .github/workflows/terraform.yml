@@ -15,7 +15,7 @@ on:
     branches:
       - main
     paths: 
-      - tf-management/**
+      - '**/*.tf'
 #  pull_request:
 
 env:
