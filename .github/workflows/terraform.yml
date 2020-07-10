@@ -26,7 +26,6 @@ env:
 
 jobs:
   # Plan and Apply job
-  #TODO #16
   planapply:
     name: Plan/apply
     if: github.event.inputs.action != 'forceunlock'
