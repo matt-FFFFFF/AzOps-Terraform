@@ -20,7 +20,7 @@ PARAMETERS
 
 }
 
-resource "azurerm_policy_remediation" "deploy_diagnostics_activitylog" {
+/* resource "azurerm_policy_remediation" "deploy_diagnostics_activitylog" {
   name                 = "deploy-diag-activitylog"
   scope                = azurerm_management_group.es.id
   policy_assignment_id = azurerm_policy_assignment.deploy_diagnostics_activitylog.id
@@ -30,4 +30,4 @@ resource "azurerm_role_assignment" "deploy_diagnostics_activitylog" {
   scope                = azurerm_management_group.es.id
   role_definition_name = "Owner"
   principal_id         = azurerm_policy_assignment.deploy_diagnostics_activitylog.identity[0].principal_id
-}
+} */

@@ -20,17 +20,16 @@ PARAMETERS
 
 }
 
-resource "azurerm_policy_remediation" "deploy_diag_loganalytics" {
+/* resource "azurerm_policy_remediation" "deploy_diag_loganalytics" {
   count                          = length(module.azopsreference.diagnostic_policy_definitions)
   name                           = lower(module.azopsreference.diagnostic_policy_definitions[count.index].name)
   scope                          = azurerm_management_group.es.id
   policy_assignment_id           = azurerm_policy_assignment.deploy_diag_loganalytics.id
   policy_definition_reference_id = replace(module.azopsreference.diagnostic_policy_definitions[count.index].name,"-","")
-  location_filters               = ["West Europe", "North Europe", "UK South"]
 }
 
 resource "azurerm_role_assignment" "deploy_diag_loganalytics" {
   scope                = azurerm_management_group.es.id
   role_definition_name = "Owner"
   principal_id         = azurerm_policy_assignment.deploy_diag_loganalytics.identity[0].principal_id
-}
+} */
