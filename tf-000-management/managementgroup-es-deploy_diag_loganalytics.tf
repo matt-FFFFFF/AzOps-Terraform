@@ -20,7 +20,7 @@ PARAMETERS
 
 }
 
-/* resource "azurerm_policy_remediation" "deploy_diag_loganalytics" {
+resource "azurerm_policy_remediation" "deploy_diag_loganalytics" {
   count                          = length(module.azopsreference.diagnostic_policy_definitions)
   name                           = lower(module.azopsreference.diagnostic_policy_definitions[count.index].name)
   scope                          = azurerm_management_group.es.id
@@ -30,6 +30,6 @@ PARAMETERS
 
 resource "azurerm_role_assignment" "deploy_diag_loganalytics" {
   scope                = azurerm_management_group.es.id
-  role_definition_name = "Owner"
+  role_definition_name = "Contributor"
   principal_id         = azurerm_policy_assignment.deploy_diag_loganalytics.identity[0].principal_id
-} */
+}
