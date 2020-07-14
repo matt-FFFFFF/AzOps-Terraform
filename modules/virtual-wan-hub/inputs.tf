@@ -16,24 +16,43 @@ variable "vhub_address_prefix" {
 
 variable "p2s_configuration" {
   type = object({
-    enabled          = bool
-    scale_units      = number
-    configuration_id = string
+    enabled                 = bool
+    scale_unit              = number
+    configuration_id        = string
+    client_address_prefixes = list(string)
   })
   default = {
-    enabled          = false
-    scale_units      = 1
-    configuration_id = ""
+    enabled                 = false
+    scale_unit              = 1
+    configuration_id        = ""
+    client_address_prefixes = [""]
   }
 }
 
 variable "er_configuration" {
   type = object({
-    enabled          = bool
-    scale_units      = number
+    enabled    = bool
+    scale_unit = number
   })
   default = {
-    enabled          = false
-    scale_units      = 1
+    enabled    = false
+    scale_unit = 1
+  }
+}
+
+variable "s2s_configuration" {
+  type = object({
+    enabled         = bool
+    scale_unit      = number
+    bgp_enabled     = bool
+    bgp_asn         = number
+    bgp_peer_weight = number
+  })
+  default = {
+    enabled         = false
+    scale_unit      = 1
+    bgp_enabled     = false
+    bgp_asn         = 65515
+    bgp_peer_weight = 0
   }
 }
