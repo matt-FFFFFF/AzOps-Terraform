@@ -26,3 +26,14 @@ variable "p2s_configuration" {
     configuration_id = ""
   }
 }
+
+variable "er_configuration" {
+  type = object({
+    enabled          = bool
+    scale_units      = number
+  })
+  default = {
+    enabled          = false
+    scale_units      = 1
+  }
+}
