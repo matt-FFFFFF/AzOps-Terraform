@@ -21,7 +21,7 @@ Create a container in the storage account to store the Terraform state.
 * Run the `bootstrap.sh` script from the project root directory, this will deploy the required resources to you management subscription and provide you with the service principal details required for the GitHub Action.
 
 ```shell
-scripts/bootstrap.sh
+$ scripts/bootstrap.sh
 ```
 
 The output will look similar to this:
