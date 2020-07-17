@@ -79,7 +79,7 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
                 "defaultValue": 5
               },
               "flowAnalyticsEnabled": {
-                "type": "bool"
+                "type": "string"
               },
               "flowAnalyticsWorkspaceId": {
                 "type": "string"
@@ -112,7 +112,7 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
                   },
                   "flowAnalyticsConfiguration": {
                     "networkWatcherFlowAnalyticsConfiguration": {
-                      "enabled": "[parameters('flowAnalyticsEnabled')]",
+                      "enabled": "[bool(parameters('flowAnalyticsEnabled'))]",
                       "trafficAnalyticsInterval": 60,
                       "workspaceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceId'))), parameters('flowAnalyticsWorkspaceId'), null)]",
                       "workspaceRegion": "[if(not(empty(parameters('flowAnalyticsWorkspaceRegion'))), parameters('flowAnalyticsWorkspaceRegion'), null)]",
@@ -146,9 +146,9 @@ POLICYRULE
     }
   },
   "flowAnalyticsEnabled": {
-    "type": "bool",
+    "type": "string",
     "metadata": {
-      "displayName": "Enable Flow Analytics"
+      "displayName": "Enable Flow Analytics (true/false)"
     }
   },
   "flowAnalyticsWorkspaceId": {
