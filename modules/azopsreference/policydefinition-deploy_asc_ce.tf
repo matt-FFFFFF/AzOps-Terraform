@@ -1,4 +1,4 @@
-# This file was auto generated
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_asc_ce" {
   name         = "Deploy-ASC-CE"
   policy_type  = "Custom"

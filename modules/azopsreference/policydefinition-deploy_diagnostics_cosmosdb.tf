@@ -1,4 +1,4 @@
-# This file was auto generated
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_cosmosdb" {
   name         = "Deploy-Diagnostics-CosmosDB"
   policy_type  = "Custom"

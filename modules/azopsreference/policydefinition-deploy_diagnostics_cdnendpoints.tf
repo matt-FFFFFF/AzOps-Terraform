@@ -1,4 +1,4 @@
-# This file was auto generated
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_cdnendpoints" {
   name         = "Deploy-Diagnostics-CDNEndpoints"
   policy_type  = "Custom"

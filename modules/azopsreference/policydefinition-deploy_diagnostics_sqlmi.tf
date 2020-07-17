@@ -1,4 +1,4 @@
-# This file was auto generated
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_sqlmi" {
   name         = "Deploy-Diagnostics-SQLMI"
   policy_type  = "Custom"

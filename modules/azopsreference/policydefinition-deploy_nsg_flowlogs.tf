@@ -1,4 +1,4 @@
-# This file was auto generated
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
   name         = "Deploy-Nsg-FlowLogs"
   policy_type  = "Custom"
@@ -44,18 +44,6 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
             },
             "retention": {
               "value": "[parameters('retention')]"
-            },
-            "flowAnalyticsEnabled": {
-              "value": "[parameters('flowAnalyticsEnabled')]"
-            },
-            "flowAnalyticsWorkspaceId": {
-              "value": "[parameters('flowAnalyticsWorkspaceId')]"
-            },
-            "flowAnalyticsWorkspaceRegion": {
-              "value": "[parameters('flowAnalyticsWorkspaceRegion')]"
-            },
-            "flowAnalyticsWorkspaceResourceId": {
-              "value": "[parameters('flowAnalyticsWorkspaceResourceId')]"
             }
           },
           "template": {
@@ -77,25 +65,13 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
               "retention": {
                 "type": "int",
                 "defaultValue": 5
-              },
-              "flowAnalyticsEnabled": {
-                "type": "bool"
-              },
-              "flowAnalyticsWorkspaceId": {
-                "type": "string"
-              },
-              "flowAnalyticsWorkspaceRegion": {
-                "type": "string"
-              },
-              "flowAnalyticsWorkspaceResourceId": {
-                "type": "string"
               }
             },
             "variables": {},
             "resources": [
               {
                 "type": "Microsoft.Network/networkWatchers/flowLogs",
-                "apiVersion": "2020-05-01",
+                "apiVersion": "2019-11-01",
                 "name": "[concat('NetworkWatcher_', toLower(parameters('location')), '/', 'flowLogs')]",
                 "location": "[parameters('location')]",
                 "properties": {
@@ -109,15 +85,6 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
                   "format": {
                     "type": "JSON",
                     "version": 2
-                  },
-                  "flowAnalyticsConfiguration": {
-                    "networkWatcherFlowAnalyticsConfiguration": {
-                      "enabled": "[parameters('flowAnalyticsEnabled')]",
-                      "trafficAnalyticsInterval": 60,
-                      "workspaceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceId'))), parameters('flowAnalyticsWorkspaceId'), null)]",
-                      "workspaceRegion": "[if(not(empty(parameters('flowAnalyticsWorkspaceRegion'))), parameters('flowAnalyticsWorkspaceRegion'), null)]",
-                      "workspaceResourceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceResourceId'))), parameters('flowAnalyticsWorkspaceResourceId'), null)]"
-                    }
                   }
                 }
               }
@@ -143,30 +110,6 @@ POLICYRULE
     "type": "String",
     "metadata": {
       "displayName": "Storage Account Resource Id"
-    }
-  },
-  "flowAnalyticsEnabled": {
-    "type": "bool",
-    "metadata": {
-      "displayName": "Enable Flow Analytics"
-    }
-  },
-  "flowAnalyticsWorkspaceId": {
-    "type": "string",
-    "metadata": {
-      "displayName": "Workspace GUID for Log Analytics"
-    }
-  },
-  "flowAnalyticsWorkspaceRegion": {
-    "type": "string",
-    "metadata": {
-      "displayName": "Region for Log Analytics workspace"
-    }
-  },
-  "flowAnalyticsWorkspaceResourceId": {
-    "type": "string",
-    "metadata": {
-      "displayName": "Resource ID of Log Analytics workspace"
     }
   }
 }

@@ -1,4 +1,4 @@
-# This file was auto generated
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_logicappswf" {
   name         = "Deploy-Diagnostics-LogicAppsWF"
   policy_type  = "Custom"

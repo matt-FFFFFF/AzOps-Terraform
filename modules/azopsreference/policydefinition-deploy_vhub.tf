@@ -1,4 +1,4 @@
-# This file was auto generated
+# This fine was auto generated
 resource "azurerm_policy_definition" "deploy_vhub" {
   name         = "Deploy-vHUB"
   policy_type  = "Custom"

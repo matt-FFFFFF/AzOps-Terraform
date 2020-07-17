@@ -1,4 +1,4 @@
-# This file was auto generated
+# This fine was auto generated
 resource "azurerm_policy_set_definition" "deploy_sql_security" {
   name                  = "Deploy-Sql-Security"
   policy_type           = "Custom"

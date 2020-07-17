@@ -1,4 +1,4 @@
-# This file was auto generated
+# This fine was auto generated
 resource "azurerm_policy_definition" "deny_publicip" {
   name         = "Deny-PublicIP"
   policy_type  = "Custom"
