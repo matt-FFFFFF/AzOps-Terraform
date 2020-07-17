@@ -25,9 +25,9 @@
               }
             },
             "flowAnalyticsEnabled": {
-              "type": "bool",
+              "type": "string",
               "metadata": {
-                "displayName": "Enable Flow Analytics"
+                "displayName": "Enable Flow Analytics (true/false)"
               }
             },
             "flowAnalyticsWorkspaceId": {
@@ -120,7 +120,7 @@
                           "defaultValue": 5
                         },
                         "flowAnalyticsEnabled": {
-                          "type": "bool"
+                          "type": "string"
                         },
                         "flowAnalyticsWorkspaceId": {
                           "type": "string"
@@ -153,7 +153,7 @@
                             },
                             "flowAnalyticsConfiguration": {
                               "networkWatcherFlowAnalyticsConfiguration": {
-                                "enabled": "[parameters('flowAnalyticsEnabled')]",
+                                "enabled": "[bool(parameters('flowAnalyticsEnabled'))]",
                                 "trafficAnalyticsInterval": 60,
                                 "workspaceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceId'))), parameters('flowAnalyticsWorkspaceId'), null)]",
                                 "workspaceRegion": "[if(not(empty(parameters('flowAnalyticsWorkspaceRegion'))), parameters('flowAnalyticsWorkspaceRegion'), null)]",
