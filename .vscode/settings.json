@@ -2,7 +2,9 @@
     "editor.tabSize": 2,
     "terraform.languageServer": {
         "args": [
-            "serve"
+            "serve",
+            "-log-file=/tmp/terraform-ls-{{pid}}.log",
+            "-tf-log-file=/tmp/tf-exec-{{lsPid}}-{{args}}.log"
         ],
         "external": true
     },

@@ -1,4 +1,4 @@
-# This fine was auto generated
+# This file was auto generated
 resource "azurerm_policy_definition" "deploy_sql_tde" {
   name         = "Deploy-Sql-Tde"
   policy_type  = "Custom"

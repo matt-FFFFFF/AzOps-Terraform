@@ -1,4 +1,4 @@
-# This fine was auto generated
+# This file was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_rediscache" {
   name         = "Deploy-Diagnostics-RedisCache"
   policy_type  = "Custom"

@@ -1,4 +1,4 @@
-# This fine was auto generated
+# This file was auto generated
 resource "azurerm_policy_set_definition" "deny_publicendpoints" {
   name                  = "Deny-PublicEndpoints"
   policy_type           = "Custom"

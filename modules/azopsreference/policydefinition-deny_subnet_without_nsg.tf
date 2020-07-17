@@ -1,4 +1,4 @@
-# This fine was auto generated
+# This file was auto generated
 resource "azurerm_policy_definition" "deny_subnet_without_nsg" {
   name         = "Deny-Subnet-Without-Nsg"
   policy_type  = "Custom"

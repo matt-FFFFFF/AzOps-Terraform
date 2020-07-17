@@ -1,4 +1,4 @@
-# This fine was auto generated
+# This file was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_aci" {
   name         = "Deploy-Diagnostics-ACI"
   policy_type  = "Custom"
