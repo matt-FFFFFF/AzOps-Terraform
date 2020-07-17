@@ -1,4 +1,4 @@
-# This fine was auto generated
+# This file was auto generated
 resource "azurerm_policy_definition" "append_kv_softdelete" {
   name         = "Append-KV-SoftDelete"
   policy_type  = "Custom"

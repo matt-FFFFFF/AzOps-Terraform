@@ -1,4 +1,4 @@
-# This fine was auto generated
+# This file was auto generated
 resource "azurerm_policy_definition" "deploy_azurebackup_on_vm" {
   name         = "Deploy-AzureBackup-on-VM"
   policy_type  = "Custom"

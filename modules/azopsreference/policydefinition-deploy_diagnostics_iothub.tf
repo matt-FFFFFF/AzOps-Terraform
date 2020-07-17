@@ -1,4 +1,4 @@
-# This fine was auto generated
+# This file was auto generated
 resource "azurerm_policy_definition" "deploy_diagnostics_iothub" {
   name         = "Deploy-Diagnostics-iotHub"
   policy_type  = "Custom"

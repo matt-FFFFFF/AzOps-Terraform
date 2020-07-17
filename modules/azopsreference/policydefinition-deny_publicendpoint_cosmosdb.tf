@@ -1,4 +1,4 @@
-# This fine was auto generated
+# This file was auto generated
 resource "azurerm_policy_definition" "deny_publicendpoint_cosmosdb" {
   name         = "Deny-PublicEndpoint-CosmosDB"
   policy_type  = "Custom"
