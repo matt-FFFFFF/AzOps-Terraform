@@ -149,25 +149,29 @@ POLICYRULE
     "type": "string",
     "metadata": {
       "displayName": "Enable Flow Analytics (true/false)"
-    }
+    },
+    "defaultValue": "false"
   },
   "flowAnalyticsWorkspaceId": {
     "type": "string",
     "metadata": {
       "displayName": "Workspace GUID for Log Analytics"
-    }
+    },
+    "defaultValue": ""
   },
   "flowAnalyticsWorkspaceRegion": {
     "type": "string",
     "metadata": {
       "displayName": "Region for Log Analytics workspace"
-    }
+    },
+    "defaultValue": ""
   },
   "flowAnalyticsWorkspaceResourceId": {
     "type": "string",
     "metadata": {
       "displayName": "Resource ID of Log Analytics workspace"
-    }
+    },
+    "defaultValue": ""
   }
 }
 PARAMETERS
