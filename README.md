@@ -12,7 +12,6 @@ The current scope of this project is as follows:
 
 * You will need an Azure subscription and a storage account to use for the backend storage.
 This subscription will become your `management` subscription.
-Create a container in the storage account to store the Terraform state.
 
 * Click the 'Use this template' button to create a copy of this repo
 
