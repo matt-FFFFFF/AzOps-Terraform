@@ -114,9 +114,9 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
                     "networkWatcherFlowAnalyticsConfiguration": {
                       "enabled": "[bool(parameters('flowAnalyticsEnabled'))]",
                       "trafficAnalyticsInterval": 60,
-                      "workspaceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceId'))), parameters('flowAnalyticsWorkspaceId'), null)]",
-                      "workspaceRegion": "[if(not(empty(parameters('flowAnalyticsWorkspaceRegion'))), parameters('flowAnalyticsWorkspaceRegion'), null)]",
-                      "workspaceResourceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceResourceId'))), parameters('flowAnalyticsWorkspaceResourceId'), null)]"
+                      "workspaceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceId'))), parameters('flowAnalyticsWorkspaceId'), '')]",
+                      "workspaceRegion": "[if(not(empty(parameters('flowAnalyticsWorkspaceRegion'))), parameters('flowAnalyticsWorkspaceRegion'), '')]",
+                      "workspaceResourceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceResourceId'))), parameters('flowAnalyticsWorkspaceResourceId'), '')]"
                     }
                   }
                 }
