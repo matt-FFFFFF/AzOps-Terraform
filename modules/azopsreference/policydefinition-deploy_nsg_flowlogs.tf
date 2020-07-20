@@ -20,7 +20,7 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
       "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ],
-      "name": "[concat('NetworkWatcher_', field('location'), '/', 'Microsoft.Network', resourceGroup().name, field('name'))]",
+      "name": "[concat('NetworkWatcher_', field('location'), '/FlowLogs/', field('name'), '-', resourceGroup().name, '-flowlog' ]",
       "resourceGroupName": "NetworkWatcherRG",
       "existenceCondition": {
         "field": "Microsoft.Network/networkWatchers/flowLogs/enabled",
@@ -44,18 +44,6 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
             },
             "retention": {
               "value": "[parameters('retention')]"
-            },
-            "flowAnalyticsEnabled": {
-              "value": "[parameters('flowAnalyticsEnabled')]"
-            },
-            "flowAnalyticsWorkspaceId": {
-              "value": "[parameters('flowAnalyticsWorkspaceId')]"
-            },
-            "flowAnalyticsWorkspaceRegion": {
-              "value": "[parameters('flowAnalyticsWorkspaceRegion')]"
-            },
-            "flowAnalyticsWorkspaceResourceId": {
-              "value": "[parameters('flowAnalyticsWorkspaceResourceId')]"
             }
           },
           "template": {
@@ -77,18 +65,6 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
               "retention": {
                 "type": "int",
                 "defaultValue": 5
-              },
-              "flowAnalyticsEnabled": {
-                "type": "string"
-              },
-              "flowAnalyticsWorkspaceId": {
-                "type": "string"
-              },
-              "flowAnalyticsWorkspaceRegion": {
-                "type": "string"
-              },
-              "flowAnalyticsWorkspaceResourceId": {
-                "type": "string"
               }
             },
             "variables": {},
@@ -96,7 +72,7 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
               {
                 "type": "Microsoft.Network/networkWatchers/flowLogs",
                 "apiVersion": "2020-05-01",
-                "name": "[concat('NetworkWatcher_', toLower(parameters('location')), '/', 'flowLogs')]",
+                "name": "[concat('NetworkWatcher_', toLower(parameters('location')), '/FlowLogs/', parameters('networkSecurityGroupName'), '-', parameters('resourceGroupName'), '-flowlog')]",
                 "location": "[parameters('location')]",
                 "properties": {
                   "targetResourceId": "[resourceId(parameters('resourceGroupName'), 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
@@ -109,15 +85,6 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
                   "format": {
                     "type": "JSON",
                     "version": 2
-                  },
-                  "flowAnalyticsConfiguration": {
-                    "networkWatcherFlowAnalyticsConfiguration": {
-                      "enabled": "[bool(parameters('flowAnalyticsEnabled'))]",
-                      "trafficAnalyticsInterval": 60,
-                      "workspaceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceId'))), parameters('flowAnalyticsWorkspaceId'), '')]",
-                      "workspaceRegion": "[if(not(empty(parameters('flowAnalyticsWorkspaceRegion'))), parameters('flowAnalyticsWorkspaceRegion'), '')]",
-                      "workspaceResourceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceResourceId'))), parameters('flowAnalyticsWorkspaceResourceId'), '')]"
-                    }
                   }
                 }
               }
@@ -144,34 +111,6 @@ POLICYRULE
     "metadata": {
       "displayName": "Storage Account Resource Id"
     }
-  },
-  "flowAnalyticsEnabled": {
-    "type": "string",
-    "metadata": {
-      "displayName": "Enable Flow Analytics (true/false)"
-    },
-    "defaultValue": "false"
-  },
-  "flowAnalyticsWorkspaceId": {
-    "type": "string",
-    "metadata": {
-      "displayName": "Workspace GUID for Log Analytics"
-    },
-    "defaultValue": ""
-  },
-  "flowAnalyticsWorkspaceRegion": {
-    "type": "string",
-    "metadata": {
-      "displayName": "Region for Log Analytics workspace"
-    },
-    "defaultValue": ""
-  },
-  "flowAnalyticsWorkspaceResourceId": {
-    "type": "string",
-    "metadata": {
-      "displayName": "Resource ID of Log Analytics workspace"
-    },
-    "defaultValue": ""
   }
 }
 PARAMETERS
