@@ -4,25 +4,40 @@
   "parameters": {
     "input": {
       "value": {
-        "Name": "Deploy-Nsg-FlowLogs",
+        "Name": "Deploy-Nsg-FlowAnalytics",
         "ResourceType": "Microsoft.Authorization/policyDefinitions",
         "SubscriptionId": null,
         "Properties": {
           "Description": null,
-          "DisplayName": "Deploy-Nsg-FlowLogs",
+          "DisplayName": "Deploy-Nsg-FlowAnalytics",
           "Mode": "All",
           "Parameters": {
-            "retention": {
+            "trafficAnalyticsInterval" : {
               "type": "Integer",
               "metadata": {
-                "displayName": "Retention"
+                "displayName": "Traffic Analytics processing interval mins (10/60)"
               }
             },
-            "storageAccountResourceId": {
-              "type": "String",
+            "flowAnalyticsWorkspaceId": {
+              "type": "string",
               "metadata": {
-                "displayName": "Storage Account Resource Id"
-              }
+                "displayName": "Workspace GUID for Log Analytics"
+              },
+              "defaultValue": ""
+            },
+            "flowAnalyticsWorkspaceRegion": {
+              "type": "string",
+              "metadata": {
+                "displayName": "Region for Log Analytics workspace"
+              },
+              "defaultValue": ""
+            },
+            "flowAnalyticsWorkspaceResourceId": {
+              "type": "string",
+              "metadata": {
+                "displayName": "Resource ID of Log Analytics workspace"
+              },
+              "defaultValue": ""
             }
           },
           "PolicyRule": {
@@ -56,11 +71,17 @@
                       "location": {
                         "value": "[field('location')]"
                       },
-                      "storageAccountResourceId": {
-                        "value": "[parameters('storageAccountResourceId')]"
+                      "trafficAnalyticsInterval": {
+                        "value": "[parameters('trafficAnalyticsInterval')]"
                       },
-                      "retention": {
-                        "value": "[parameters('retention')]"
+                      "flowAnalyticsWorkspaceId": {
+                        "value": "[parameters('flowAnalyticsWorkspaceId')]"
+                      },
+                      "flowAnalyticsWorkspaceRegion": {
+                        "value": "[parameters('flowAnalyticsWorkspaceRegion')]"
+                      },
+                      "flowAnalyticsWorkspaceResourceId": {
+                        "value": "[parameters('flowAnalyticsWorkspaceResourceId')]"
                       }
                     },
                     "template": {
@@ -76,12 +97,18 @@
                         "location": {
                           "type": "string"
                         },
-                        "storageAccountResourceId": {
+                        "trafficAnalyticsInterval": {
+                          "type": "int",
+                          "defaultValue": 60
+                        },
+                        "flowAnalyticsWorkspaceId": {
                           "type": "string"
                         },
-                        "retention": {
-                          "type": "int",
-                          "defaultValue": 5
+                        "flowAnalyticsWorkspaceRegion": {
+                          "type": "string"
+                        },
+                        "flowAnalyticsWorkspaceResourceId": {
+                          "type": "string"
                         }
                       },
                       "variables": {},
@@ -92,16 +119,14 @@
                           "name": "[concat('NetworkWatcher_', toLower(parameters('location')),  '/FlowLogs/', parameters('networkSecurityGroupName'), '-', parameters('resourceGroupName'), '-flowlog')]",
                           "location": "[parameters('location')]",
                           "properties": {
-                            "targetResourceId": "[resourceId(parameters('resourceGroupName'), 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
-                            "storageId": "[parameters('storageAccountResourceId')]",
-                            "enabled": true,
-                            "retentionPolicy": {
-                              "enabled": true,
-                              "days": "[parameters('retention')]"
-                            },
-                            "format": {
-                              "type": "JSON",
-                              "version": 2
+                            "flowAnalyticsConfiguration": {
+                              "networkWatcherFlowAnalyticsConfiguration": {
+                                "enabled": true,
+                                "trafficAnalyticsInterval": "[paramaters('trafficAnalyticsInterval')]",
+                                "workspaceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceId'))), parameters('flowAnalyticsWorkspaceId'), '')]",
+                                "workspaceRegion": "[if(not(empty(parameters('flowAnalyticsWorkspaceRegion'))), parameters('flowAnalyticsWorkspaceRegion'), '')]",
+                                "workspaceResourceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceResourceId'))), parameters('flowAnalyticsWorkspaceResourceId'), '')]"
+                              }
                             }
                           }
                         }
