@@ -160,7 +160,7 @@
                       "resources": [
                         {
                           "type": "Microsoft.Network/networkWatchers/flowLogs",
-                          "apiVersion": "2019-11-01",
+                          "apiVersion": "2020-05-01",
                           "name": "[concat('NetworkWatcher_', toLower(parameters('location')),  '/', parameters('networkSecurityGroupName'), '-', parameters('resourceGroupName'), '-flowlog' )]",
                           "location": "[parameters('location')]",
                           "properties": {
