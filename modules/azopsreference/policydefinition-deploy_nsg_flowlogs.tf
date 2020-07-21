@@ -20,6 +20,7 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
       "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ],
+      "name": "[concat('NetworkWatcher_', field('location'), '/', field('name'), '-', resourceGroup().name, '-flowlog' )]",
       "resourceGroupName": "NetworkWatcherRG",
       "existenceCondition": {
         "allOf": [
