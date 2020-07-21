@@ -59,10 +59,10 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
               "value": "[parameters('trafficAnalyticsInterval')]"
             },
             "flowAnalyticsWorkspaceId": {
-              "value": "[if(not(empty(parameters('logAnalytics'), reference(parameters('flowAnalyticsWorkspaceResourceId'), '2020-03-01-preview', 'Full').properties.customerId, '' )))]"
+              "value": "[if(not(empty(parameters('logAnalytics'), reference(parameters('logAnalytics'), '2020-03-01-preview', 'Full').properties.customerId, '' )))]"
             },
             "flowAnalyticsWorkspaceRegion": {
-              "value": "[if(not(empty(parameters('logAnalytics'), reference(parameters('flowAnalyticsWorkspaceResourceId'), '2020-03-01-preview', 'Full').location, '' )))]"
+              "value": "[if(not(empty(parameters('logAnalytics'), reference(parameters('logAnalytics'), '2020-03-01-preview', 'Full').location, '' )))]"
             },
             "logAnalytics": {
               "value": "[parameters('logAnalytics')]"
