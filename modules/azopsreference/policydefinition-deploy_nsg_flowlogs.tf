@@ -20,7 +20,6 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
       "roleDefinitionIds": [
         "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
       ],
-      "name": "[concat('NetworkWatcher_', field('location'), '/', field('name'), '-', resourceGroup().name, '-flowlog' )]",
       "resourceGroupName": "NetworkWatcherRG",
       "existenceCondition": {
         "allOf": [
@@ -60,10 +59,10 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
               "value": "[parameters('trafficAnalyticsInterval')]"
             },
             "flowAnalyticsWorkspaceId": {
-              "value": "[parameters('flowAnalyticsWorkspaceId')]"
+              "value": "[if(not(empty(parameters('flowAnalyticsWorkspaceResourceId'), reference(parameters('flowAnalyticsWorkspaceResourceId'), '2020-03-01-preview', 'Full').properties.customerId, ''))]"
             },
             "flowAnalyticsWorkspaceRegion": {
-              "value": "[parameters('flowAnalyticsWorkspaceRegion')]"
+              "value": "[if(not(empty(parameters('flowAnalyticsWorkspaceResourceId'), reference(parameters('flowAnalyticsWorkspaceResourceId'), '2020-03-01-preview', 'Full').location, ''))]"
             },
             "flowAnalyticsWorkspaceResourceId": {
               "value": "[parameters('flowAnalyticsWorkspaceResourceId')]"
@@ -155,7 +154,8 @@ POLICYRULE
   "storageAccountResourceId": {
     "type": "String",
     "metadata": {
-      "displayName": "Storage Account Resource Id"
+      "displayName": "Storage Account Resource Id",
+      "strongType": "Microsoft.Storage/storageAccounts"
     }
   },
   "trafficAnalyticsInterval": {
@@ -172,23 +172,10 @@ POLICYRULE
     },
     "defaultValue": false
   },
-  "flowAnalyticsWorkspaceId": {
+  "logAnalytics": {
     "type": "string",
     "metadata": {
-      "displayName": "Workspace GUID for Log Analytics"
-    },
-    "defaultValue": ""
-  },
-  "flowAnalyticsWorkspaceRegion": {
-    "type": "string",
-    "metadata": {
-      "displayName": "Region for Log Analytics workspace"
-    },
-    "defaultValue": ""
-  },
-  "flowAnalyticsWorkspaceResourceId": {
-    "type": "string",
-    "metadata": {
+      "strongType": "oms",
       "displayName": "Resource ID of Log Analytics workspace"
     },
     "defaultValue": ""
