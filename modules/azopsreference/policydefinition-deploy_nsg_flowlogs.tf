@@ -65,7 +65,7 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
               "value": "[if(not(empty(parameters('logAnalytics'), reference(parameters('flowAnalyticsWorkspaceResourceId'), '2020-03-01-preview', 'Full').location, '' )))]"
             },
             "logAnalytics": {
-              "value": "[parameters('flowAnalyticsWorkspaceResourceId')]"
+              "value": "[parameters('logAnalytics')]"
             }
           },
           "template": {
@@ -99,7 +99,7 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
               "flowAnalyticsWorkspaceRegion": {
                 "type": "string"
               },
-              "flowAnalyticsWorkspaceResourceId": {
+              "logAnalytics": {
                 "type": "string"
               }
             },
@@ -128,7 +128,7 @@ resource "azurerm_policy_definition" "deploy_nsg_flowlogs" {
                       "trafficAnalyticsInterval": "[parameters('trafficAnalyticsInterval')]",
                       "workspaceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceId'))), parameters('flowAnalyticsWorkspaceId'), json('null') )]",
                       "workspaceRegion": "[if(not(empty(parameters('flowAnalyticsWorkspaceRegion'))), parameters('flowAnalyticsWorkspaceRegion'), json('null'))]",
-                      "workspaceResourceId": "[if(not(empty(parameters('flowAnalyticsWorkspaceResourceId'))), parameters('flowAnalyticsWorkspaceResourceId'), json('null'))]"
+                      "workspaceResourceId": "[if(not(empty(parameters('logAnalytics'))), parameters('logAnalytics'), json('null'))]"
                     }
                   }
                 }
@@ -149,7 +149,8 @@ POLICYRULE
     "type": "Integer",
     "metadata": {
       "displayName": "Retention"
-    }
+    },
+    "defaultValue": 5
   },
   "storageAccountResourceId": {
     "type": "String",
