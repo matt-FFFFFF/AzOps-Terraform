@@ -164,7 +164,7 @@ POLICYRULE
   "logAnalytics": {
     "type": "string",
     "metadata": {
-      "strongType": "oms",
+      "strongType": "omsWorkspace",
       "displayName": "Resource ID of Log Analytics workspace"
     },
     "defaultValue": ""
