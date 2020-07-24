@@ -72,6 +72,7 @@ The container will:
 * Set the ARM_[CLIENT_ID|CLIENT_SECRET|SUBSCRIPTION_ID|TENANT_ID] environment variables
 * Create the `backend.hcl` for Terraform to use
 * For each directory that starts with `tf-*`
+  * Create or switch to a workspace with the same name as the directory
   * run tf init
   * run tf fmt -check
   * run tf plan
