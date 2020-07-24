@@ -5,7 +5,7 @@ This project is in its early stages but intends to provide an alternate implemen
 The current scope of this project is as follows:
 
 * :white_check_mark: [Enterprise Scale Foundation](https://github.com/Azure/Enterprise-Scale/tree/main/docs/reference/wingtip)
-* :black_square_button: Regional hub template (not started)
+* :black_square_button: Regional hub template (in progress)
 * :black_square_button: Landing zone template (not started)
 
 ## Quick Start
@@ -58,4 +58,23 @@ estf00000000
   * In GitHub, use the `workflow_dispatch` capability to do this.
   * In Azure DevOps #TODO [#10](https://github.com/matt-FFFFFF/AzOps-Terraform/issues/10)
 
+## GitHub Actions / Azure DevOps
 
+> Azure DevOps support is WIP
+
+This repostory contains a GitHub action workflow that provides CI/CD functionality.
+In order to simplify the workflow, the terraform logic is run inside of a lightweight (5.5MB before Terraform install) container.
+This container is published here <https://github.com/matt-FFFFFF/AzOpsTFRun>.
+
+The container will:
+
+* Retrieve the privileged SPN details from KeyVault
+* Set the ARM_[CLIENT_ID|CLIENT_SECRET|SUBSCRIPTION_ID|TENANT_ID] environment variables
+* Create the `backend.hcl` for Terraform to use
+* For each directory that starts with `tf-*`
+  * run tf init
+  * run tf fmt -check
+  * run tf plan
+  * IF it's a push to main, OR the `apply` input was specified in the repo dispatch THEN run tf apply
+  
+See [entrypoint.sh](https://github.com/matt-FFFFFF/AzOpsTFRun/blob/main/root/entrypoint.sh) for more info.
