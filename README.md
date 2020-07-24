@@ -68,9 +68,9 @@ This container is published here <https://github.com/matt-FFFFFF/AzOpsTFRun>.
 
 The container will:
 
-* Retrieve the privileged SPN details from KeyVault
+* Retrieve the privileged SPN details from KeyVault (this was created by the bootstrap script)
 * Set the ARM_[CLIENT_ID|CLIENT_SECRET|SUBSCRIPTION_ID|TENANT_ID] environment variables
-* Create the `backend.hcl` for Terraform to use
+* Create the `backend.hcl` for Terraform to use (also created by the bootstrap script)
 * For each directory that starts with `tf-*`
   * Create or switch to a workspace with the same name as the directory
   * run tf init
