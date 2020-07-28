@@ -5,7 +5,7 @@ terraform {
 
 module "azopsreference" {
   source                = "../modules/azopsreference"
-  management_group_name = azurerm_management_group.es.name
+  management_group_name = module.managementgroups.mgs["ES"].name
 }
 
 data "azurerm_subscription" "management" {
