@@ -4,7 +4,7 @@ terraform {
 }
 
 module "azopsreference" {
-  source                = "../modules/azopsreference"
+  source                = "github.com/terraform-azurerm-modules/terraform-azurerm-azopsreference"
   management_group_name = azurerm_management_group.es.name
 }
 
