@@ -23,7 +23,7 @@ on:
       - '**/*.tfvars'
 
 env:
-  TF_VERSION: '0.12.28'
+  TF_VERSION: '0.13.0'
   GITHUB_EVENT_NAME: ${{ github.event_name }}
   GITHUB_EVENT_INPUTS_ACTION: ${{ github.event.inputs.action }}
   AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
