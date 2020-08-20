@@ -1,6 +1,11 @@
 terraform {
-  required_version = "=0.12.28"
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+    }
+  }
   backend "azurerm" {}
+  required_version = ">= 0.13"
 }
 
 module "azopsreference" {
